@@ -37,12 +37,12 @@
 - [x] **21.3.** Tích hợp cơ chế trừ kho nguyên tử (`atomicDecrementStock`) chống overselling & race conditions với SQL `stock_quantity >= $1`.
 - [x] **21.4.** Viết unit & integration tests kiểm thử nghiệp vụ kho và đồng thời (concurrency check), 37/37 tests pass, 59/59 files backend pass 100%.
 
-#### [TASK-22] Màn Hình Giao Diện Quản Lý Đơn Hàng & Vận Đơn (`/orders`) - [P0]
-- [ ] **22.1.** Thiết kế Zustand store `order.store.ts` kết nối REST APIs `/api/v1/orders` và lắng nghe socket `ORDER_STATUS_CHANGED`.
-- [ ] **22.2.** Xây dựng bảng danh sách đơn hàng Bento phong cách macOS Clean Utility với bộ lọc trạng thái đa tầng (`pending`, `confirmed`, `shipping`, `completed`, `cancelled`).
-- [ ] **22.3.** Xây dựng Drawer/Modal xem chi tiết đơn hàng, lịch sử thay đổi trạng thái, thông tin CRM khách hàng (PII masked) và in phiếu vận đơn.
-- [ ] **22.4.** Viết unit & integration tests cho toàn bộ phân hệ quản lý đơn hàng.
-*(Khi bắt đầu thực thi: Chạy `/opsx-propose orders-management-ui`)*
+#### [TASK-22] Màn Hình Giao Diện Quản Lý Đơn Hàng & Vận Đơn (`/orders`) - [P0] - **[HOÀN THÀNH]**
+- [x] **22.1.** Thiết kế Zustand store `order.store.ts` kết nối REST APIs `/api/v1/orders` và lắng nghe socket `ORDER_STATUS_CHANGED`.
+- [x] **22.2.** Xây dựng bảng danh sách đơn hàng Bento phong cách macOS Clean Utility với bộ lọc trạng thái đa tầng (`pending`, `confirmed`, `shipping`, `completed`, `cancelled`).
+- [x] **22.3.** Xây dựng Drawer/Modal xem chi tiết đơn hàng, lịch sử thay đổi trạng thái, thông tin CRM khách hàng (PII masked) và in phiếu vận đơn.
+- [x] **22.4.** Viết unit & integration tests cho toàn bộ phân hệ quản lý đơn hàng: 23/23 tests passed, TypeScript compile 0 lỗi.
+*(Hoàn thành OpenSpec change: `orders-management-ui`)*
 
 #### [TASK-23] Tích Hợp Cổng Thanh Toán VietQR Động & Đơn Vị Vận Chuyển - [P1]
 - [ ] **23.1.** Xây dựng tiện ích sinh mã VietQR động theo chuẩn Napas 247 (chứa đúng số tiền đơn hàng và mã nội dung chuyển khoản bảo mật).
@@ -81,5 +81,7 @@
 | 21/10/2026 | [TASK-19] Bảng Điều Khiển Tổng Quan & Báo Cáo KPIs (`/(dashboard)`) | **DONE** | Lưới Bento đa tầng 4 KPI thẻ điều hành, `TrafficChart` SVG thuần trực quan hóa lưu lượng & khung giờ vàng (11:30 & 20:00), `MetaWindowWidget` đếm ngược SLA 24h, `HotLeadsWidget` với PII phone masking (`098****123`), `QuickActions` 4 phím tắt chuyển trang nhanh; 9/9 tests pass (93/93 toàn frontend pass), build Next.js 14 thành công. **HOÀN THÀNH SPRINT 3 (100%)**. |
 | 21/10/2026 | [TASK-20] Mô-đun Trích Xuất Thực Thể Đơn Hàng Bằng Google Gemini AI (`OrderParserService`) | **DONE** | Kiến trúc Hybrid 2 tầng: Regex Fast-path (< 50ms) + Gemini 2.5 Flash Fallback (< 1.5s), prompt injection guard `<customer_input>`, REST API `POST /api/v1/orders/parse`, 23/23 Golden test fixtures passed (đạt 100% độ chính xác), 55/55 files test (457/457 tests backend) pass 100%, 0 lỗi TypeScript. Hoàn thành OpenSpec `order-ai-parser`. |
 | 21/10/2026 | [TASK-21] Nghiệp Vụ Quản Lý Danh Mục Sản Phẩm, Biến Thể & Tồn Kho (`/api/v1/products`) | **DONE** | Bảng PostgreSQL `products` (`002_products_and_inventory.sql`), Zod DTOs, `ProductRepository` với trừ kho nguyên tử (`atomicDecrementStock` chống overselling/race conditions), `ProductService` kiểm tra trùng SKU trên cùng page, 6 REST APIs CRUD & `/stock`, 59/59 test files pass 100% (494/494 tests passed), 0 lỗi TypeScript; hoàn thành OpenSpec `product-catalog-service`. |
+| 21/10/2026 | [TASK-22] Màn Hình Giao Diện Quản Lý Đơn Hàng & Vận Đơn (`/orders`) | **DONE** | Zustand store `order.store.ts` (multi-status filter, debounced search, optimistic status update, WebSocket listener), Bento UI components (`OrderStatusBadge`, `OrderMetrics`, `OrderTable` macOS Clean Utility, `OrderDetailDrawer` với PII phone masking & copy address, `OrderPrintModal` phiếu in nhiệt A5/A6 `@media print`), Sidebar `/orders` navigation badge; 23/23 tests pass 100%, 0 lỗi TypeScript. Hoàn thành OpenSpec `orders-management-ui`. |
+
 
 

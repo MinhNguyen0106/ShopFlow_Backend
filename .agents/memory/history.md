@@ -2,6 +2,35 @@
 
 Nhật ký theo dõi các mốc phát triển, thay đổi kiến trúc và trạng thái của dự án ShopFlow.
 
+## [2026-10-21] - Hoàn Thành TASK-22: Màn Hình Giao Diện Quản Lý Đơn Hàng & Vận Đơn (`orders-management-ui`) - Sprint 4 P0
+- **Tác giả:** System Architect & Full-Stack Engineer (Antigravity Ecosystem)
+- **Nội dung hoàn thành:**
+  - Hoàn thành toàn diện 8/8 tasks trong OpenSpec change [orders-management-ui](file:///c:/Users/Dell/Desktop/ShopFlow/openspec/changes/orders-management-ui/tasks.md) tương ứng **[TASK-22]** trên [Task.md](file:///c:/Users/Dell/Desktop/ShopFlow/Task.md).
+  - **Tầng Types & Defensive Normalizer (`frontend/src/types/order.ts`):**
+    - Khai báo types: `Order`, `OrderItem`, `OrderStatus` (5 trạng thái: `pending`, `confirmed`, `shipping`, `completed`, `cancelled`), `PaymentStatus` (`unpaid`, `paid`, `refunded`), `PaymentMethod` (`cod`, `vietqr`, `bank_transfer`), `OrderTimelineEvent`, `OrderMetrics`, `OrderPagination`.
+    - Xây dựng tiện ích che giấu thông tin cá nhân `maskPhoneNumber` (bảo vệ PII khách hàng theo quy chuẩn an toàn ShopFlow: `098****321`).
+    - Triển khai hàm phòng vệ `normalizeOrder` giải mã an toàn các trường JSON, mảng items và timeline.
+  - **Tầng Zustand State Store (`frontend/src/lib/order.store.ts`):**
+    - Quản lý trạng thái đa tầng: lọc trạng thái (`selectedStatus`), tìm kiếm debounced (`search`), phân trang (`pagination`).
+    - Kết nối REST APIs `/api/v1/orders` (danh sách và cập nhật trạng thái đơn hàng).
+    - Cập nhật Optimistic UI ngay lập tức khi chuyển đổi trạng thái đơn hàng và tự động rollback nếu server phản hồi lỗi.
+    - Lắng nghe sự kiện WebSocket realtime `ORDER_STATUS_CHANGED` và `NEW_ORDER_CREATED` để đồng bộ đơn hàng tức thời.
+    - Viết 13/13 unit tests tại `frontend/src/lib/__tests__/order.store.test.ts` đạt 100% pass.
+  - **Bộ UI Components Chuẩn Apple Bento & In Phiếu Giao Hàng:**
+    - `OrderStatusBadge` & `PaymentStatusBadge` (`frontend/src/components/orders/order-status-badge.tsx`): Hiển thị màu sắc Bento tinh gọn, hỗ trợ tùy chọn icon và kiểu hiển thị mini.
+    - `OrderMetrics` (`frontend/src/components/orders/order-metrics.tsx`): 4 thẻ Bento thống kê (Tổng đơn hôm nay, Tăng trưởng %, Đơn chờ xác nhận, Đang giao hàng, Doanh thu ước tính) kèm skeleton loading.
+    - `OrderTable` (`frontend/src/components/orders/order-table.tsx`): Bảng danh sách phong cách macOS Clean Utility, tab lọc ngang, ô tìm kiếm debounced, checkbox chọn hàng loạt và thanh điều hướng phân trang.
+    - `OrderDetailDrawer` (`frontend/src/components/orders/order-detail-drawer.tsx`): Slide-over drawer hiển thị chi tiết giỏ hàng, thông tin khách hàng (PII masked), địa chỉ giao hàng với nút 1-click sao chép vào clipboard, timeline lịch sử xử lý và các nút chuyển trạng thái nhanh (`Xác nhận đơn`, `Bàn giao vận chuyển`, `Giao thành công`, `Hủy đơn`).
+    - `OrderPrintModal` (`frontend/src/components/orders/order-print-modal.tsx`): Khung xem trước và in phiếu vận đơn/đóng gói chuẩn A5/A6 tối ưu máy in nhiệt cho shipper kèm CSS `@media print`.
+  - **Lắp Ráp Trang & Tích Hợp Điều Hướng:**
+    - Cập nhật `frontend/src/components/layout/sidebar.tsx` bổ sung menu `Quản lý đơn hàng` (`/orders`, icon `ShoppingBag`).
+    - Lắp ráp hoàn chỉnh trang chính tại `frontend/src/app/(dashboard)/orders/page.tsx` đồng bộ với `usePageStore`.
+    - Viết integration test suite tại `frontend/src/app/(dashboard)/orders/__tests__/orders.test.tsx` đạt 10/10 tests pass.
+  - **Chất Lượng Mã Nguồn & Kiểm Định:**
+    - Toàn bộ 23/23 tests cho phân hệ đơn hàng đạt 100% pass.
+    - Kiểm tra tĩnh kiểu dữ liệu `npx tsc --noEmit -p frontend/tsconfig.json` đạt **0 lỗi** (Strict Mode).
+    - Lưu trữ living specification tại [openspec/specs/orders-management/spec.md](file:///c:/Users/Dell/Desktop/ShopFlow/openspec/specs/orders-management/spec.md).
+
 ## [2026-10-21] - Hoàn Thành TASK-21: Nghiệp Vụ Quản Lý Danh Mục Sản Phẩm, Biến Thể & Tồn Kho (`product-catalog-service`) - Sprint 4 P1
 - **Tác giả:** System Architect & Full-Stack Engineer (Antigravity Ecosystem)
 - **Nội dung hoàn thành:**
