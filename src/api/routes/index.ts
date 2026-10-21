@@ -7,6 +7,7 @@ import { pageRouter } from './page.routes.js';
 import { mediaRouter } from './media.routes.js';
 import { postRouter } from './post.routes.js';
 import { inboxRouter } from './inbox.routes.js';
+import { orderParserRouter } from './order-parser.routes.js';
 
 export const apiV1Router = Router();
 
@@ -33,3 +34,6 @@ apiV1Router.use('/posts', postRouter);
 
 // Mount Centralized Inbox routes
 apiV1Router.use('/inbox', inboxRouter);
+
+// Mount Order AI Parser routes (TASK-20)
+apiV1Router.use('/orders', orderParserRouter);

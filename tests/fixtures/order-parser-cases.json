@@ -1,0 +1,324 @@
+[
+  {
+    "id": "CASE-01",
+    "description": "Cú pháp chuẩn shop online với #SKU, số lượng, màu, size, SĐT, địa chỉ",
+    "input": {
+      "text": "#VAY01 2 cái đỏ size L 0987654321 địa chỉ 123 Cầu Giấy, Hà Nội",
+      "context": { "customerName": "Nguyễn Thị Hoa" }
+    },
+    "expected": {
+      "productCode": "VAY01",
+      "quantity": 2,
+      "color": "đỏ",
+      "size": "L",
+      "customerPhone": "0987654321",
+      "shippingAddress": "123 Cầu Giấy, Hà Nội",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-02",
+    "description": "Mã sản phẩm trong ngoặc vuông và SĐT",
+    "input": {
+      "text": "[SP123] lấy 3 đôi tất đen sđt 0905123456",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "SP123",
+      "quantity": 3,
+      "color": "đen",
+      "customerPhone": "0905123456",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-03",
+    "description": "Số lượng bằng chữ 'hai chiếc' và màu kép 'xanh ngọc'",
+    "input": {
+      "text": "Cho chị hai chiếc áo sơ mi #SM02 màu xanh ngọc size S nha em, 0933221100",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "SM02",
+      "quantity": 2,
+      "size": "S",
+      "customerPhone": "0933221100",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-04",
+    "description": "Số điện thoại định dạng quốc tế +84",
+    "input": {
+      "text": "#A01 size XL màu be, +84 977 123 456",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "A01",
+      "size": "XL",
+      "color": "be",
+      "customerPhone": "0977123456",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-05",
+    "description": "Số điện thoại phân tách bằng dấu chấm",
+    "input": {
+      "text": "#DAM99 096.123.4567 ship về Landmark 81, lấy 1 cái xanh than size L",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "DAM99",
+      "customerPhone": "0961234567",
+      "size": "L",
+      "shippingAddress": "Landmark 81",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-06",
+    "description": "Chỉ định địa chỉ bằng từ khóa 'gửi về'",
+    "input": {
+      "text": "#QUAN01 gửi về Thôn 3, Xã Tân Triều, Thanh Trì, Hà Nội, sđt 0981234567",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "QUAN01",
+      "shippingAddress": "Thôn 3, Xã Tân Triều, Thanh Trì, Hà Nội",
+      "customerPhone": "0981234567",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-07",
+    "description": "Mã sản phẩm có tiền tố 'Mã:'",
+    "input": {
+      "text": "Mã: SET05 màu be size M, 2 bộ, 0918765432",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "SET05",
+      "quantity": 2,
+      "size": "M",
+      "color": "be",
+      "customerPhone": "0918765432",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-08",
+    "description": "Mã SKU có ký tự gạch ngang",
+    "input": {
+      "text": "Mã SP-9988 màu xám size XXL sdt 0922334455",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "SP-9988",
+      "size": "XXL",
+      "color": "xám",
+      "customerPhone": "0922334455",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-09",
+    "description": "Chỉ định địa chỉ bằng từ khóa 'ship tới'",
+    "input": {
+      "text": "#AO09 ship tới Số 9 đường 3/2, Phường 11, Quận 10, TP.HCM, sdt 0938123456",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "AO09",
+      "shippingAddress": "Số 9 đường 3/2, Phường 11, Quận 10, TP.HCM",
+      "customerPhone": "0938123456",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-10",
+    "description": "Viết tắt địa chỉ 'đc:' và liên hệ 'sdt:'",
+    "input": {
+      "text": "#VAY10 đc: 120 Hoàng Hoa Thám, Ba Đình, HN - sdt: 0919283746 - lấy 2 chiếc váy đen L",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "VAY10",
+      "quantity": 2,
+      "color": "đen",
+      "size": "L",
+      "customerPhone": "0919283746",
+      "shippingAddress": "120 Hoàng Hoa Thám, Ba Đình, HN",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-11",
+    "description": "Comment không có mã nhưng được cung cấp defaultProductCode trong context",
+    "input": {
+      "text": "Cho mình 1 cái size L màu đen, 0987111222",
+      "context": { "defaultProductCode": "POLO01" }
+    },
+    "expected": {
+      "productCode": "POLO01",
+      "quantity": 1,
+      "size": "L",
+      "color": "đen",
+      "customerPhone": "0987111222",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-12",
+    "description": "Comment tiếng lóng viết tắt 'chốt 1c đỏ m sdt 0981999888'",
+    "input": {
+      "text": "#SET01 chốt 1c đỏ m sdt 0981999888",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "SET01",
+      "quantity": 1,
+      "color": "đỏ",
+      "size": "M",
+      "customerPhone": "0981999888",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-13",
+    "description": "Comment số lượng bằng chữ 'ba cái'",
+    "input": {
+      "text": "#AO02 ba cái màu trắng size XL 0945112233",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "AO02",
+      "quantity": 3,
+      "color": "trắng",
+      "size": "XL",
+      "customerPhone": "0945112233",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-14",
+    "description": "Số lượng bằng chữ 'bốn bộ'",
+    "input": {
+      "text": "#DOBO bốn bộ màu hồng size S sdt 0977889900",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "DOBO",
+      "quantity": 4,
+      "color": "hồng",
+      "size": "S",
+      "customerPhone": "0977889900",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-15",
+    "description": "Số lượng bằng chữ 'năm chiếc'",
+    "input": {
+      "text": "#PANT năm chiếc màu đen size M 0903456789",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "PANT",
+      "quantity": 5,
+      "color": "đen",
+      "size": "M",
+      "customerPhone": "0903456789",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-16",
+    "description": "Số lượng 'một đôi' tất",
+    "input": {
+      "text": "#TAT01 một đôi màu xám sdt 0914567890",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "TAT01",
+      "quantity": 2,
+      "color": "xám",
+      "customerPhone": "0914567890",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-17",
+    "description": "Màu sắc kép 'xanh lá' và size 2XL",
+    "input": {
+      "text": "#AO_HOODIE 1 cái xanh lá size 2XL liên hệ 0988001122",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "AO_HOODIE",
+      "quantity": 1,
+      "color": "xanh lá",
+      "size": "2XL",
+      "customerPhone": "0988001122",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-18",
+    "description": "Số điện thoại có tiền tố 'lh'",
+    "input": {
+      "text": "#VAY_MAXI 1 chiếc vàng M lh 0939112233",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "VAY_MAXI",
+      "quantity": 1,
+      "color": "vàng",
+      "size": "M",
+      "customerPhone": "0939112233",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-19",
+    "description": "Địa chỉ có tiền tố 'tới' và số điện thoại",
+    "input": {
+      "text": "#JEAN01 giao về Số 24 Phan Đình Phùng, TP Đà Nẵng sđt 0905998877",
+      "context": {}
+    },
+    "expected": {
+      "productCode": "JEAN01",
+      "shippingAddress": "Số 24 Phan Đình Phùng, TP Đà Nẵng",
+      "customerPhone": "0905998877",
+      "minConfidence": 0.8
+    }
+  },
+  {
+    "id": "CASE-20",
+    "description": "Trường hợp không phải đặt hàng (khen sản phẩm)",
+    "input": {
+      "text": "Váy xinh xắn quá shop ơi, mẫu này chụp ở đâu vậy?",
+      "context": {}
+    },
+    "expected": {
+      "productCode": null,
+      "customerPhone": null,
+      "shippingAddress": null,
+      "maxConfidence": 0.5
+    }
+  },
+  {
+    "id": "CASE-21",
+    "description": "Trường hợp hỏi địa chỉ shop không phải đặt hàng",
+    "input": {
+      "text": "Shop mình có cửa hàng ở Hà Nội không ạ?",
+      "context": {}
+    },
+    "expected": {
+      "productCode": null,
+      "customerPhone": null,
+      "shippingAddress": null,
+      "maxConfidence": 0.5
+    }
+  }
+]

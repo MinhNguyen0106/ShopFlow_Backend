@@ -36,6 +36,10 @@ const envSchema = z.object({
   CLOUDINARY_API_KEY: z.string().default('mock_cloudinary_api_key'),
   CLOUDINARY_API_SECRET: z.string().default('mock_cloudinary_api_secret'),
   CLOUDINARY_URL: z.string().optional(),
+
+  // Google Gemini AI (TASK-20)
+  GEMINI_API_KEY: z.string().optional().default('mock_gemini_api_key_dev'),
+  GEMINI_MODEL: z.string().default('gemini-2.5-flash'),
 });
 
 export type EnvConfig = z.infer<typeof envSchema>;

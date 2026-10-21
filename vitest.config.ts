@@ -6,7 +6,7 @@ export default defineConfig({
     environment: 'node',
 
     // Glob pattern tìm kiếm test files
-    include: ['src/**/__tests__/**/*.test.ts', 'src/**/*.test.ts'],
+    include: ['src/**/__tests__/**/*.test.ts', 'src/**/*.test.ts', 'tests/**/*.test.ts'],
 
     // Thời gian timeout cho mỗi test case (ms)
     testTimeout: 10_000,
