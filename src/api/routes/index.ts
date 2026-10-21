@@ -9,6 +9,8 @@ import { postRouter } from './post.routes.js';
 import { inboxRouter } from './inbox.routes.js';
 import { orderParserRouter } from './order-parser.routes.js';
 import { productRouter } from './product.routes.js';
+import { paymentRouter } from './payment.routes.js';
+import { shippingRouter } from './shipping.routes.js';
 
 export const apiV1Router = Router();
 
@@ -41,3 +43,9 @@ apiV1Router.use('/orders', orderParserRouter);
 
 // Mount Product Catalog routes (TASK-21)
 apiV1Router.use('/products', productRouter);
+
+// Mount Payment & VietQR routes (TASK-23)
+apiV1Router.use('/payments', paymentRouter);
+
+// Mount Shipping Carrier routes (TASK-23)
+apiV1Router.use('/shipments', shippingRouter);

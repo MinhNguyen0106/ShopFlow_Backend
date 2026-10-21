@@ -120,6 +120,64 @@ export class SocketService {
       '[SocketService] 📡 Đã phát sự kiện POST_STATUS_CHANGED'
     );
   }
+
+  /**
+   * Phát sự kiện ORDER_STATUS_CHANGED khi trạng thái đơn hàng thay đổi
+   */
+  emitOrderStatusChanged(pageId: string, payload: {
+    order_id: string;
+    order_code: string;
+    status: string;
+    payment_status?: string;
+    updated_at?: string;
+  }): void {
+    const io = getSocketServer();
+    if (!io) {
+      logger.debug({ pageId }, '[SocketService] Socket.io chưa được khởi tạo, bỏ qua emitOrderStatusChanged');
+      return;
+    }
+
+    const pageRoom = `room:page_${pageId}`;
+    io.to(pageRoom).emit('ORDER_STATUS_CHANGED', {
+      event: 'ORDER_STATUS_CHANGED',
+      page_id: pageId,
+      ...payload,
+      updated_at: payload.updated_at || new Date().toISOString(),
+    });
+    logger.debug(
+      { pageRoom, orderId: payload.order_id, status: payload.status },
+      '[SocketService] 📡 Đã phát sự kiện ORDER_STATUS_CHANGED'
+    );
+  }
+
+  /**
+   * Phát sự kiện PAYMENT_RECEIVED khi nhận được thanh toán thành công qua VietQR
+   */
+  emitPaymentReceived(pageId: string, payload: {
+    order_id: string;
+    order_code: string;
+    amount: number;
+    transaction_id: string;
+    paid_at?: string;
+  }): void {
+    const io = getSocketServer();
+    if (!io) {
+      logger.debug({ pageId }, '[SocketService] Socket.io chưa được khởi tạo, bỏ qua emitPaymentReceived');
+      return;
+    }
+
+    const pageRoom = `room:page_${pageId}`;
+    io.to(pageRoom).emit('PAYMENT_RECEIVED', {
+      event: 'PAYMENT_RECEIVED',
+      page_id: pageId,
+      ...payload,
+      paid_at: payload.paid_at || new Date().toISOString(),
+    });
+    logger.debug(
+      { pageRoom, orderId: payload.order_id, amount: payload.amount },
+      '[SocketService] 📡 Đã phát sự kiện PAYMENT_RECEIVED'
+    );
+  }
 }
 
 export const socketService = new SocketService();

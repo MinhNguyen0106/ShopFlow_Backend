@@ -2,6 +2,64 @@
 
 Nhật ký theo dõi các mốc phát triển, thay đổi kiến trúc và trạng thái của dự án ShopFlow.
 
+## [2026-10-21] - Hoàn Thành TASK-23: Tích Hợp Cổng Thanh Toán VietQR Động & Đơn Vị Vận Chuyển (`payment-shipping-integration`) - ĐÓNG SPRINT 4 (100% DONE)
+- **Tác giả:** System Architect & Full-Stack Engineer (Antigravity Ecosystem)
+- **Nội dung hoàn thành:**
+  - Hoàn thành toàn diện 10/10 tasks trong OpenSpec change [payment-shipping-integration](file:///c:/Users/Dell/Desktop/ShopFlow/openspec/changes/archive/2026-10-21-payment-shipping-integration/tasks.md) tương ứng **[TASK-23]** trên [Task.md](file:///c:/Users/Dell/Desktop/ShopFlow/Task.md).
+  - **Database Migration DDL (`003_orders_and_fulfillment.sql`):**
+    - Thiết kế và khởi tạo 4 bảng chuẩn quan hệ ACID: `orders`, `order_items`, `payments`, `shipments`.
+    - Thiết lập toàn diện chỉ mục `idx_orders_page_status`, `idx_orders_customer_phone`, `idx_payments_order_id`, `idx_payments_gateway_transaction` (UNIQUE per gateway cho Idempotency), `idx_shipments_order_id`, `idx_shipments_tracking_code` (UNIQUE) và trigger tự động cập nhật `updated_at`.
+  - **Tầng DTOs & Validation Schemas (`backend/src/api/dtos/payment.dto.ts`, `shipping.dto.ts`):**
+    - `GenerateVietQrDtoSchema`: Validate UUID `orderId`.
+    - `PaymentWebhookDtoSchema`: Validate payload webhook biến động số dư ngân hàng (`gateway`, `transactionId`, `amount`, `transferContent`, `bankAccount`, `paidAt`).
+    - `CreateShipmentDtoSchema`: Validate thông tin tạo vận đơn (`orderId`, `carrier`: `ghn` | `ghtk` | `mock`, `weightGram`, `codAmount`).
+    - `TrackShipmentDtoSchema`: Validate mã vận đơn `trackingCode`.
+    - 11/11 tests pass tại `payment-shipping.dto.test.ts`.
+  - **Tiện ích Chuẩn Quốc Tế VietQR Napas 247 (`backend/src/core/services/vietqr.helper.ts`):**
+    - Thuật toán định dạng TLV (Tag-Length-Value) theo EMVCo QR standard (Payload Format Indicator `00`, POI Method `01` Dynamic, Merchant Account Info `38`, Transaction Currency `53` VND 704, CRC `63`).
+    - Thuật toán băm CRC16-CCITT (polynomial `0x1021`, initial `0xFFFF`) xuất chuỗi 4 ký tự Hex viết hoa chuẩn xác 100%.
+    - Sinh URL ảnh QuickLink VietQR (`https://img.vietqr.io/image/...`).
+    - Regex Parser bóc tách mã đơn hàng từ nội dung chuyển khoản tự do của khách hàng.
+    - 11/11 tests pass tại `vietqr.helper.test.ts`.
+  - **Tầng Repositories Quản Lý Đơn Hàng & Vận Đơn:**
+    - `OrderRepository` (`backend/src/infrastructure/repositories/order.repository.ts`): Quản lý vòng đời đơn hàng, items, và cập nhật trạng thái có ghi nhận timeline audit trail.
+    - `PaymentRepository` (`backend/src/infrastructure/repositories/payment.repository.ts`): Ghi nhận giao dịch thanh toán, tra cứu theo `transactionId` chống replay attack.
+    - `ShipmentRepository` (`backend/src/infrastructure/repositories/shipment.repository.ts`): Quản lý vận đơn, cập nhật trạng thái giao nhận.
+    - 8/8 tests pass tại `order-payment.repository.test.ts`.
+  - **Tầng Dịch Vụ Nghiệp Vụ Thanh Toán & Vận Chuyển:**
+    - `PaymentWebhookService` (`backend/src/core/services/payment-webhook.service.ts`):
+      - Cơ chế Idempotency 24h qua Redis cache (`payment:processed:${gateway}:${transactionId}`).
+      - Tự động trích xuất mã đơn hàng từ nội dung chuyển khoản và đối chiếu số tiền thực nhận (`amount >= final_amount`).
+      - Tự động chuyển trạng thái `payment_status = 'paid'`, `order_status = 'confirmed'` và phát 2 sự kiện WebSocket realtime `PAYMENT_RECEIVED` và `ORDER_STATUS_CHANGED`.
+      - Hỗ trợ xử lý thiếu tiền (`partially_paid`) gửi cảnh báo Dashboard.
+      - 8/8 tests pass tại `payment-webhook.service.test.ts`.
+    - `ShippingService` & Adapter Pattern (`backend/src/core/services/shipping.service.ts`, `backend/src/infrastructure/shipping/shipping.adapter.ts`):
+      - Triển khai Strategy Adapter: `MockCarrierAdapter` (môi trường dev/test cô lập), `GhnCarrierAdapter` (Giao Hàng Nhanh API V2), `GhtkCarrierAdapter` (Giao Hàng Tiết Kiệm API).
+      - Tự động tính toán tiền thu hộ COD (bằng 0 nếu đơn đã thanh toán trước đó).
+      - Tự động gán mã vận đơn `tracking_code`, chuyển trạng thái đơn hàng sang `shipping`, và phát sự kiện Socket `ORDER_STATUS_CHANGED`.
+      - Tra cứu lịch sử hành trình chi tiết của kiện hàng.
+      - 5/5 tests pass tại `shipping.service.test.ts`.
+  - **Tầng REST API Endpoints & Controllers:**
+    - `POST /api/v1/payments/vietqr`: Sinh mã QR động Napas 247 cho đơn hàng.
+    - `POST /api/v1/payments/webhook`: Ingestion webhook biến động số dư ngân hàng xác thực API secret key.
+    - `POST /api/v1/shipments/create`: Tạo vận đơn với nhà vận chuyển đối tác.
+    - `GET /api/v1/shipments/:trackingCode/track`: Tra cứu hành trình vận chuyển thời gian thực.
+    - 11/11 integration tests pass (6/6 tại `payment.controller.test.ts` và 5/5 tại `shipping.controller.test.ts`).
+  - **Tổng Kết Kiểm Thử & Quality Gates:**
+    - Toàn bộ 7 test suites (54/54 tests) của TASK-23 pass 100% trong 2.31s.
+    - `npx tsc --noEmit -p backend/tsconfig.json` đạt **0 lỗi** (TypeScript Strict Mode).
+    - Lưu trữ living specifications: [openspec/specs/payment-and-shipping/spec.md](file:///c:/Users/Dell/Desktop/ShopFlow/openspec/specs/payment-and-shipping/spec.md) và cập nhật [openspec/specs/orders-management/spec.md](file:///c:/Users/Dell/Desktop/ShopFlow/openspec/specs/orders-management/spec.md).
+    - Lưu trữ change: `openspec/changes/archive/2026-10-21-payment-shipping-integration`.
+- **KẾT QUẢ ĐÓNG SPRINT 4:** Toàn bộ 4 tasks ([TASK-20], [TASK-21], [TASK-22], [TASK-23]) hoàn thành 100%.
+
+### [Kế Hoạch Tiếp Theo: Sprint 5 - Advanced Analytics, Performance Optimization & Production Hardening]
+1. **[TASK-24] Màn Hình Báo Cáo Phân Tích Doanh Thu & Hiệu Quả Bán Hàng (`/analytics`) - [P0]:**
+   - Biểu đồ doanh thu đa kênh, tỷ lệ chuyển đổi bình luận thành đơn hàng, top sản phẩm bán chạy, phân tích khung giờ vàng hiệu quả nhất.
+2. **[TASK-25] Mở Rộng Quản Lý Đa Fanpage & Phân Quyền Nhân Viên (RBAC) - [P1]:**
+   - Phân quyền theo vai trò (Owner, Manager, Staff), giới hạn quyền xem số điện thoại khách hàng PII cho nhân viên trực chat.
+3. **[TASK-26] Tối Ưu Hóa Hiệu Năng & Hardening Môi Trường Production - [P1]:**
+   - Tối ưu hóa Redis Caching cho danh mục sản phẩm, nén Gzip/Brotli, rate-limit chống DDoS, thiết lập Docker Compose hoàn chỉnh cho toàn bộ hệ sinh thái ShopFlow (Frontend, Backend, PostgreSQL, Redis).
+
 ## [2026-10-21] - Hoàn Thành TASK-22: Màn Hình Giao Diện Quản Lý Đơn Hàng & Vận Đơn (`orders-management-ui`) - Sprint 4 P0
 - **Tác giả:** System Architect & Full-Stack Engineer (Antigravity Ecosystem)
 - **Nội dung hoàn thành:**

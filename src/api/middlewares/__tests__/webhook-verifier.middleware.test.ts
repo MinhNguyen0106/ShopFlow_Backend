@@ -128,7 +128,7 @@ describe('verifyWebhookSignature() — Express Middleware', () => {
   });
 
   it('ở môi trường dev/test khi FACEBOOK_APP_SECRET undefined thì cảnh báo và cho qua (gọi next)', () => {
-    vi.spyOn(env, 'FACEBOOK_APP_SECRET', 'get').mockReturnValue(undefined);
+    vi.spyOn(env, 'FACEBOOK_APP_SECRET', 'get').mockReturnValue(undefined as any);
     vi.spyOn(env, 'NODE_ENV', 'get').mockReturnValue('development');
 
     const { req, res, next } = createMocks({}, Buffer.from('{}'), {});
@@ -139,7 +139,7 @@ describe('verifyWebhookSignature() — Express Middleware', () => {
   });
 
   it('ở môi trường production khi FACEBOOK_APP_SECRET undefined thì throw UnauthorizedError', () => {
-    vi.spyOn(env, 'FACEBOOK_APP_SECRET', 'get').mockReturnValue(undefined);
+    vi.spyOn(env, 'FACEBOOK_APP_SECRET', 'get').mockReturnValue(undefined as any);
     vi.spyOn(env, 'NODE_ENV', 'get').mockReturnValue('production');
 
     const { req, res, next } = createMocks({}, Buffer.from('{}'), {});

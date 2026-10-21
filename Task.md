@@ -27,29 +27,38 @@
 
 ---
 
-## 🚀 DANH MỤC CÔNG VIỆC SPRINT 4: ORDER MANAGEMENT, AI ENTITY EXTRACTION & PAYMENT INTEGRATION
+## 🚀 DANH MỤC CÔNG VIỆC SPRINT 5: ADVANCED ANALYTICS, MULTI-PAGE RBAC & PRODUCTION HARDENING
 
 ### 📋 TRẠNG THÁI: CHỜ THỰC HIỆN (TODO)
 
-#### [TASK-21] Nghiệp Vụ Quản Lý Danh Mục Sản Phẩm, Biến Thể & Tồn Kho (`/api/v1/products`) - [P1] - **[HOÀN THÀNH]**
-- [x] **21.1.** Xây dựng Repository & Service quản lý sản phẩm (`products`), biến thể (`variants` JSON) và trừ kho an toàn (`stock_quantity`).
-- [x] **21.2.** Xây dựng REST APIs CRUD: `GET /api/v1/products`, `POST /api/v1/products`, `PUT /api/v1/products/:id`, `DELETE /api/v1/products/:id`, `PATCH /api/v1/products/:id/stock`.
-- [x] **21.3.** Tích hợp cơ chế trừ kho nguyên tử (`atomicDecrementStock`) chống overselling & race conditions với SQL `stock_quantity >= $1`.
-- [x] **21.4.** Viết unit & integration tests kiểm thử nghiệp vụ kho và đồng thời (concurrency check), 37/37 tests pass, 59/59 files backend pass 100%.
+#### [TASK-24] Màn Hình Báo Cáo Phân Tích Doanh Thu & Hiệu Quả Bán Hàng (`/analytics`) - [P0]
+- [ ] **24.1.** Xây dựng API thống kê doanh thu theo thời gian, tỷ lệ chốt đơn từ bình luận/tin nhắn và top sản phẩm bán chạy nhất.
+- [ ] **24.2.** Thiết kế Zustand store `analytics.store.ts` kết nối REST API báo cáo số liệu và tính toán chỉ số tăng trưởng.
+- [ ] **24.3.** Xây dựng giao diện Dashboard Analytics chuẩn macOS Clean Utility với biểu đồ SVG tương tác (doanh thu, đơn hàng, heatmap khung giờ vàng).
+- [ ] **24.4.** Viết unit & integration tests cho toàn bộ phân hệ báo cáo phân tích kinh doanh.
+*(Khi bắt đầu thực thi: Chạy `/opsx-propose analytics-dashboard`)*
 
-#### [TASK-22] Màn Hình Giao Diện Quản Lý Đơn Hàng & Vận Đơn (`/orders`) - [P0] - **[HOÀN THÀNH]**
-- [x] **22.1.** Thiết kế Zustand store `order.store.ts` kết nối REST APIs `/api/v1/orders` và lắng nghe socket `ORDER_STATUS_CHANGED`.
-- [x] **22.2.** Xây dựng bảng danh sách đơn hàng Bento phong cách macOS Clean Utility với bộ lọc trạng thái đa tầng (`pending`, `confirmed`, `shipping`, `completed`, `cancelled`).
-- [x] **22.3.** Xây dựng Drawer/Modal xem chi tiết đơn hàng, lịch sử thay đổi trạng thái, thông tin CRM khách hàng (PII masked) và in phiếu vận đơn.
-- [x] **22.4.** Viết unit & integration tests cho toàn bộ phân hệ quản lý đơn hàng: 23/23 tests passed, TypeScript compile 0 lỗi.
-*(Hoàn thành OpenSpec change: `orders-management-ui`)*
+#### [TASK-25] Mở Rộng Quản Lý Đa Fanpage & Phân Quyền Nhân Viên (RBAC) - [P1]
+- [ ] **25.1.** Thiết kế bảng cơ sở dữ liệu `page_members` phân quyền vai trò (`owner`, `manager`, `staff`).
+- [ ] **25.2.** Middleware kiểm tra quyền hạn `authorizeRole` và chính sách bảo mật che số điện thoại khách hàng PII cho vai trò `staff`.
+- [ ] **25.3.** Giao diện mời nhân viên và quản lý danh sách thành viên trong Fanpage Settings.
+- [ ] **25.4.** Viết unit & integration tests cho luồng phân quyền và bảo vệ dữ liệu PII.
+*(Khi bắt đầu thực thi: Chạy `/opsx-propose multi-page-rbac`)*
 
-#### [TASK-23] Tích Hợp Cổng Thanh Toán VietQR Động & Đơn Vị Vận Chuyển - [P1]
-- [ ] **23.1.** Xây dựng tiện ích sinh mã VietQR động theo chuẩn Napas 247 (chứa đúng số tiền đơn hàng và mã nội dung chuyển khoản bảo mật).
-- [ ] **23.2.** Tích hợp Webhook nhận thông báo biến động số dư chuyển khoản tự động đổi trạng thái đơn hàng sang `confirmed`.
-- [ ] **23.3.** Kết nối API đẩy đơn sang đối tác vận chuyển (GHN / GHTK) và nhận mã vận đơn `tracking_code`.
-- [ ] **23.4.** Viết integration tests cho luồng thanh toán và cập nhật vận đơn.
-*(Khi bắt đầu thực thi: Chạy `/opsx-propose payment-shipping-integration`)*
+#### [TASK-26] Tối Ưu Hóa Hiệu Năng & Hardening Môi Trường Production - [P1]
+- [ ] **26.1.** Tối ưu hóa Redis Caching cho danh mục sản phẩm và trạng thái Fanpage với TTL và invalidation logic.
+- [ ] **26.2.** Tích hợp middleware nén Gzip/Brotli, rate limiting chống brute-force và DDoS.
+- [ ] **26.3.** Hoàn thiện cấu hình Docker Compose môi trường production (Frontend, Backend, PostgreSQL, Redis, Nginx Reverse Proxy).
+- [ ] **26.4.** Kiểm thử tải (Load Testing) và xác thực toàn diện tiêu chuẩn bảo mật OWASP.
+*(Khi bắt đầu thực thi: Chạy `/opsx-propose production-hardening`)*
+
+---
+
+### 📦 SPRINT ĐÃ HOÀN THÀNH: SPRINT 4 (100% DONE)
+- [x] **[TASK-20]** Mô-đun Trích Xuất Thực Thể Đơn Hàng Bằng Google Gemini AI (`OrderParserService`) - 100% DONE
+- [x] **[TASK-21]** Nghiệp Vụ Quản Lý Danh Mục Sản Phẩm, Biến Thể & Tồn Kho (`/api/v1/products`) - 100% DONE
+- [x] **[TASK-22]** Màn Hình Giao Diện Quản Lý Đơn Hàng & Vận Đơn (`/orders`) - 100% DONE
+- [x] **[TASK-23]** Tích Hợp Cổng Thanh Toán VietQR Động & Đơn Vị Vận Chuyển - 100% DONE
 
 ---
 
@@ -82,6 +91,7 @@
 | 21/10/2026 | [TASK-20] Mô-đun Trích Xuất Thực Thể Đơn Hàng Bằng Google Gemini AI (`OrderParserService`) | **DONE** | Kiến trúc Hybrid 2 tầng: Regex Fast-path (< 50ms) + Gemini 2.5 Flash Fallback (< 1.5s), prompt injection guard `<customer_input>`, REST API `POST /api/v1/orders/parse`, 23/23 Golden test fixtures passed (đạt 100% độ chính xác), 55/55 files test (457/457 tests backend) pass 100%, 0 lỗi TypeScript. Hoàn thành OpenSpec `order-ai-parser`. |
 | 21/10/2026 | [TASK-21] Nghiệp Vụ Quản Lý Danh Mục Sản Phẩm, Biến Thể & Tồn Kho (`/api/v1/products`) | **DONE** | Bảng PostgreSQL `products` (`002_products_and_inventory.sql`), Zod DTOs, `ProductRepository` với trừ kho nguyên tử (`atomicDecrementStock` chống overselling/race conditions), `ProductService` kiểm tra trùng SKU trên cùng page, 6 REST APIs CRUD & `/stock`, 59/59 test files pass 100% (494/494 tests passed), 0 lỗi TypeScript; hoàn thành OpenSpec `product-catalog-service`. |
 | 21/10/2026 | [TASK-22] Màn Hình Giao Diện Quản Lý Đơn Hàng & Vận Đơn (`/orders`) | **DONE** | Zustand store `order.store.ts` (multi-status filter, debounced search, optimistic status update, WebSocket listener), Bento UI components (`OrderStatusBadge`, `OrderMetrics`, `OrderTable` macOS Clean Utility, `OrderDetailDrawer` với PII phone masking & copy address, `OrderPrintModal` phiếu in nhiệt A5/A6 `@media print`), Sidebar `/orders` navigation badge; 23/23 tests pass 100%, 0 lỗi TypeScript. Hoàn thành OpenSpec `orders-management-ui`. |
+| 21/10/2026 | [TASK-23] Tích Hợp Cổng Thanh Toán VietQR Động & Đơn Vị Vận Chuyển | **DONE** | Migration DDL 4 bảng (`orders`, `order_items`, `payments`, `shipments`), `VietQrHelper` chuẩn Napas 247 CRC16 & QuickLink, `PaymentWebhookService` Idempotency Redis 24h & tự động đối soát chuyển `confirmed`, Adapter pattern đối tác vận chuyển (`MockCarrierAdapter`, `GhnCarrierAdapter`, `GhtkCarrierAdapter`), 4 REST APIs `/payments/vietqr`, `/payments/webhook`, `/shipments/create`, `/shipments/:trackingCode/track`; 54/54 tests pass 100%, 0 lỗi TypeScript. Hoàn thành OpenSpec `payment-shipping-integration`. **HOÀN THÀNH SPRINT 4 (100%)**. |
 
 
 

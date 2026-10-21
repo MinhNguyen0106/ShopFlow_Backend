@@ -43,6 +43,14 @@ Hệ thống SHALL cho phép người dùng thay đổi trạng thái đơn hàn
 - **WHEN** Hệ thống nhận được sự kiện Socket `ORDER_STATUS_CHANGED` từ server với payload trạng thái mới của đơn hàng
 - **THEN** Zustand store tự động cập nhật bản ghi đơn hàng tương ứng trong bảng danh sách và Drawer chi tiết mà không yêu cầu người dùng tải lại trang
 
+#### Scenario: Automatic confirmation upon VietQR payment verification
+- **WHEN** Webhook thanh toán xác nhận giao dịch ngân hàng thành công cho đơn hàng
+- **THEN** Hệ thống tự động chuyển trạng thái đơn hàng sang `confirmed`, hiển thị badge đã thanh toán và cập nhật thông tin giao dịch trong lịch sử đơn hàng
+
+#### Scenario: Automatic transition to shipping when tracking code is issued
+- **WHEN** Đơn vị vận chuyển tạo vận đơn thành công và cấp mã `tracking_code`
+- **THEN** Đơn hàng tự động chuyển sang trạng thái `shipping`, lưu trữ thông tin nhà vận chuyển và mã vận đơn để tra cứu hành trình
+
 ### Requirement: Printable waybill and packing slip generation
 Hệ thống SHALL cung cấp modal xem trước và hỗ trợ in phiếu giao hàng / vận đơn (Packing Slip / Waybill) chuẩn A5/A6 tối ưu in nhiệt cho đối tác vận chuyển, bao gồm: Mã đơn hàng (kèm Barcode/QR code), Thông tin người gửi (Shop/Fanpage), Thông tin người nhận (hiển thị số điện thoại đầy đủ phục vụ giao hàng), Danh sách chi tiết các mặt hàng và Số tiền thu hộ COD.
 
