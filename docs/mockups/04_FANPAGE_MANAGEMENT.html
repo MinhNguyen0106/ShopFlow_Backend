@@ -1,0 +1,904 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShopFlow - Quản lý Kết nối Fanpage &amp; Kênh bán hàng</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed-variant": "#004493",
+            "on-primary-container": "#eeefff",
+            "primary": "#004ac6",
+            "surface-variant": "#dae2fd",
+            "secondary-fixed-dim": "#adc6ff",
+            "primary-fixed": "#dbe1ff",
+            "surface-container-lowest": "#ffffff",
+            "secondary-container": "#0070eb",
+            "surface-container-low": "#f2f3ff",
+            "on-primary-fixed-variant": "#003ea8",
+            "surface-bright": "#faf8ff",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed": "#00174b",
+            "inverse-on-surface": "#eef0ff",
+            "surface-dim": "#d2d9f4",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-error": "#ffffff",
+            "surface-container-high": "#e2e7ff",
+            "tertiary-fixed": "#71ff74",
+            "error": "#ba1a1a",
+            "on-surface": "#131b2e",
+            "surface-tint": "#0053db",
+            "secondary": "#0058bc",
+            "on-tertiary-fixed": "#002203",
+            "outline": "#737686",
+            "surface-container-highest": "#dae2fd",
+            "secondary-fixed": "#d8e2ff",
+            "primary-container": "#2563eb",
+            "on-secondary-container": "#fefcff",
+            "error-container": "#ffdad6",
+            "tertiary-container": "#007f1f",
+            "on-primary": "#ffffff",
+            "tertiary": "#006316",
+            "on-secondary": "#ffffff",
+            "outline-variant": "#c3c6d7",
+            "on-tertiary-container": "#c6ffbc",
+            "inverse-surface": "#283044",
+            "on-tertiary-fixed-variant": "#005311",
+            "inverse-primary": "#b4c5ff",
+            "on-error-container": "#93000a",
+            "surface": "#faf8ff",
+            "background": "#faf8ff",
+            "surface-container": "#eaedff",
+            "tertiary-fixed-dim": "#49e255",
+            "on-surface-variant": "#434655",
+            "on-secondary-fixed": "#001a41",
+            "on-background": "#131b2e"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "gutter": "1rem",
+            "space-md": "0.875rem",
+            "space-sm": "0.5rem",
+            "margin": "1rem",
+            "gutter-desktop": "1.5rem",
+            "margin-desktop": "2rem",
+            "space-lg": "1.25rem"
+          },
+          "fontFamily": {
+            "label-mono": ["Space Mono"],
+            "headline-md": ["Geist"],
+            "headline-xl-mobile": ["Geist"],
+            "headline-lg": ["Geist"],
+            "body-lg": ["Geist"],
+            "label-lg": ["Geist"],
+            "label-md": ["Geist"],
+            "body-sm": ["Geist"],
+            "body-md": ["Geist"],
+            "headline-xl": ["Geist"]
+          },
+          "fontSize": {
+            "label-mono": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "headline-md": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-xl-mobile": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "headline-lg": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-lg": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.011em", "fontWeight": "400" }],
+            "label-lg": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "-0.006em", "fontWeight": "500" }],
+            "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "body-sm": ["0.75rem", { "lineHeight": "1.125rem", "letterSpacing": "0em", "fontWeight": "400" }],
+            "body-md": ["0.875rem", { "lineHeight": "1.375rem", "letterSpacing": "-0.006em", "fontWeight": "400" }],
+            "headline-xl": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.03em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Blueprint subtle background micro-grid */
+    .bg-grid-pattern {
+      background-color: #faf8ff;
+      background-image: radial-gradient(#c3c6d7 0.75px, transparent 0.75px);
+      background-size: 16px 16px;
+    }
+    
+    .macos-window-shadow {
+      box-shadow: 0 20px 45px -12px rgba(19, 27, 46, 0.08), 0 0 0 1px rgba(195, 198, 215, 0.4);
+    }
+    
+    .macos-card-hover {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .macos-card-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -6px rgba(19, 27, 46, 0.1), 0 0 0 1px #2563eb;
+    }
+  </style>
+</head>
+<body class="font-body-md text-on-surface antialiased bg-grid-pattern min-h-screen">
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: SideNavBar (Fixed Left, 64 = 16rem = 256px)             -->
+<!-- Active Tab: "Kết nối Fanpage" (Index 4 strictly mapped)                   -->
+<!-- ========================================================================= -->
+<aside class="fixed top-0 left-0 h-screen w-64 flex flex-col justify-between p-4 z-40 bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant/30 shadow-sm dark:shadow-none">
+<div class="flex flex-col gap-6">
+<!-- Brand & Header -->
+<div class="px-2 pt-1 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary font-headline-lg font-bold shadow-md shadow-primary/20">
+<span class="material-symbols-outlined text-on-primary">hub</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight">ShopFlow</span>
+<span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed">VN</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant font-medium">Pro E-commerce Suite</p>
+</div>
+</div>
+</div>
+<!-- Action Button (CTA from JSON) -->
+<button class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-primary-container hover:bg-primary text-on-primary text-label-lg font-label-lg font-medium shadow-sm transition-all duration-150 active:scale-[0.98]">
+<span class="material-symbols-outlined text-lg">edit_square</span>
+<span>Soạn bài viết mới</span>
+</button>
+<!-- Navigation Links (5 tabs from JSON) -->
+<nav class="flex flex-col gap-1">
+<!-- Tab 0: Tổng quan -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span>Tổng quan</span>
+</a>
+<!-- Tab 1: Hộp thư Live Chat -->
+<a class="flex items-center justify-between px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-xl">forum</span>
+<span>Hộp thư Live Chat</span>
+</div>
+<span class="bg-primary text-on-primary text-[10px] font-bold px-2 py-0.5 rounded-full">18</span>
+</a>
+<!-- Tab 2: Lịch đăng bài -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined text-xl">calendar_month</span>
+<span>Lịch đăng bài</span>
+</a>
+<!-- Tab 3: Kịch bản tự động hóa -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined text-xl">smart_toy</span>
+<span>Kịch bản tự động hóa</span>
+</a>
+<!-- Tab 4: Kết nối Fanpage (ACTIVE AS PER EXACT MATCH) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-container text-primary dark:text-inverse-primary font-medium text-label-lg font-label-lg relative" href="#">
+<span class="material-symbols-outlined text-xl text-primary font-semibold" style="font-variation-settings: 'FILL' 1;">sync_alt</span>
+<span class="font-semibold text-primary">Kết nối Fanpage</span>
+<span class="ml-auto w-1.5 h-4 bg-primary rounded-full"></span>
+</a>
+</nav>
+</div>
+<!-- Bottom Meta & Settings Section -->
+<div class="flex flex-col gap-2 pt-4 border-t border-outline-variant/30">
+<div class="px-3 py-2 rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">speed</span>
+<span class="text-body-sm font-body-sm text-on-surface font-medium">Rate Limit Meta v19</span>
+</div>
+<span class="text-label-mono font-label-mono text-tertiary font-bold">24%</span>
+</div>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span>Cài đặt hệ thống</span>
+</a>
+<!-- Meta Partner Badge Indicator -->
+<div class="mt-2 p-2.5 rounded-xl bg-surface-bright border border-outline-variant/30 flex items-center gap-2.5">
+<div class="w-6 h-6 rounded-md bg-[#1877F2]/10 flex items-center justify-center text-[#1877F2]">
+<span class="material-symbols-outlined text-base">verified</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[11px] font-bold text-on-surface leading-tight">Meta Business Partner</span>
+<span class="text-[10px] text-on-surface-variant">Graph API v19.0 Secured</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: TopNavBar (macOS toolbar style, fixed top-0 right-0 left-64) -->
+<!-- ========================================================================= -->
+<header class="fixed top-0 right-0 left-64 h-14 flex items-center justify-between px-6 z-30 bg-surface-container-lowest/90 dark:bg-inverse-surface/90 backdrop-blur-md border-b border-outline-variant/30 shadow-[0_1px_3px_0_rgba(15,23,42,0.05)]">
+<!-- Left: Title / Search bar -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-primary font-headline-md font-bold">
+<span class="material-symbols-outlined text-xl">tune</span>
+<span>ShopFlow Live Hub</span>
+</div>
+<div class="h-4 w-[1px] bg-outline-variant/40"></div>
+<!-- Quick Search inside Hub -->
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-lg">search</span>
+<input class="w-full h-8 pl-9 pr-3 text-body-sm font-body-sm bg-surface-container-low border border-outline-variant/30 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-on-surface placeholder:text-outline" placeholder="Tìm kiếm Fanpage, ID Page..." type="text"/>
+</div>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-3">
+<!-- Trailing Secondary: Active Fanpage Quick Dropdown -->
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low border border-outline-variant/40 text-on-surface text-label-md font-label-md hover:bg-surface-container transition-colors">
+<span class="w-2 h-2 rounded-full bg-[#27C93F] animate-pulse"></span>
+<span class="font-medium">Fanpage: Tiệm Mỹ Phẩm Sài Gòn</span>
+<span class="material-symbols-outlined text-base text-outline">expand_more</span>
+</button>
+<!-- Trailing Primary Action -->
+<button class="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary-container text-on-primary text-label-md font-label-md font-semibold hover:bg-primary transition-all shadow-sm active:scale-95">
+<span class="material-symbols-outlined text-sm font-bold">add</span>
+<span>Tạo chiến dịch</span>
+</button>
+<div class="h-4 w-[1px] bg-outline-variant/40 mx-1"></div>
+<!-- Trailing Icon Actions -->
+<div class="flex items-center gap-1 text-on-surface-variant">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-surface-container-low transition-colors" title="Sensors">
+<span class="material-symbols-outlined text-lg">sensors</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-surface-container-low transition-colors relative" title="Thông báo">
+<span class="material-symbols-outlined text-lg">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error"></span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-surface-container-low transition-colors" title="Tài khoản">
+<span class="material-symbols-outlined text-xl text-primary">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- MAIN WORKSPACE CANVAS                                                     -->
+<!-- ========================================================================= -->
+<main class="ml-64 pt-14 p-6 min-h-screen">
+<div class="max-w-[1400px] mx-auto space-y-6">
+<!-- Breadcrumbs & Page Header Section -->
+<section class="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-2">
+<div>
+<!-- Breadcrumb -->
+<nav class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant mb-1">
+<span>ShopFlow Workspace</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span>Kênh tiếp thị &amp; Social</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-semibold">Quản lý Fanpage &amp; Kênh bán hàng</span>
+</nav>
+<h1 class="text-headline-xl font-headline-xl text-on-surface tracking-tight">
+            Quản lý Fanpage &amp; Kênh bán hàng
+          </h1>
+<p class="text-body-md font-body-md text-on-surface-variant max-w-3xl mt-1">
+            Kết nối API trực tiếp qua Meta Graph API v19+, quản lý phân quyền và đồng bộ tin nhắn/bình luận theo thời gian thực.
+          </p>
+</div>
+<!-- Primary Top CTAs -->
+<div class="flex items-center gap-3 shrink-0">
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/60 hover:bg-surface-container-low text-on-surface text-label-lg font-label-lg font-medium transition-all shadow-sm">
+<span class="material-symbols-outlined text-primary text-base">refresh</span>
+<span>Đồng bộ lại tất cả Webhooks</span>
+</button>
+<button class="flex items-center gap-2 px-5 py-2 rounded-full bg-primary-container text-on-primary hover:bg-primary text-label-lg font-label-lg font-medium shadow-md shadow-primary/25 hover:shadow-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+<span>+ Thêm Fanpage Mới (Meta OAuth)</span>
+</button>
+</div>
+</section>
+<!-- ===================================================================== -->
+<!-- 1. TOP METRIC CARDS (Bento Overview Grid)                             -->
+<!-- ===================================================================== -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Metric 1: Connected Pages -->
+<div class="p-4 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 macos-window-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-label-md font-label-md uppercase tracking-wider text-outline font-semibold">Tổng số trang kết nối</span>
+<span class="p-2 rounded-lg bg-surface-container-low text-primary">
+<span class="material-symbols-outlined text-lg">domain</span>
+</span>
+</div>
+<div class="mt-2">
+<div class="flex items-baseline gap-2">
+<span class="text-headline-xl font-headline-xl text-on-surface font-bold">3 / 5</span>
+<span class="text-label-md font-label-md px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-semibold">Gói Pro</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 60%"></div>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-2 flex items-center justify-between">
+<span>Còn 2 slot trống</span>
+<a class="text-primary hover:underline font-medium" href="#">Nâng cấp +</a>
+</p>
+</div>
+</div>
+<!-- Metric 2: Webhook & Token Health -->
+<div class="p-4 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 macos-window-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-label-md font-label-md uppercase tracking-wider text-outline font-semibold">Trạng thái Webhook &amp; Token</span>
+<span class="p-2 rounded-lg bg-tertiary/10 text-tertiary">
+<span class="material-symbols-outlined text-lg">security</span>
+</span>
+</div>
+<div class="mt-2">
+<div class="flex items-center gap-2">
+<span class="text-headline-xl font-headline-xl text-tertiary font-bold">100%</span>
+<span class="flex items-center gap-1 text-label-md font-label-md px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-semibold">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> Hoạt động
+              </span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-3 font-medium">
+              Meta Long-lived Access Token hợp lệ <span class="font-bold text-on-surface">58 ngày</span> nữa
+            </p>
+</div>
+</div>
+<!-- Metric 3: Traffic today -->
+<div class="p-4 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 macos-window-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-label-md font-label-md uppercase tracking-wider text-outline font-semibold">Lưu lượng hôm nay</span>
+<span class="p-2 rounded-lg bg-secondary-fixed/50 text-secondary">
+<span class="material-symbols-outlined text-lg">mark_chat_unread</span>
+</span>
+</div>
+<div class="mt-2">
+<div class="flex items-baseline gap-2">
+<span class="text-headline-xl font-headline-xl text-on-surface font-bold">1,428</span>
+<span class="text-label-md font-label-md text-tertiary font-semibold flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> +14.2%
+              </span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-3">
+              Tự động hóa xử lý <span class="font-bold text-primary">88%</span> (1,256 lượt)
+            </p>
+</div>
+</div>
+<!-- Metric 4: Average response latency -->
+<div class="p-4 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 macos-window-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-label-md font-label-md uppercase tracking-wider text-outline font-semibold">Tốc độ phản hồi trung bình</span>
+<span class="p-2 rounded-lg bg-surface-container-high text-primary">
+<span class="material-symbols-outlined text-lg">timer</span>
+</span>
+</div>
+<div class="mt-2">
+<div class="flex items-baseline gap-2">
+<span class="text-headline-xl font-headline-xl text-primary font-bold">1.4s</span>
+<span class="text-label-md font-label-md text-on-surface-variant">SLA &lt; 3.0s</span>
+</div>
+<p class="text-body-sm font-body-sm text-tertiary mt-3 font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">verified_user</span> Chuẩn cam kết SLA Meta Business
+            </p>
+</div>
+</div>
+</section>
+<!-- ===================================================================== -->
+<!-- 2. META SECURITY & TOKEN STATUS BANNER                                -->
+<!-- ===================================================================== -->
+<section class="rounded-2xl p-4 bg-gradient-to-r from-surface-container-low via-surface-container to-surface-variant border border-outline-variant/40 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-2xl">shield_lock</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-label-lg font-label-lg font-bold text-on-surface">Meta Business Suite đã xác minh doanh nghiệp</span>
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#1877F2] text-on-primary tracking-wide">VERIFIED TIER 3</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+              Token v19 bảo mật mã hóa <span class="font-label-mono font-bold text-on-surface">AES-256</span>. Webhook đang lắng nghe sự kiện: 
+              <span class="font-label-mono text-primary font-semibold">messages</span>, 
+              <span class="font-label-mono text-primary font-semibold">messaging_postbacks</span>, 
+              <span class="font-label-mono text-primary font-semibold">feed</span>, 
+              <span class="font-label-mono text-primary font-semibold">standby</span>.
+            </p>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0 self-end lg:self-center">
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-lowest/80 border border-outline-variant/30 text-body-sm font-body-sm">
+<span class="w-2 h-2 rounded-full bg-[#27C93F] animate-ping"></span>
+<span class="text-on-surface font-medium">Graph API 19.0.4 Online</span>
+</div>
+<button class="px-3.5 py-1.5 rounded-lg bg-surface-container-lowest text-primary hover:bg-surface-container-high border border-outline-variant/40 text-label-md font-label-md font-semibold transition-colors">
+            Kiểm tra chứng chỉ
+          </button>
+</div>
+</section>
+<!-- ===================================================================== -->
+<!-- 3. DETAILED CONNECTED FANPAGES CARDS                                  -->
+<!-- ===================================================================== -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface font-bold tracking-tight">
+              Danh sách Fanpage đang liên kết
+            </h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Quản lý trực tiếp cấu hình bot, quyền tư vấn viên và quy tắc bảo vệ dữ liệu khách hàng</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-lg bg-surface-container-lowest border border-outline-variant/40 text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-base">filter_list</span>
+</button>
+<button class="p-2 rounded-lg bg-surface-container-lowest border border-outline-variant/40 text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-base">sort</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<!-- PAGE 1: Tiệm Mỹ Phẩm Sài Gòn -->
+<div class="rounded-2xl bg-surface-container-lowest border border-outline-variant/40 macos-window-shadow macos-card-hover overflow-hidden">
+<!-- macOS Window Title Bar Style -->
+<div class="px-4 py-2 bg-surface-container-low/50 border-b border-outline-variant/20 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#FF5F56] inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#FFBD2E] inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#27C93F] inline-block"></span>
+<span class="ml-2 text-label-mono font-label-mono text-[11px] text-outline font-medium">PAGE_ID: 109283748291038</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-label-mono font-label-mono text-[11px] text-tertiary flex items-center gap-1 font-semibold">
+<span class="w-2 h-2 rounded-full bg-[#27C93F]"></span> Ping: 42ms
+                </span>
+<span class="text-label-mono font-label-mono text-[11px] text-on-surface-variant">Server: SGN-01</span>
+</div>
+</div>
+<!-- Card Body Content -->
+<div class="p-5 flex flex-col xl:flex-row items-start xl:items-center justify-between gap-6">
+<!-- Left Column: Avatar & Page Info -->
+<div class="flex items-start gap-4 min-w-[320px]">
+<div class="relative">
+<img class="w-16 h-16 rounded-2xl object-cover border border-outline-variant/40 shadow-sm" data-alt="A vivid and modern commercial photograph representing a premium Vietnamese skincare and cosmetics boutique, with luxurious glass bottles and serene tropical botanical background in bright natural daylight, crisp light-mode aesthetic, deep blue and emerald accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpencVELDgC_lHuWoELf5Tu3pX1DTkxab8pr2VLsKKWrfuV5UomWdiOcwBoXtyfJoGkmkSmE4TIyTZNaQBdrBFIsKB0OT-FafDWXim8ukWPhcNHebq7UPaQsNzyLZuj7_kbt_0ICuESApSWpEnvJ8WxAGYqi87azlX4Ek-3YTiUBxgyNQzvVQ8xxViuJ_i1ZDGSrH1R-_XWJelp0kYEU3sJDbUPcXk2RqeYbOfHDCgQqYCIkLx4vAA7d5WOBsOsX8_AYha92S3iiT9"/>
+<span class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#1877F2] text-on-primary flex items-center justify-center text-xs shadow">
+<span class="material-symbols-outlined text-[13px]">thumb_up</span>
+</span>
+</div>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<h3 class="text-headline-md font-headline-md font-bold text-on-surface">Tiệm Mỹ Phẩm Sài Gòn</h3>
+<span class="px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary text-[11px] font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Đang hoạt động (Live)
+                    </span>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant text-[11px] font-bold">
+                      Webhook: Active
+                    </span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-primary text-[11px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">security</span> Chống cướp đơn: Bật
+                    </span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Mỹ phẩm, Làm đẹp &amp; Chăm sóc cá nhân</p>
+<!-- Metrics Row -->
+<div class="flex items-center gap-4 mt-2.5 text-body-sm font-body-sm">
+<span class="flex items-center gap-1 text-on-surface font-semibold">
+<span class="material-symbols-outlined text-base text-outline">group</span> 124k Followers
+                    </span>
+<span class="text-outline-variant">•</span>
+<span class="flex items-center gap-1 text-on-surface font-semibold">
+<span class="material-symbols-outlined text-base text-outline">forum</span> 48 bình luận/h
+                    </span>
+<span class="text-outline-variant">•</span>
+<span class="flex items-center gap-1 text-tertiary font-semibold">
+<span class="material-symbols-outlined text-base">key</span> Token còn 58 ngày
+                    </span>
+</div>
+</div>
+</div>
+<!-- Middle Column: Assignees (Tư vấn viên phụ trách) -->
+<div class="flex flex-col gap-1.5 min-w-[200px]">
+<span class="text-label-md font-label-md text-outline font-semibold uppercase">Nhân viên phụ trách (3)</span>
+<div class="flex items-center gap-2">
+<div class="flex -space-x-2 overflow-hidden">
+<img class="inline-block h-8 w-8 rounded-full ring-2 ring-surface-container-lowest object-cover" data-alt="Close up professional portrait of a young Vietnamese female customer support representative smiling gently in a clean modern minimalist white tech office setting with soft natural window illumination" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAv53402ft3UWT5kuMY7sn8_O8LO57cQlAnqmiB18e61Z32SWfwbADbdbhZ1zDQSU9oVmlOLxzvAmrxWKvYNqRtnIBgalMmsxnS0CDu30Y3Xcftlx2zd8nEGOj9smjMdN9IVrDKDAdmWztEhAWm9Glz6R_Me0k7Xu6kEtpADkyt8UHrRYHIlUVEAIOinvxZ8FTSGFdhS6mbm4oGXDm8-xFBFrQytmjPZGYhtutHwv-hnTJIfqFvTACsXLNB9qGrac2aXe_YMcThjtUw"/>
+<img class="inline-block h-8 w-8 rounded-full ring-2 ring-surface-container-lowest object-cover" data-alt="Close up professional portrait of a young Vietnamese male sales consultant in a smart casual collared shirt against a serene bright modern co-working background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2wwCFByxO3y-Hl3QscGM8qjSAFqliJgtE0RlfN1sBZvr7DE8saVFFCimlrx7whTwbJt-7oNgkYyojbVFdX9Xeood9yEnsBmO6uCsetk59DLFHGXHIv4EK-C5es7LuFn1dcQI6l4LdoNA2tkKWvvEpsJ4qcKqWOLWAYEn2drrHBYRE6iJD9yVknz9b1Q4N7Vsb5XF1QK4KdXohb6iB-jBSgeXQLoOosDSQ5CWjevrQKgnAWy3g8AwCQg5VbK971cyX9db4UISk2Ot8"/>
+<img class="inline-block h-8 w-8 rounded-full ring-2 ring-surface-container-lowest object-cover" data-alt="Close up professional headshot of a friendly Vietnamese female support agent with headset in high key lighting clean tech workspace" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZVEMVgIRHM80CVY3Bm9SfV3nAErTTpOoXNYrfprhebpX9cqdnpC4bv7Y0YLjVLRTVys1Wae7-akshbAGX9kI6Jzcs44sCHKoanGKHKuVRjFxnSC8fh_aLfH9LHUHqbIOW-0C-tSLrf-Qj4qSqtL6FN8Ksf3ueW-tM7PH1rkUnKw91dqq2a0E6O9KYoN4DJPL6YX1mvizkJ0A893Pnk9d9GAVLdq0_xuH0RFpws8oMDn0bBgeeIJ5sojHaQiUhMhqbihGnse1YLpB7"/>
+</div>
+<span class="text-body-sm font-body-sm text-on-surface font-medium">Trần Thu Hà, Minh Tuấn +1</span>
+</div>
+</div>
+<!-- Right Column: Interactive Toggles -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 lg:gap-6 bg-surface-container-low/40 p-3 rounded-xl border border-outline-variant/30">
+<!-- Toggle 1 -->
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<span class="text-body-sm font-body-sm font-medium text-on-surface">Bắt SĐT &amp; Ẩn bình luận</span>
+</div>
+<!-- Toggle 2 -->
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<span class="text-body-sm font-body-sm font-medium text-on-surface">Gửi tin nhắn mẫu</span>
+</div>
+<!-- Toggle 3 -->
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<span class="text-body-sm font-body-sm font-medium text-on-surface">Đồng bộ đơn hàng</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-2 shrink-0">
+<button class="px-3.5 py-2 rounded-lg bg-surface-container-high hover:bg-surface-container text-primary text-label-md font-label-md font-semibold transition-colors">
+                  Cấu hình chi tiết
+                </button>
+<button class="p-2 rounded-lg bg-surface-container-lowest border border-outline-variant/40 hover:bg-surface-container-low text-on-surface-variant transition-colors" title="Làm mới Token">
+<span class="material-symbols-outlined text-base">cached</span>
+</button>
+<button class="p-2 rounded-lg bg-surface-container-lowest border border-outline-variant/40 hover:bg-surface-container-low text-on-surface-variant transition-colors" title="Xem nhật ký Webhook">
+<span class="material-symbols-outlined text-base">receipt_long</span>
+</button>
+</div>
+</div>
+</div>
+<!-- PAGE 2: Hùng Sport - Đồ Tập & Sneaker -->
+<div class="rounded-2xl bg-surface-container-lowest border border-outline-variant/40 macos-window-shadow macos-card-hover overflow-hidden">
+<!-- macOS Window Title Bar Style -->
+<div class="px-4 py-2 bg-surface-container-low/50 border-b border-outline-variant/20 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#FF5F56] inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#FFBD2E] inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#27C93F] inline-block"></span>
+<span class="ml-2 text-label-mono font-label-mono text-[11px] text-outline font-medium">PAGE_ID: 284729102948192</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-label-mono font-label-mono text-[11px] text-tertiary flex items-center gap-1 font-semibold">
+<span class="w-2 h-2 rounded-full bg-[#27C93F]"></span> Ping: 38ms
+                </span>
+<span class="text-label-mono font-label-mono text-[11px] text-on-surface-variant">Server: SGN-02</span>
+</div>
+</div>
+<!-- Card Body Content -->
+<div class="p-5 flex flex-col xl:flex-row items-start xl:items-center justify-between gap-6">
+<!-- Left Column: Avatar & Page Info -->
+<div class="flex items-start gap-4 min-w-[320px]">
+<div class="relative">
+<img class="w-16 h-16 rounded-2xl object-cover border border-outline-variant/40 shadow-sm" data-alt="A clean modern commercial studio shot of athletic footwear and gym fitness accessories neatly displayed on an architectural pedestal with bright crisp natural studio lighting and deep blue accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWG73iDrux7ZVyvr9c3vNhlnTS8bHJilm1stNde4ox_E4Ju_q5cBJhDCSXpIXtCpGPQH4Se8CWwjOAVKeVl5zff28XUSuoM9kLGou7yGidKQKCTeDq-aI49t5kFJ2abROHDiPW5A4-TBqn1T86SLE2Ys8Dc43oOLsB1dBXQBgZuS3SnR1MBZu1hY0wBm8tn2dx1rfZ69TXYedS2ataMJtN1cE6xVfjlzEc_3SBhAHSPpLHnD4FeKE4UmviseWuTlu9zhJxP8gC7faQ"/>
+<span class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#1877F2] text-on-primary flex items-center justify-center text-xs shadow">
+<span class="material-symbols-outlined text-[13px]">thumb_up</span>
+</span>
+</div>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<h3 class="text-headline-md font-headline-md font-bold text-on-surface">Hùng Sport - Đồ Tập &amp; Sneaker</h3>
+<span class="px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary text-[11px] font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Đang hoạt động
+                    </span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-primary text-[11px] font-bold">
+                      Tự động trả lời: Bật
+                    </span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Trang phục &amp; Dụng cụ thể thao</p>
+<!-- Metrics Row -->
+<div class="flex items-center gap-4 mt-2.5 text-body-sm font-body-sm">
+<span class="flex items-center gap-1 text-on-surface font-semibold">
+<span class="material-symbols-outlined text-base text-outline">group</span> 85k Followers
+                    </span>
+<span class="text-outline-variant">•</span>
+<span class="flex items-center gap-1 text-on-surface font-semibold">
+<span class="material-symbols-outlined text-base text-outline">forum</span> 22 bình luận/h
+                    </span>
+<span class="text-outline-variant">•</span>
+<span class="flex items-center gap-1 text-tertiary font-semibold">
+<span class="material-symbols-outlined text-base">key</span> Token còn 54 ngày
+                    </span>
+</div>
+</div>
+</div>
+<!-- Middle Column: Assignees -->
+<div class="flex flex-col gap-1.5 min-w-[200px]">
+<span class="text-label-md font-label-md text-outline font-semibold uppercase">Nhân viên phụ trách (2)</span>
+<div class="flex items-center gap-2">
+<div class="flex -space-x-2 overflow-hidden">
+<img class="inline-block h-8 w-8 rounded-full ring-2 ring-surface-container-lowest object-cover" data-alt="Portrait of an enthusiastic young Vietnamese male customer support team lead in a modern office setup with soft ambient daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJFVINwvjxUBrQxFqdsWBQWSxUBGcH7OFDJJ1AiWpnyY41K-ivsCxmswEBxs2J-OeCTKUiYJaoF8oKuantr4_TqXFgRQY-kizbZ1e9c6RxWClF_5MkGp4FWmbXq5GQMtXcinB64iXrWQ_N9c4Qu8H8sphl-YyElwBYzz5abZBFyr_LOyUQiIC2ftC_4XtP4Jg7bX8USnmEjnq4WZY63TXmXYlznss-P83w7xMJl7FfGjg8yg1pXWr2ieSJRMHvz9U6BIl1mbPEtiqw"/>
+<img class="inline-block h-8 w-8 rounded-full ring-2 ring-surface-container-lowest object-cover" data-alt="Portrait of a young male Vietnamese e-commerce operations staff member working on laptop in minimalist light mode studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqiP4TkmUC4CifA8nQ695iN7uSOijcU44e3rfGEwcnE69l_7MuP3L7ZiDy_5-n-HKhSTb9H6UH0AcvnN-5LxWRRina6ZDC7R9M_2vrXkhIvE9Wh5urx5ghDOeySMHR6VCvU_R3YopFLIT7kVU-C9MYmDUryIIc77EoJEEvjhohJf1Tj3JMGUHRoLDDbNPiI7jyXNij-8Jhi0bdqvtCHE49aeLxyR8at5yMGjscIrU4G6LjjuUp8Url4As6J74SS73GZs3mcbrUuFNV"/>
+</div>
+<span class="text-body-sm font-body-sm text-on-surface font-medium">Lê Hoàng Nam, Đặng Văn Hùng</span>
+</div>
+</div>
+<!-- Right Column: Interactive Toggles -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 lg:gap-6 bg-surface-container-low/40 p-3 rounded-xl border border-outline-variant/30">
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<span class="text-body-sm font-body-sm font-medium text-on-surface">Bắt SĐT &amp; Ẩn bình luận</span>
+</div>
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<span class="text-body-sm font-body-sm font-medium text-on-surface">Gửi tin nhắn mẫu</span>
+</div>
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<span class="text-body-sm font-body-sm font-medium text-on-surface">Đồng bộ đơn hàng</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-2 shrink-0">
+<button class="px-3.5 py-2 rounded-lg bg-surface-container-high hover:bg-surface-container text-primary text-label-md font-label-md font-semibold transition-colors">
+                  Cấu hình chi tiết
+                </button>
+<button class="p-2 rounded-lg bg-surface-container-lowest border border-outline-variant/40 hover:bg-surface-container-low text-on-surface-variant transition-colors" title="Làm mới Token">
+<span class="material-symbols-outlined text-base">cached</span>
+</button>
+</div>
+</div>
+</div>
+<!-- PAGE 3: Phụ Kiện GenZ Official (Warning / Re-auth state) -->
+<div class="rounded-2xl bg-surface-container-lowest border border-error/30 macos-window-shadow macos-card-hover overflow-hidden">
+<!-- macOS Window Title Bar Style -->
+<div class="px-4 py-2 bg-error-container/30 border-b border-error/20 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#FF5F56] inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#FFBD2E] inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#27C93F] inline-block"></span>
+<span class="ml-2 text-label-mono font-label-mono text-[11px] text-error font-medium">PAGE_ID: 938472019482710 • ACCESS RESTRICTED</span>
+</div>
+<div class="flex items-center gap-2 text-error text-label-md font-label-md font-bold">
+<span class="material-symbols-outlined text-sm">warning</span>
+<span>Webhook Disconnected</span>
+</div>
+</div>
+<!-- Card Body Content -->
+<div class="p-5 flex flex-col xl:flex-row items-start xl:items-center justify-between gap-6">
+<!-- Left Column: Avatar & Page Info -->
+<div class="flex items-start gap-4 min-w-[320px]">
+<div class="relative">
+<img class="w-16 h-16 rounded-2xl object-cover border border-outline-variant/40 opacity-80" data-alt="A trendy and stylish product flatlay of modern pastel smartphone accessories, phone cases, and earphones neatly organized against an off-white architectural background with soft natural lighting and light-mode clean atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDD2zmdNq25rksNF5iFq-Lr87ixfugQjHEvGxA3v-5M_oQ8EspRWkdD4v7SF42BWlOSNwNf7SrCN_SkKz05HkqqjC59HypB2R4KmpIS6bKLAW_jZvpg8jago7SylFxNt1D-Q2XyQxoCKzYDZ3VyHGUDCreHSKqAriIVQIQFSDf59HomVGkt1uBySJrdzT8PGScLITWp5CLR4n9XO0VKEgLYVEKtLYGvR99IorC0SXG4gxnAsHHzNw6pfT0F9vmlErfrvzlKea3fDHt"/>
+<span class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-error text-on-error flex items-center justify-center text-xs shadow">
+<span class="material-symbols-outlined text-[13px]">priority_high</span>
+</span>
+</div>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<h3 class="text-headline-md font-headline-md font-bold text-on-surface">Phụ Kiện GenZ Official</h3>
+<span class="px-2.5 py-0.5 rounded-full bg-error-container text-error text-[11px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">error</span> Cảnh báo: Cần cấp lại quyền Messenger
+                    </span>
+</div>
+<p class="text-body-sm font-body-sm text-error font-medium mt-1">Đang chờ refresh token sau khi đổi mật khẩu Facebook quản trị viên</p>
+<div class="flex items-center gap-4 mt-2.5 text-body-sm font-body-sm">
+<span class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-base text-outline">group</span> 42k Followers
+                    </span>
+<span class="text-outline-variant">•</span>
+<span class="text-error font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-base">cloud_off</span> Tạm dừng webhook nhận bình luận
+                    </span>
+</div>
+</div>
+</div>
+<!-- Center Notification Banner -->
+<div class="flex items-center gap-3 bg-error-container/20 p-3 rounded-xl border border-error/20 flex-1">
+<span class="material-symbols-outlined text-error text-2xl shrink-0">lock_reset</span>
+<p class="text-body-sm font-body-sm text-on-surface">
+                  Graph API v19 yêu cầu xác thực lại do token của quản trị viên đã bị thu hồi bởi Meta Security. Các hội thoại mới đang được xếp vào hàng chờ tạm thời.
+                </p>
+</div>
+<!-- Re-authenticate Primary Action -->
+<div class="flex items-center gap-2 shrink-0">
+<button class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-error text-on-error hover:bg-on-error-container text-label-md font-label-md font-semibold shadow-md shadow-error/20 transition-all active:scale-95">
+<span class="material-symbols-outlined text-base">key</span>
+<span>Cấp lại quyền (Re-authenticate)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- PLACEHOLDER CARD: Add more Fanpages -->
+<div class="rounded-2xl border-2 border-dashed border-outline-variant/60 hover:border-primary/60 bg-surface-container-lowest/50 hover:bg-surface-container-low/50 p-6 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-200">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-2xl">add_link</span>
+</div>
+<div>
+<h4 class="text-label-lg font-label-lg font-bold text-on-surface">
+                  + Kết nối thêm Fanpage Facebook hoặc Instagram Business (Còn trống 2 slot)
+                </h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+                  Đồng bộ tức thời toàn bộ hộp thư, bài viết và đơn hàng tự động không giới hạn số lượng tin nhắn trong gói Pro.
+                </p>
+</div>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-primary-fixed hover:bg-primary-container text-on-primary-fixed hover:text-on-primary text-label-md font-label-md font-semibold transition-all">
+<span class="material-symbols-outlined text-base">add</span>
+<span>Kết nối ngay</span>
+</button>
+</div>
+</div>
+</section>
+<!-- ===================================================================== -->
+<!-- 4 & 5. SPLIT SECTION: AUTOMATION SETTINGS & REAL-TIME AUDIT LOG       -->
+<!-- ===================================================================== -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2">
+<!-- 4. Global Fanpage Automation Settings (7 Cols) -->
+<div class="lg:col-span-7 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 macos-window-shadow p-6">
+<div class="flex items-center justify-between pb-4 border-b border-outline-variant/20 mb-4">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-primary-container/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">tune</span>
+</div>
+<div>
+<h3 class="text-headline-md font-headline-md font-bold text-on-surface">Cấu hình tự động hóa toàn hệ thống</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Áp dụng tức thời cho toàn bộ 3 Fanpage đang kết nối</p>
+</div>
+</div>
+<span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary">Real-time Apply</span>
+</div>
+<div class="space-y-4">
+<!-- Rule 1: Chống cướp đơn -->
+<div class="p-3.5 rounded-xl bg-surface-container-low/40 border border-outline-variant/30 flex items-start justify-between gap-4">
+<div class="flex items-start gap-3">
+<div class="p-2 rounded-lg bg-surface-container text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-lg">visibility_off</span>
+</div>
+<div>
+<h4 class="text-label-lg font-label-lg font-semibold text-on-surface">Quy tắc tự động ẩn bình luận chứa số điện thoại để chống cướp đơn</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+                    Hệ thống tự động phân tích regex nhận diện định dạng số điện thoại Việt Nam (10-11 số, dấu chấm, dấu cách) và ẩn comment sau 0.4s.
+                  </p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Rule 2: Round Robin Routing -->
+<div class="p-3.5 rounded-xl bg-surface-container-low/40 border border-outline-variant/30 flex items-start justify-between gap-4">
+<div class="flex items-start gap-3">
+<div class="p-2 rounded-lg bg-surface-container text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-lg">rotate_right</span>
+</div>
+<div>
+<h4 class="text-label-lg font-label-lg font-semibold text-on-surface">Tự động gán hội thoại xoay vòng cho nhân viên (Round-Robin routing)</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+                    Chia đều khách hàng nhắn tin mới cho các tư vấn viên đang ở trạng thái Online để tối ưu tỉ lệ chốt đơn và phản hồi trong 60 giây.
+                  </p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Rule 3: Telegram Alert -->
+<div class="p-3.5 rounded-xl bg-surface-container-low/40 border border-outline-variant/30 flex items-start justify-between gap-4">
+<div class="flex items-start gap-3">
+<div class="p-2 rounded-lg bg-surface-container text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-lg">send</span>
+</div>
+<div>
+<h4 class="text-label-lg font-label-lg font-semibold text-on-surface">Gửi thông báo Telegram khi phát hiện lỗi Webhook từ Meta</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+                    Gửi cảnh báo khẩn cấp đến nhóm quản trị viên nếu token hết hạn hoặc Facebook Graph API quá tải rate limit để can thiệp kịp thời.
+                  </p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- 5. Real-time Audit Log & Webhook Monitor (5 Cols) -->
+<div class="lg:col-span-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 macos-window-shadow p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-4 border-b border-outline-variant/20 mb-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#27C93F] animate-pulse"></span>
+<h3 class="text-headline-md font-headline-md font-bold text-on-surface">Nhật ký Webhook &amp; Audit Log</h3>
+</div>
+<button class="text-body-sm font-body-sm text-primary hover:underline font-medium">Xuất file CSV</button>
+</div>
+<!-- Terminal-like Event Stream -->
+<div class="space-y-3 font-label-mono text-body-sm">
+<!-- Log Item 1 -->
+<div class="p-2.5 rounded-lg bg-surface-container-low/60 border border-outline-variant/20 flex items-start gap-2.5">
+<span class="text-outline text-label-mono text-[11px] shrink-0 pt-0.5">09:42:15</span>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-tertiary/10 text-tertiary">200 OK</span>
+<span class="font-semibold text-on-surface text-xs font-label-mono">Webhook nhận 14 bình luận mới</span>
+</div>
+<p class="text-[11px] text-on-surface-variant font-label-mono mt-0.5">
+                    Từ: Tiệm Mỹ Phẩm Sài Gòn (Đã ẩn 3 SĐT tự động)
+                  </p>
+</div>
+</div>
+<!-- Log Item 2 -->
+<div class="p-2.5 rounded-lg bg-surface-container-low/60 border border-outline-variant/20 flex items-start gap-2.5">
+<span class="text-outline text-label-mono text-[11px] shrink-0 pt-0.5">09:30:02</span>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-primary-fixed text-on-primary-fixed-variant">TOKEN</span>
+<span class="font-semibold text-on-surface text-xs font-label-mono">Gia hạn Page Access Token thành công</span>
+</div>
+<p class="text-[11px] text-on-surface-variant font-label-mono mt-0.5">
+                    Đã cấp mới chứng chỉ mã hóa 60 ngày tiếp theo
+                  </p>
+</div>
+</div>
+<!-- Log Item 3 -->
+<div class="p-2.5 rounded-lg bg-surface-container-low/60 border border-outline-variant/20 flex items-start gap-2.5">
+<span class="text-outline text-label-mono text-[11px] shrink-0 pt-0.5">09:12:44</span>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-error-container text-error">WARN</span>
+<span class="font-semibold text-error text-xs font-label-mono">Phụ Kiện GenZ Official: Token Invalid</span>
+</div>
+<p class="text-[11px] text-on-surface-variant font-label-mono mt-0.5">
+                    Error Code: 190, Subcode: 460 (Password changed)
+                  </p>
+</div>
+</div>
+<!-- Log Item 4 -->
+<div class="p-2.5 rounded-lg bg-surface-container-low/60 border border-outline-variant/20 flex items-start gap-2.5">
+<span class="text-outline text-label-mono text-[11px] shrink-0 pt-0.5">08:55:10</span>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-tertiary/10 text-tertiary">SYNC</span>
+<span class="font-semibold text-on-surface text-xs font-label-mono">Đồng bộ catalog sản phẩm hoàn tất</span>
+</div>
+<p class="text-[11px] text-on-surface-variant font-label-mono mt-0.5">
+                    420 mã SKU cập nhật cho Hùng Sport
+                  </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Health Indicator Footer -->
+<div class="mt-4 pt-3 border-t border-outline-variant/20 flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#27C93F]"></span>
+              Độ trễ Graph API: <span class="font-bold text-on-surface">32ms</span>
+</span>
+<span class="text-label-mono text-[11px] text-outline">Meta Cluster: ap-southeast-1</span>
+</div>
+</div>
+</section>
+<!-- Bottom Spacer for macOS Comfort -->
+<div class="h-8"></div>
+</div>
+</main>
+<!-- Lightweight Inline Interaction Script for Toggles and Toast Notifications -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Notification feedback for quick action buttons
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          // Provide micro tactile haptic scale feedback
+          btn.style.transform = 'scale(0.97)';
+          setTimeout(() => {
+            btn.style.transform = '';
+          }, 120);
+        });
+      });
+    });
+  </script>
+</body></html>
+

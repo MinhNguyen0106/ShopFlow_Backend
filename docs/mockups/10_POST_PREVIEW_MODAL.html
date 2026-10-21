@@ -1,0 +1,477 @@
+﻿<!DOCTYPE html>
+
+<html class="h-full" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShopFlow - Hộp thoại Xem trước Bài đăng Facebook</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-tint": "#0053db",
+            "on-error-container": "#93000a",
+            "error": "#ba1a1a",
+            "on-secondary-fixed-variant": "#004493",
+            "on-tertiary-fixed": "#002203",
+            "on-primary": "#ffffff",
+            "surface-dim": "#d2d9f4",
+            "secondary-fixed-dim": "#adc6ff",
+            "inverse-on-surface": "#eef0ff",
+            "tertiary-container": "#007f1f",
+            "on-secondary-fixed": "#001a41",
+            "on-secondary-container": "#fefcff",
+            "on-primary-fixed-variant": "#003ea8",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-container": "#eeefff",
+            "secondary": "#0058bc",
+            "surface-container-high": "#e2e7ff",
+            "surface": "#faf8ff",
+            "primary-fixed": "#dbe1ff",
+            "error-container": "#ffdad6",
+            "background": "#faf8ff",
+            "secondary-fixed": "#d8e2ff",
+            "on-secondary": "#ffffff",
+            "on-tertiary-container": "#c6ffbc",
+            "inverse-surface": "#283044",
+            "surface-container-highest": "#dae2fd",
+            "surface-variant": "#dae2fd",
+            "secondary-container": "#0070eb",
+            "on-surface": "#131b2e",
+            "tertiary-fixed-dim": "#49e255",
+            "outline": "#737686",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed": "#00174b",
+            "surface-bright": "#faf8ff",
+            "outline-variant": "#c3c6d7",
+            "inverse-primary": "#b4c5ff",
+            "tertiary-fixed": "#71ff74",
+            "tertiary": "#006316",
+            "on-surface-variant": "#434655",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed-variant": "#005311",
+            "primary-fixed-dim": "#b4c5ff",
+            "primary-container": "#2563eb",
+            "primary": "#004ac6",
+            "surface-container-low": "#f2f3ff",
+            "on-background": "#131b2e",
+            "surface-container": "#eaedff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "margin": "1rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "margin-desktop": "2rem",
+            "gutter-desktop": "1.5rem",
+            "space-md": "0.875rem",
+            "space-lg": "1.25rem",
+            "gutter": "1rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Geist", "sans-serif"],
+            "headline-xl": ["Geist", "sans-serif"],
+            "body-md": ["Geist", "sans-serif"],
+            "label-lg": ["Geist", "sans-serif"],
+            "headline-xl-mobile": ["Geist", "sans-serif"],
+            "headline-lg": ["Geist", "sans-serif"],
+            "label-mono": ["Space Mono", "monospace"],
+            "body-lg": ["Geist", "sans-serif"],
+            "headline-md": ["Geist", "sans-serif"],
+            "label-md": ["Geist", "sans-serif"]
+          },
+          "fontSize": {
+            "body-sm": ["0.75rem", { "lineHeight": "1.125rem", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-xl": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "body-md": ["0.875rem", { "lineHeight": "1.375rem", "letterSpacing": "-0.006em", "fontWeight": "400" }],
+            "label-lg": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "-0.006em", "fontWeight": "500" }],
+            "headline-xl-mobile": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "headline-lg": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-mono": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "body-lg": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.011em", "fontWeight": "400" }],
+            "headline-md": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Geist', sans-serif;
+      background-color: #faf8ff;
+      background-image: radial-gradient(#CBD5E1 0.75px, transparent 0.75px);
+      background-size: 16px 16px;
+    }
+    .macos-window-shadow {
+      box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(15, 23, 42, 0.08);
+    }
+    .scrollbar-none::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-none {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="h-full overflow-hidden text-on-surface antialiased flex flex-col">
+<!-- SideNavBar -->
+<aside class="fixed top-0 left-0 h-screen w-64 flex flex-col justify-between p-4 z-40 bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant/30 shadow-sm dark:shadow-none">
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-3 px-2 py-1">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary font-bold">
+<span class="material-symbols-outlined text-sm">storefront</span>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight">ShopFlow</h1>
+<p class="text-body-sm text-on-surface-variant">Pro E-commerce Suite</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+          Tổng quan
+        </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined">forum</span>
+          Hộp thư Live Chat
+        </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-container text-primary dark:text-inverse-primary font-medium text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+          Lịch đăng bài
+        </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+          Kịch bản tự động hóa
+        </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined">sync_alt</span>
+          Kết nối Fanpage
+        </a>
+</nav>
+</div>
+<div class="flex flex-col gap-4">
+<button class="w-full py-2.5 px-4 bg-primary text-on-primary rounded-full text-label-lg font-label-lg hover:bg-primary-tint transition-all shadow-sm active:scale-[0.99]">
+        Soạn bài viết mới
+      </button>
+<div class="pt-4 border-t border-outline-variant/30 flex flex-col gap-1 text-on-surface-variant">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-body-sm hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined text-sm">speed</span>
+          Rate Limit Meta v19
+        </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-body-sm hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined text-sm">settings</span>
+          Cài đặt hệ thống
+        </a>
+</div>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-64 h-14 flex items-center justify-between px-6 z-30 bg-surface-container-lowest/90 dark:bg-inverse-surface/90 backdrop-blur-md border-b border-outline-variant/30 shadow-[0_1px_3px_0_rgba(15,23,42,0.05)]">
+<div class="flex items-center gap-4">
+<div class="relative w-72">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">search</span>
+</span>
+<input class="w-full h-9 pl-9 pr-4 bg-surface-container-low border border-outline-variant/40 rounded-lg text-body-md focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Tìm kiếm chiến dịch, khách hàng, đơn hàng..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container text-body-sm font-medium">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+        Fanpage: Tiệm Mỹ Phẩm Sài Gòn
+      </div>
+<button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low relative">
+<span class="material-symbols-outlined text-xl">sensors</span>
+</button>
+<button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low relative">
+<span class="material-symbols-outlined text-xl">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="h-6 w-[1px] bg-outline-variant/40 mx-1"></div>
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Professional studio portrait of an Asian female e-commerce store owner smiling warmly, dressed in a smart casual blazer, against a softly lit modern office background with muted blue and neutral tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBE38ACNK60lVeh801x_1eoEYLoh6k8hDGUMiKPZPoyXYnq8fRgGlxLzwf4UCwN64u_ClIH9jz2flTY50PwSJwXVTVDfLI6jzPn_RNRIeEjE4aMadFi65jPw_8bcYdebBlVLolvieMvFiWubyIH3qa9hDVBpnXP1ApVg7uiSE0rSBDd5gsYi721fYO9sQ6HYkOrfieJdBO-5XLs5uKTynfnMIAGlb_yqvrFzqrv0n3-POWIMaJZ_wRcbUYr9iewhPlseYNF-LAg70FN"/>
+<span class="text-label-lg font-label-lg">Chủ cửa hàng</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas (Blurred Background Simulation) -->
+<main class="ml-64 mt-14 h-[calc(100vh-3.5rem)] overflow-y-auto p-8 filter blur-[2px] pointer-events-none select-none opacity-40">
+<div class="max-w-7xl mx-auto flex flex-col gap-6">
+<div class="flex justify-between items-center">
+<div>
+<h2 class="text-headline-lg font-headline-lg">Lịch đăng bài tự động &amp; Quản lý Fanpage</h2>
+<p class="text-body-md text-on-surface-variant">Lên lịch nội dung đa kênh và giám sát chiến dịch chatbot tự động.</p>
+</div>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-full">Tạo chiến dịch mới</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="p-6 bg-surface-container-lowest rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<span class="text-label-md font-label-md text-on-surface-variant">TỔNG LƯỢT TIẾP CẬN</span>
+<span class="material-symbols-outlined text-primary">trending_up</span>
+</div>
+<div class="text-headline-xl font-headline-xl">48,250</div>
+<div class="text-body-sm text-tertiary">+12.4% so với tuần trước</div>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<span class="text-label-md font-label-md text-on-surface-variant">TỶ LỆ CHUYỂN ĐỔI CHAT</span>
+<span class="material-symbols-outlined text-primary">forum</span>
+</div>
+<div class="text-headline-xl font-headline-xl">34.8%</div>
+<div class="text-body-sm text-tertiary">+4.2% tự động hóa</div>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<span class="text-label-md font-label-md text-on-surface-variant">BÀI ĐÃ LÊN LỊCH</span>
+<span class="material-symbols-outlined text-primary">calendar_month</span>
+</div>
+<div class="text-headline-xl font-headline-xl">12</div>
+<div class="text-body-sm text-on-surface-variant">Sẵn sàng phát hành</div>
+</div>
+</div>
+<div class="h-96 bg-surface-container-lowest rounded-2xl border border-outline-variant/40 p-6 flex items-center justify-center">
+<p class="text-on-surface-variant">Bảng điều khiển hoạt động chính...</p>
+</div>
+</div>
+</main>
+<!-- Modal Overlay & Window Container -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/40 backdrop-blur-sm p-4 animate-fadeIn">
+<div class="w-full max-w-5xl bg-surface-container-lowest rounded-2xl border border-outline-variant/40 macos-window-shadow flex flex-col max-h-[921px] overflow-hidden">
+<!-- Modal Header -->
+<div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/30 bg-surface-container-lowest">
+<!-- Left: Traffic Lights & Title -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#FF5F56] inline-block cursor-pointer"></span>
+<span class="w-3 h-3 rounded-full bg-[#FFBD2E] inline-block cursor-pointer"></span>
+<span class="w-3 h-3 rounded-full bg-[#27C93F] inline-block cursor-pointer"></span>
+</div>
+<div class="h-4 w-[1px] bg-outline-variant/40"></div>
+<h2 class="text-headline-md font-headline-md">Xem trước Bài đăng Facebook - Meta Feed Preview</h2>
+</div>
+<!-- Center: Device Switcher -->
+<div class="flex items-center bg-surface-container p-1 rounded-xl">
+<button class="px-3 py-1 rounded-lg text-body-sm text-on-surface-variant hover:text-on-surface transition-all">
+            Desktop News Feed (680px)
+          </button>
+<button class="px-3 py-1 rounded-lg text-body-sm font-medium bg-surface-container-lowest text-primary shadow-sm transition-all">
+            Mobile App Feed (414px)
+          </button>
+<button class="px-3 py-1 rounded-lg text-body-sm text-on-surface-variant hover:text-on-surface transition-all">
+            Dark Mode
+          </button>
+</div>
+<!-- Right: Close Button -->
+<button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
+</div>
+<!-- Main Modal Content Split (Two Columns) -->
+<div class="flex-1 overflow-y-auto grid grid-cols-1 lg:grid-cols-12 bg-surface-container-low/50">
+<!-- Left/Center Column: Authentic Meta Facebook News Feed Card (7 Cols) -->
+<div class="lg:col-span-7 p-6 flex justify-center items-start overflow-y-auto">
+<div class="w-full max-w-[414px] bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden">
+<!-- Post Header -->
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img class="w-10 h-10 rounded-full object-cover border border-outline-variant/30" data-alt="A clean, professional circular profile avatar logo for a Vietnamese cosmetics boutique named Tiệm Mỹ Phẩm Sài Gòn, featuring elegant typography and soft pastel pink and gold accents against a clean white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOZsVNxSnf2wgb1nwnybYF7OVwWv0z4ILNzUQ4wwQbidnR2TaW1m3VC0w82U10RTUSPBUFLE86BkA4zkOlI9kTa7IGJs2gjnuNVS25Jiy7zkqi1TtwBjkfJS19-CAI7lbBHK1t3s3cFyQ9Qt7pbHum0LeqnSv0KF35sPAxvuOP8OE-dPd_W1m1j_OYsrir81ZV_1o6YBmMZeumKFYdcuh8I9y0l6xpeFfrZ7opDPO7PHmeqXdxjalsKKtUCV309Z9dZE-FoYrS0jSi"/>
+<span class="absolute -bottom-1 -right-1 bg-primary text-on-primary rounded-full p-0.5 flex items-center justify-center text-[10px]">
+<span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</span>
+</div>
+<div>
+<div class="flex items-center gap-1">
+<span class="text-label-lg font-label-lg">Tiệm Mỹ Phẩm Sài Gòn</span>
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="flex items-center gap-1 text-body-sm text-on-surface-variant">
+<span>20:00 Hôm nay</span>
+<span>•</span>
+<span class="material-symbols-outlined text-xs">public</span>
+</div>
+</div>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<!-- Post Caption -->
+<div class="px-4 pb-3 text-body-md text-on-surface flex flex-col gap-2">
+<p>✨ MÙA HLE - DA SÁNG MỊN MÀNG CÙNG SHOPFLOW FLASH SALE! 🌸</p>
+<p>Chăm sóc làn da chuẩn Hàn chưa bao giờ dễ dàng đến thế với bộ sưu tập serum Vitamin C và kem dưỡng ẩm độc quyền. Giữ ẩm sâu, làm mờ thâm nám chỉ sau 7 ngày sử dụng!</p>
+<p class="text-primary font-medium cursor-pointer">Xem thêm</p>
+<div class="flex flex-wrap gap-1.5 pt-1 text-primary text-body-md font-medium">
+<span>#ShopFlowVN</span>
+<span>#FlashSale</span>
+<span>#Skincare</span>
+</div>
+</div>
+<!-- 4-Photo Facebook Multi-Image Grid Layout with HD Badge -->
+<div class="relative grid grid-cols-2 gap-0.5 bg-outline-variant/20 aspect-square">
+<div class="relative overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="A sleek cosmetic product bottle of glowing facial serum placed elegantly on a clean white marble surface surrounded by green botanical leaves, bright high-key lighting, modern minimalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWNZa-SvbcwfJz6Jh_b8wQ4ZbIt9YX2fZso6EQQLfGiRWbPV4T1MfEdra-iArhPAdgmVRINfLYa9PA2aDdfQs1mYHbERl-41Ro_JDPMXLRU5B7VHSLYm5Z9EBntl5BxijGmbKNFx2sE9Pv_c_L93DGaShmZFSp16X6s9zdvVd2wzu5cbHj9Xxf-8b8AqczWPSQZgyS3RnNsh8af0bWILWtVy2EigFd9DndjJyUAvfq63nWK8J7wRUad5moIqhaZ6pgCol0KllxZJL-"/>
+<div class="absolute top-2 left-2 bg-inverse-surface/80 text-inverse-on-surface text-[10px] font-bold px-1.5 py-0.5 rounded backdrop-blur-sm">HD</div>
+</div>
+<div class="relative overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="Close-up of a luxurious facial cream jar with a golden cap resting on a pastel pink background, soft natural lighting highlighting its smooth texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4eBw826Wd4qk3isPB0LkpkRu2nDc6xPigIt9dOwTPdbNemm9AaNvWoInu1LOdCzGnj9R_4Nnkc-D0XkRcV_YAxnJ6P7yE6mSbbKoqfd-750-z7loho7xhDY5qjx4PthQYah_N-4FBx7doQliaNX1rD8MBo0wenpv4EiM0TLqiSgnP2kK-rAafbkGiBlqN-rHtc9dzUJ_h1iypFMt0NW8jS_4pFFPWzXf831RnWRjp-dWeYd-h0IV3CvkLFJTrt8WIU6retw-t47aX"/>
+<div class="absolute top-2 left-2 bg-inverse-surface/80 text-inverse-on-surface text-[10px] font-bold px-1.5 py-0.5 rounded backdrop-blur-sm">HD</div>
+</div>
+<div class="relative overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="A young Vietnamese woman with radiant, clear skin smiling happily while holding a skincare product bottle in a bright modern sunlit room." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcjlwZOdgm96677XGTZIa4_WtYvzPE5YCjmMhjduMGkczQ7s2x7BsCvUQrYtUBPlJxIVfbWTPT8K36qAm-YSilij-zXhVPpeEPL92Hm51kO4KBByqlL2p-hp_bw2EwxIA8ExVoaFGAqtGTKjBeaFIjesqka_5x0S350FoIu_7k2t3T7Uh12b-tm4DVovfakfmJLEgY9dcMs16Z07mQ36n7wmK6wKKD-uAn8wqREENBVrYplSnAAQsUwpeZ2zO_dFZIg_oNasqeGzGb"/>
+<div class="absolute top-2 left-2 bg-inverse-surface/80 text-inverse-on-surface text-[10px] font-bold px-1.5 py-0.5 rounded backdrop-blur-sm">HD</div>
+</div>
+<div class="relative overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="A flat lay arrangement of organic skincare bottles, droppers, and fresh flower petals on a clean minimalist light gray backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAYegRrKuW6ubRZ18k8pq52ybplJSYQUqhUQavbRP7oTp3pQT1gRe9ncz2fjm7_euFz7W5nzrQltyQMUAssMY-MyZTGLtYi2h5uPwcrC_HTJUrQsgs01iY2W5qOB-cfRhqV2vk-NCcEGUn7x0yvJmTHk-3HcVvrwgYNqOwlhLplmGBwgolwXuVfoR3ZQPWUYF7LwXmmMHiiIdm98IzsPkwTo0j2pTtErutjstyI1tW3BwffoqQhvHZvmsv6Ze4TvTxE9ywEM9P0fII"/>
+<div class="absolute top-2 left-2 bg-inverse-surface/80 text-inverse-on-surface text-[10px] font-bold px-1.5 py-0.5 rounded backdrop-blur-sm">HD</div>
+</div>
+</div>
+<!-- Embedded Messenger CTA Card -->
+<div class="p-3 bg-surface-container-low border-t border-b border-outline-variant/20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<div>
+<div class="text-label-lg font-label-lg">Nhận tư vấn trực tiếp qua Messenger</div>
+<div class="text-body-sm text-on-surface-variant">Phản hồi tự động trong giây lát</div>
+</div>
+</div>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-full text-label-lg font-label-lg hover:bg-primary-tint transition-all flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-sm">send</span>
+                Gửi tin nhắn
+              </button>
+</div>
+<!-- Reactions & Engagement Stats -->
+<div class="px-4 py-2 flex items-center justify-between text-body-sm text-on-surface-variant border-b border-outline-variant/20">
+<div class="flex items-center gap-1.5">
+<div class="flex -space-x-1">
+<span class="w-5 h-5 rounded-full bg-error text-white flex items-center justify-center text-[10px]">❤️</span>
+<span class="w-5 h-5 rounded-full bg-secondary text-white flex items-center justify-center text-[10px]">👍</span>
+<span class="w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px]">😆</span>
+</div>
+<span>1,420</span>
+</div>
+<div class="flex items-center gap-3">
+<span>186 bình luận</span>
+<span>42 lượt chia sẻ</span>
+</div>
+</div>
+<!-- Facebook Action Bar -->
+<div class="grid grid-cols-3 py-1 px-2 border-t border-outline-variant/20">
+<button class="flex items-center justify-center gap-2 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors text-label-lg font-label-lg">
+<span class="material-symbols-outlined">thumb_up</span>
+                Thích
+              </button>
+<button class="flex items-center justify-center gap-2 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors text-label-lg font-label-lg">
+<span class="material-symbols-outlined">chat_bubble</span>
+                Bình luận
+              </button>
+<button class="flex items-center justify-center gap-2 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors text-label-lg font-label-lg">
+<span class="material-symbols-outlined">share</span>
+                Chia sẻ
+              </button>
+</div>
+</div>
+</div>
+<!-- Right Inspector: Pre-publish Diagnostic Panel (5 Cols) -->
+<div class="lg:col-span-5 p-6 border-t lg:border-t-0 lg:border-l border-outline-variant/30 flex flex-col gap-6 bg-surface-container-lowest">
+<div>
+<h3 class="text-headline-md font-headline-md mb-1">Kiểm tra &amp; Chẩn đoán bài đăng</h3>
+<p class="text-body-md text-on-surface-variant">Hệ thống AI ShopFlow kiểm tra tự động các tiêu chuẩn Meta v19 trước khi xuất bản.</p>
+</div>
+<!-- Diagnostic Cards -->
+<div class="flex flex-col gap-4">
+<!-- Algorithm Reach Forecast -->
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">trending_up</span>
+<span class="text-label-lg font-label-lg">Dự báo tiếp cận thuật toán</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tertiary/15 text-tertiary">Tối ưu cao</span>
+</div>
+<div class="text-headline-lg font-headline-lg text-primary">18,500 - 32,000 <span class="text-body-sm font-normal text-on-surface-variant">tài khoản</span></div>
+<p class="text-body-sm text-on-surface-variant">Khung giờ 20:00 hôm nay có lượng truy cập cao nhất trong nhóm khách hàng mục tiêu của bạn.</p>
+</div>
+<!-- Meta HD Score -->
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">high_quality</span>
+<span class="text-label-lg font-label-lg">Chất lượng hình ảnh Meta HD</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tertiary/15 text-tertiary">100/100</span>
+</div>
+<div class="w-full bg-outline-variant/30 h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-full rounded-full"></div>
+</div>
+<p class="text-body-sm text-on-surface-variant">Tất cả 4 ảnh đạt độ phân giải tiêu chuẩn 1080p, không bị nén bởi thuật toán Facebook.</p>
+</div>
+<!-- Text-on-image Compliance -->
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">text_snippet</span>
+<span class="text-label-lg font-label-lg">Tỷ lệ chữ trên ảnh (Text-on-image)</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tertiary/15 text-tertiary">Đạt chuẩn</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Mật độ chữ phát hiện:</span>
+<span class="font-bold text-tertiary font-label-mono">12% (&lt; 20% tối đa)</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">Không vi phạm chính sách quảng cáo văn bản của Meta.</p>
+</div>
+<!-- ShopFlow Shield Active Badge -->
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container/15 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined">security</span>
+</div>
+<div>
+<div class="text-label-lg font-label-lg">ShopFlow Shield Bảo mật</div>
+<div class="text-body-sm text-on-surface-variant">Tự động ẩn số điện thoại bình luận</div>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">Active (&lt;0.28s)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="px-6 py-4 border-t border-outline-variant/30 bg-surface-container-lowest flex items-center justify-between">
+<div class="text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary">schedule</span>
+<span>Lịch hẹn tự động phát hành: <strong>20:00 - Hôm nay</strong></span>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-5 py-2.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface text-label-lg font-label-lg transition-all border border-outline-variant/30">
+            Chỉnh sửa lại
+          </button>
+<button class="px-6 py-2.5 rounded-full bg-primary hover:bg-primary-tint text-on-primary text-label-lg font-label-lg transition-all shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+            + Xác Nhận &amp; Lên Lịch Đăng Bài
+          </button>
+</div>
+</div>
+</div>
+</div>
+</body></html>
+

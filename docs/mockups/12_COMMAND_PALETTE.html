@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html>
+
+<html class="h-full" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShopFlow Spotlight Command Palette</title>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Space+Mono&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#71ff74",
+            "surface": "#faf8ff",
+            "on-tertiary-fixed-variant": "#005311",
+            "on-background": "#131b2e",
+            "inverse-on-surface": "#eef0ff",
+            "tertiary": "#006316",
+            "inverse-primary": "#b4c5ff",
+            "on-tertiary-container": "#c6ffbc",
+            "on-primary-fixed-variant": "#003ea8",
+            "on-surface": "#131b2e",
+            "outline-variant": "#c3c6d7",
+            "on-tertiary": "#ffffff",
+            "on-primary": "#ffffff",
+            "secondary-container": "#0070eb",
+            "surface-container-lowest": "#ffffff",
+            "background": "#faf8ff",
+            "surface-variant": "#dae2fd",
+            "on-secondary-fixed-variant": "#004493",
+            "tertiary-fixed-dim": "#49e255",
+            "surface-tint": "#0053db",
+            "primary": "#004ac6",
+            "on-error-container": "#93000a",
+            "error-container": "#ffdad6",
+            "surface-dim": "#d2d9f4",
+            "secondary-fixed": "#d8e2ff",
+            "on-surface-variant": "#434655",
+            "tertiary-container": "#007f1f",
+            "primary-fixed": "#dbe1ff",
+            "on-tertiary-fixed": "#002203",
+            "surface-bright": "#faf8ff",
+            "inverse-surface": "#283044",
+            "secondary-fixed-dim": "#adc6ff",
+            "error": "#ba1a1a",
+            "on-error": "#ffffff",
+            "surface-container-highest": "#dae2fd",
+            "outline": "#737686",
+            "surface-container-high": "#e2e7ff",
+            "primary-container": "#2563eb",
+            "surface-container-low": "#f2f3ff",
+            "on-secondary-fixed": "#001a41",
+            "on-secondary-container": "#fefcff",
+            "surface-container": "#eaedff",
+            "on-primary-fixed": "#00174b",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-primary-container": "#eeefff",
+            "secondary": "#0058bc",
+            "on-secondary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.25rem",
+            "gutter": "1rem",
+            "space-md": "0.875rem",
+            "margin": "1rem",
+            "space-xl": "2rem",
+            "gutter-desktop": "1.5rem",
+            "space-xs": "0.25rem",
+            "margin-desktop": "2rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "headline-xl-mobile": ["Geist"],
+            "body-sm": ["Geist"],
+            "label-md": ["Geist"],
+            "headline-lg": ["Geist"],
+            "body-lg": ["Geist"],
+            "headline-md": ["Geist"],
+            "body-md": ["Geist"],
+            "headline-xl": ["Geist"],
+            "label-lg": ["Geist"],
+            "label-mono": ["Space Mono"]
+          },
+          "fontSize": {
+            "headline-xl-mobile": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "body-sm": ["0.75rem", { "lineHeight": "1.125rem", "letterSpacing": "0em", "fontWeight": "400" }],
+            "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-lg": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-lg": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.011em", "fontWeight": "400" }],
+            "headline-md": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-md": ["0.875rem", { "lineHeight": "1.375rem", "letterSpacing": "-0.006em", "fontWeight": "400" }],
+            "headline-xl": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "label-lg": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "-0.006em", "fontWeight": "500" }],
+            "label-mono": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "-0.01em", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .blueprint-grid {
+      background-color: #faf8ff;
+      background-image: radial-gradient(#CBD5E1 0.75px, transparent 0.75px);
+      background-size: 16px 16px;
+    }
+    .macos-window-shadow {
+      box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(15, 23, 42, 0.08);
+    }
+  </style>
+</head>
+<body class="h-full blueprint-grid font-body-md text-on-surface antialiased overflow-hidden flex flex-col">
+<!-- Background Layer: Blurred ShopFlow Dashboard Overview -->
+<div class="absolute inset-0 filter blur-sm opacity-40 pointer-events-none select-none flex flex-col">
+<!-- Top App Bar -->
+<header class="bg-surface border-b border-outline-variant/40 h-16 px-6 flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<span class="font-headline-md font-bold text-primary">ShopFlow Spotlight</span>
+<div class="flex items-center bg-surface-container px-3 py-1.5 rounded-lg border border-outline-variant/30 text-on-surface-variant w-72">
+<span class="material-symbols-outlined text-sm mr-2">search</span>
+<span class="text-body-sm">Tìm kiếm nhanh lệnh hoặc khách hàng...</span>
+</div>
+</div>
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-md">SO</div>
+</div>
+</header>
+<!-- Main Dashboard Content Placeholder -->
+<main class="flex-1 p-6 grid grid-cols-3 gap-6 max-w-7xl mx-auto w-full">
+<div class="bg-surface rounded-xl p-6 border border-outline-variant/40 macos-window-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<div class="flex space-x-2">
+<div class="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
+<div class="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
+<div class="w-3 h-3 rounded-full bg-[#27C93F]"></div>
+</div>
+<span class="text-body-sm text-on-surface-variant">Livestream Trực Tiếp</span>
+</div>
+<div class="h-32 bg-surface-container rounded-lg flex items-center justify-center text-on-surface-variant">
+          Analytics Feed Panel
+        </div>
+</div>
+<div class="bg-surface rounded-xl p-6 border border-outline-variant/40 macos-window-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<div class="flex space-x-2">
+<div class="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
+<div class="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
+<div class="w-3 h-3 rounded-full bg-[#27C93F]"></div>
+</div>
+<span class="text-body-sm text-on-surface-variant">Đơn Hàng Mới</span>
+</div>
+<div class="h-32 bg-surface-container rounded-lg flex items-center justify-center text-on-surface-variant">
+          Order Queue Feed
+        </div>
+</div>
+<div class="bg-surface rounded-xl p-6 border border-outline-variant/40 macos-window-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<div class="flex space-x-2">
+<div class="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
+<div class="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
+<div class="w-3 h-3 rounded-full bg-[#27C93F]"></div>
+</div>
+<span class="text-body-sm text-on-surface-variant">Fanpage CRM</span>
+</div>
+<div class="h-32 bg-surface-container rounded-lg flex items-center justify-center text-on-surface-variant">
+          Customer Insights
+        </div>
+</div>
+</main>
+</div>
+<!-- Foreground: Spotlight Command Palette Modal -->
+<div class="relative z-10 flex items-center justify-center min-h-screen p-4 sm:p-6">
+<div class="w-full max-w-2xl bg-surface/95 backdrop-blur-xl rounded-2xl border border-outline-variant/40 macos-window-shadow overflow-hidden flex flex-col">
+<!-- Modal Header: Search Input -->
+<div class="px-4 py-4 sm:px-6 sm:py-5 border-b border-outline-variant/30 flex items-center space-x-3">
+<span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">search</span>
+<input autofocus="" class="w-full bg-transparent border-none text-headline-md text-on-surface placeholder-outline focus:ring-0 p-0" placeholder="Nhập lệnh hoặc tìm kiếm khách hàng, bài viết, fanpage..." type="text"/>
+<div class="hidden sm:flex items-center bg-surface-container-high px-2 py-1 rounded border border-outline-variant/40 text-label-mono text-on-surface-variant">
+          ESC
+        </div>
+</div>
+<!-- Grouped Results List -->
+<div class="max-h-[614px] overflow-y-auto p-3 space-y-4">
+<!-- Group 1: Hành Động Nhanh -->
+<div>
+<div class="px-3 py-1 text-label-md text-on-surface-variant uppercase tracking-wider font-label-mono">Hành Động Nhanh</div>
+<div class="mt-1 space-y-1">
+<!-- Active First Item -->
+<div class="flex items-center justify-between px-3 py-2.5 rounded-lg bg-primary/10 text-primary cursor-pointer transition-colors duration-150">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-xl">post_add</span>
+<span class="font-label-lg font-medium">Soạn bài viết mới</span>
+</div>
+<span class="text-label-mono bg-primary/20 text-primary px-2 py-0.5 rounded font-medium">⌘N</span>
+</div>
+<!-- Item -->
+<div class="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-surface-container text-on-surface cursor-pointer transition-colors duration-150">
+<div class="flex items-center space-x-3">
+<div class="relative flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">shield</span>
+<span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#27C93F] ring-2 ring-surface"></span>
+</div>
+<span class="font-label-lg font-medium">Bật/Tắt Khiên Ẩn SĐT Chống Cướp Đơn</span>
+</div>
+<span class="text-label-mono bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded font-medium">⌘S</span>
+</div>
+<!-- Item -->
+<div class="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-surface-container text-on-surface cursor-pointer transition-colors duration-150">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-xl">add</span>
+<span class="font-label-lg font-medium">Kết nối thêm Fanpage</span>
+</div>
+<span class="text-label-mono bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded font-medium">⌘P</span>
+</div>
+<!-- Item -->
+<div class="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-surface-container text-on-surface cursor-pointer transition-colors duration-150">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-xl">sync</span>
+<span class="font-label-lg font-medium">Đồng bộ Webhooks Meta v19</span>
+</div>
+<span class="text-label-mono bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded font-medium">⌘R</span>
+</div>
+</div>
+</div>
+<!-- Group 2: Khách Hàng & Leads Gần Đây -->
+<div>
+<div class="px-3 py-1 text-label-md text-on-surface-variant uppercase tracking-wider font-label-mono">Khách Hàng &amp; Leads Gần Đây</div>
+<div class="mt-1 space-y-1">
+<div class="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-surface-container text-on-surface cursor-pointer transition-colors duration-150">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-xl text-primary">person</span>
+<div>
+<div class="font-label-lg font-medium">Trần Thu Hà - 098***123</div>
+<div class="text-body-sm text-on-surface-variant">Beauty Serum B5</div>
+</div>
+</div>
+<span class="text-label-md px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-semibold">Live Chat</span>
+</div>
+<div class="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-surface-container text-on-surface cursor-pointer transition-colors duration-150">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-xl text-primary">person</span>
+<div>
+<div class="font-label-lg font-medium">Lê Hoàng Long - 091***456</div>
+<div class="text-body-sm text-on-surface-variant">Đơn hàng 850k</div>
+</div>
+</div>
+<span class="text-label-mono text-on-surface-variant">2 phút trước</span>
+</div>
+</div>
+</div>
+<!-- Group 3: Điều Hướng Trang -->
+<div>
+<div class="px-3 py-1 text-label-md text-on-surface-variant uppercase tracking-wider font-label-mono">Điều Hướng Trang</div>
+<div class="mt-1 space-y-1">
+<div class="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-surface-container text-on-surface cursor-pointer transition-colors duration-150">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-xl text-secondary">inbox</span>
+<span class="font-label-lg font-medium">Hộp thư Live Chat</span>
+</div>
+<span class="text-label-mono text-outline font-mono">/inbox</span>
+</div>
+<div class="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-surface-container text-on-surface cursor-pointer transition-colors duration-150">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-xl text-secondary">calendar_today</span>
+<span class="font-label-lg font-medium">Lịch biểu đăng bài</span>
+</div>
+<span class="text-label-mono text-outline font-mono">/posts</span>
+</div>
+<div class="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-surface-container text-on-surface cursor-pointer transition-colors duration-150">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-xl text-secondary">bolt</span>
+<span class="font-label-lg font-medium">Tự động hóa</span>
+</div>
+<span class="text-label-mono text-outline font-mono">/automation</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Footer: Keyboard Hints -->
+<div class="px-4 py-3 sm:px-6 bg-surface-container-low border-t border-outline-variant/30 flex items-center justify-between text-body-sm text-on-surface-variant">
+<div class="flex items-center space-x-3">
+<span class="flex items-center"><strong class="mr-1 font-mono">↑↓</strong> Điều hướng</span>
+<span>|</span>
+<span class="flex items-center"><strong class="mr-1 font-mono">↵</strong> Chọn</span>
+<span>|</span>
+<span class="flex items-center"><strong class="mr-1 font-mono">ESC</strong> Đóng</span>
+</div>
+<div class="font-mono text-label-mono font-medium text-primary">
+          ShopFlow v3.8
+        </div>
+</div>
+</div>
+</div>
+</body></html>
+

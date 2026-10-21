@@ -1,0 +1,730 @@
+﻿<!DOCTYPE html>
+
+<html class="h-full" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShopFlow - Quản lý Khách hàng &amp; Leads (CRM)</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-container": "#fefcff",
+            "on-background": "#131b2e",
+            "primary-fixed-dim": "#b4c5ff",
+            "inverse-on-surface": "#eef0ff",
+            "surface-container-low": "#f2f3ff",
+            "on-tertiary-fixed-variant": "#005311",
+            "surface-container": "#eaedff",
+            "surface-container-high": "#e2e7ff",
+            "tertiary-fixed-dim": "#49e255",
+            "tertiary": "#006316",
+            "outline-variant": "#c3c6d7",
+            "secondary": "#0058bc",
+            "on-primary-fixed-variant": "#003ea8",
+            "on-primary": "#ffffff",
+            "on-tertiary-fixed": "#002203",
+            "secondary-fixed": "#d8e2ff",
+            "background": "#faf8ff",
+            "error": "#ba1a1a",
+            "primary": "#004ac6",
+            "surface-bright": "#faf8ff",
+            "surface-dim": "#d2d9f4",
+            "surface-variant": "#dae2fd",
+            "primary-container": "#2563eb",
+            "surface-container-highest": "#dae2fd",
+            "secondary-fixed-dim": "#adc6ff",
+            "tertiary-container": "#007f1f",
+            "on-primary-container": "#eeefff",
+            "on-tertiary": "#ffffff",
+            "inverse-surface": "#283044",
+            "on-tertiary-container": "#c6ffbc",
+            "on-error-container": "#93000a",
+            "inverse-primary": "#b4c5ff",
+            "on-error": "#ffffff",
+            "surface": "#faf8ff",
+            "on-secondary-fixed-variant": "#004493",
+            "on-primary-fixed": "#00174b",
+            "outline": "#737686",
+            "primary-fixed": "#dbe1ff",
+            "secondary-container": "#0070eb",
+            "tertiary-fixed": "#71ff74",
+            "on-surface-variant": "#434655",
+            "on-secondary-fixed": "#001a41",
+            "surface-tint": "#0053db",
+            "on-secondary": "#ffffff",
+            "on-surface": "#131b2e",
+            "error-container": "#ffdad6",
+            "surface-container-lowest": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "space-lg": "1.25rem",
+            "margin": "1rem",
+            "gutter-desktop": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "0.875rem",
+            "margin-desktop": "2rem",
+            "space-sm": "0.5rem",
+            "gutter": "1rem"
+          },
+          "fontFamily": {
+            "label-mono": ["Space Mono", "monospace"],
+            "label-md": ["Geist", "sans-serif"],
+            "headline-lg": ["Geist", "sans-serif"],
+            "body-md": ["Geist", "sans-serif"],
+            "headline-md": ["Geist", "sans-serif"],
+            "headline-xl": ["Geist", "sans-serif"],
+            "body-sm": ["Geist", "sans-serif"],
+            "label-lg": ["Geist", "sans-serif"],
+            "body-lg": ["Geist", "sans-serif"],
+            "headline-xl-mobile": ["Geist", "sans-serif"]
+          },
+          "fontSize": {
+            "label-mono": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-lg": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-md": ["0.875rem", { "lineHeight": "1.375rem", "letterSpacing": "-0.006em", "fontWeight": "400" }],
+            "headline-md": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-xl": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "body-sm": ["0.75rem", { "lineHeight": "1.125rem", "letterSpacing": "0em", "fontWeight": "400" }],
+            "label-lg": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "-0.006em", "fontWeight": "500" }],
+            "body-lg": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.011em", "fontWeight": "400" }],
+            "headline-xl-mobile": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.025em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      background-color: #F8FAFC;
+      background-image: radial-gradient(#CBD5E1 0.75px, transparent 0.75px);
+      background-size: 16px 16px;
+    }
+    .mac-window-shadow {
+      box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(15, 23, 42, 0.08);
+    }
+  </style>
+</head>
+<body class="h-full text-on-surface font-body-md antialiased overflow-hidden">
+<!-- SideNavBar -->
+<aside class="fixed top-0 left-0 h-screen w-64 flex flex-col justify-between p-4 z-40 bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant/30 shadow-sm dark:shadow-none">
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-3 px-2 pt-2">
+<div class="w-9 h-9 rounded-xl bg-primary-container flex items-center justify-center text-white shadow-md shadow-primary/20">
+<span class="material-symbols-outlined text-xl">hub</span>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight">ShopFlow</h1>
+<p class="text-body-sm text-on-surface-variant">Pro E-commerce Suite</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1.5">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="/">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span>Tổng quan</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="/pages">
+<span class="material-symbols-outlined text-xl">sync_alt</span>
+<span>Kết nối Fanpage</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="/inbox">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-xl">forum</span>
+<span>Hộp thư Live Chat</span>
+</div>
+<span class="px-2 py-0.5 text-xs font-semibold bg-error text-white rounded-full">12</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="/posts">
+<span class="material-symbols-outlined text-xl">calendar_month</span>
+<span>Lịch đăng bài</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="/automation">
+<span class="material-symbols-outlined text-xl">smart_toy</span>
+<span>Kịch bản tự động hóa</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-container text-primary dark:text-inverse-primary font-medium text-label-lg font-label-lg border-l-4 border-primary" href="/customers">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">group</span>
+<span>Khách hàng &amp; Leads</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="/settings">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span>Cài đặt hệ thống</span>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-3 pt-4 border-t border-outline-variant/20">
+<div class="p-3 bg-surface-container-low rounded-xl border border-outline-variant/30 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-lg mt-0.5" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<div>
+<div class="text-xs font-semibold text-on-surface">ShopFlow Shield v2.4</div>
+<div class="text-[11px] text-on-surface-variant leading-relaxed">Auto Masking Phone &amp; PII Active</div>
+</div>
+</div>
+<button class="w-full py-2.5 px-4 bg-primary text-white rounded-lg text-label-lg font-medium hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-lg">edit_note</span>
+<span>Soạn bài viết mới</span>
+</button>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-64 h-14 flex items-center justify-between px-6 z-30 bg-surface-container-lowest/90 dark:bg-inverse-surface/90 backdrop-blur-md border-b border-outline-variant/30 shadow-[0_1px_3px_0_rgba(15,23,42,0.05)]">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]"></div>
+<div class="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]"></div>
+<div class="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]"></div>
+</div>
+<div class="h-4 w-[1px] bg-outline-variant/40"></div>
+<div class="text-sm font-medium text-on-surface-variant flex items-center gap-2">
+<span>ShopFlow</span>
+<span class="text-outline-variant">/</span>
+<span>CRM</span>
+<span class="text-outline-variant">/</span>
+<span class="text-primary font-semibold">Khách hàng &amp; Leads</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative w-64">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">search</span>
+</span>
+<input class="w-full pl-9 pr-12 py-1.5 bg-surface-container-low border border-outline-variant/40 rounded-lg text-body-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20" placeholder="Tìm kiếm toàn hệ thống..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
+<kbd class="px-1.5 py-0.5 text-[10px] font-label-mono bg-surface border border-outline-variant/40 rounded text-on-surface-variant shadow-sm">⌘K</kbd>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="relative p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-lg transition-colors">
+<span class="material-symbols-outlined text-xl">sensors</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+</button>
+<button class="relative p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-lg transition-colors">
+<span class="material-symbols-outlined text-xl">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full"></span>
+</button>
+</div>
+<div class="h-4 w-[1px] bg-outline-variant/40"></div>
+<div class="flex items-center gap-3 pl-1">
+<div class="relative">
+<img class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20" data-alt="Professional portrait of a young Vietnamese female e-commerce store owner with friendly smile, wearing a neat blazer, sitting in a bright modern office workspace with multiple computer screens displaying live analytics charts." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoj27PAZOZuwvnXCJgJ8DsfE1RN0N0VlzxXrOG_6h5j8SiKi1zvp_KlcNGuAGVLUw13Mhv-kZglNeLwUpkS-gWPmln8-nELEQ8cx8mljIN0zjr75k7OC-UZxxtOwbeiUm2DS9qbFPraJoflN3lYmeLO58f86psVTr0RGfZK6jstPe1GM-iY8fWDhjdoHsqfbWzFpXsmAQW2zFFhWGpto8WZoaCIgP5EnDai0qOIG41ltdolXzk5PbupnM-Wg78BBCT0hm42IwIlv1s"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-surface-container-lowest rounded-full"></span>
+</div>
+<div class="hidden xl:block text-left">
+<div class="text-xs font-semibold text-on-surface leading-tight">Tiệm Mỹ Phẩm Sài Gòn</div>
+<div class="text-[11px] text-on-surface-variant">Chủ cửa hàng (Pro)</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="fixed top-14 right-0 left-64 bottom-0 p-6 overflow-y-auto bg-slate-50 flex flex-col gap-6">
+<!-- Page Title & Action Bar -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h2 class="text-headline-lg text-on-surface tracking-tight">Quản lý Khách hàng &amp; Leads</h2>
+<p class="text-body-md text-on-surface-variant mt-0.5">Tập hợp tự động danh bạ khách hàng từ bình luận &amp; tin nhắn Fanpage Facebook qua Webhooks</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 bg-white border border-outline-variant/50 text-on-surface text-label-lg font-medium rounded-full hover:bg-surface-container-low transition-colors flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+<span>Bộ lọc nâng cao</span>
+</button>
+<button class="px-4 py-2 bg-white border border-outline-variant/50 text-on-surface text-label-lg font-medium rounded-full hover:bg-surface-container-low transition-colors flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-lg">download</span>
+<span>Xuất Excel / CSV</span>
+</button>
+<button class="px-4 py-2 bg-primary text-white text-label-lg font-medium rounded-full hover:bg-primary/90 transition-all flex items-center gap-2 shadow-md shadow-primary/20">
+<span class="material-symbols-outlined text-lg">person_add</span>
+<span>+ Thêm Khách Hàng</span>
+</button>
+</div>
+</div>
+<!-- Filter Strip / Quick Segment Tabs -->
+<div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+<button class="px-3.5 py-1.5 bg-primary text-white text-label-md rounded-full font-medium shrink-0 shadow-sm">Tất cả (14,850)</button>
+<button class="px-3.5 py-1.5 bg-white border border-outline-variant/40 text-on-surface-variant hover:text-on-surface text-label-md rounded-full font-medium shrink-0 transition-colors">Khách VIP (820)</button>
+<button class="px-3.5 py-1.5 bg-white border border-outline-variant/40 text-on-surface-variant hover:text-on-surface text-label-md rounded-full font-medium shrink-0 transition-colors">Leads mới để lại SĐT (2,340)</button>
+<button class="px-3.5 py-1.5 bg-white border border-outline-variant/40 text-on-surface-variant hover:text-on-surface text-label-md rounded-full font-medium shrink-0 transition-colors">Chờ chốt đơn (415)</button>
+<button class="px-3.5 py-1.5 bg-white border border-outline-variant/40 text-error hover:bg-error-container/20 text-label-md rounded-full font-medium shrink-0 transition-colors flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span>Nguy cơ bom (28)</span>
+</button>
+</div>
+<!-- 4 Top Metric Cards (KPIs) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+<div class="bg-white p-5 rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-body-sm text-on-surface-variant font-medium">Tổng Khách Hàng CRM</span>
+<div class="w-10 h-10 rounded-xl bg-primary-fixed/50 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">group</span>
+</div>
+</div>
+<div class="mt-4">
+<div class="text-2xl font-bold font-label-mono text-on-surface">14,850</div>
+<div class="flex items-center gap-1.5 mt-1 text-xs text-emerald-600 font-medium">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+12.4% tháng này</span>
+</div>
+</div>
+</div>
+<div class="bg-white p-5 rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-body-sm text-on-surface-variant font-medium">Leads Mới Có SĐT</span>
+<div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">phone_in_talk</span>
+</div>
+</div>
+<div class="mt-4">
+<div class="text-2xl font-bold font-label-mono text-on-surface">2,340</div>
+<div class="flex items-center gap-1.5 mt-1 text-xs text-emerald-600 font-medium">
+<span class="material-symbols-outlined text-sm">verified</span>
+<span>Tỷ lệ chuyển đổi: 34.8%</span>
+</div>
+</div>
+</div>
+<div class="bg-white p-5 rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-body-sm text-on-surface-variant font-medium">Doanh Thu Khách VIP</span>
+<div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+</div>
+<div class="mt-4">
+<div class="text-2xl font-bold font-label-mono text-on-surface">1.42 Tỷ VNĐ</div>
+<div class="flex items-center gap-1.5 mt-1 text-xs text-amber-600 font-medium">
+<span class="material-symbols-outlined text-sm">pie_chart</span>
+<span>Đóng góp 48.2% GMV</span>
+</div>
+</div>
+</div>
+<div class="bg-white p-5 rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-body-sm text-on-surface-variant font-medium">Bảo Vệ SĐT (ShopFlow Shield)</span>
+<div class="w-10 h-10 rounded-xl bg-blue-50 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+</div>
+<div class="mt-4">
+<div class="text-2xl font-bold font-label-mono text-emerald-600">100% Hoạt Động</div>
+<div class="flex items-center gap-1.5 mt-1 text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-primary">security</span>
+<span>Đã tự động ẩn 4,120 SĐT công khai</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Split View Container: Table (65%) + Inspector Panel (35%) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-6 pb-12">
+<!-- Customer List Table (65% width -> col-span-8) -->
+<div class="xl:col-span-8 bg-white rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col overflow-hidden">
+<!-- Table Search & Filter Bar -->
+<div class="p-4 border-b border-outline-variant/30 flex flex-col sm:flex-row items-center justify-between gap-3 bg-surface-container-lowest">
+<div class="relative w-full sm:w-80">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">search</span>
+</span>
+<input class="w-full pl-9 pr-4 py-2 bg-surface-container-low border border-outline-variant/40 rounded-lg text-body-sm focus:outline-none focus:border-primary" placeholder="Tìm kiếm theo tên, số điện thoại, Fanpage..." type="text"/>
+</div>
+<div class="flex items-center gap-2 w-full sm:w-auto">
+<select class="px-3 py-2 bg-surface-container-low border border-outline-variant/40 rounded-lg text-body-sm text-on-surface focus:outline-none focus:border-primary">
+<option>Tất cả Fanpage</option>
+<option>Tiệm Mỹ Phẩm Sài Gòn</option>
+<option>Sneaker VNXK Chính Hãng</option>
+<option>Phụ Kiện GenZ Store</option>
+</select>
+<select class="px-3 py-2 bg-surface-container-low border border-outline-variant/40 rounded-lg text-body-sm text-on-surface focus:outline-none focus:border-primary">
+<option>Phân loại tags</option>
+<option>Khách VIP</option>
+<option>Đơn mới</option>
+<option>Chờ tư vấn</option>
+<option>Nguy cơ bom hàng</option>
+</select>
+</div>
+</div>
+<!-- Data Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/30 bg-surface-container-low/50 text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider">
+<th class="py-3 px-4 w-10">
+<input class="rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+</th>
+<th class="py-3 px-4">Khách hàng</th>
+<th class="py-3 px-4">Số điện thoại</th>
+<th class="py-3 px-4">Nguồn Fanpage</th>
+<th class="py-3 px-4">Thẻ phân loại</th>
+<th class="py-3 px-4 text-right">Tổng chi tiêu (LTV)</th>
+<th class="py-3 px-4 text-center">Đơn</th>
+<th class="py-3 px-4">Thao tác</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20 text-body-md">
+<!-- Row 1 (Selected) -->
+<tr class="bg-primary/5 hover:bg-primary/10 transition-colors cursor-pointer border-l-4 border-primary">
+<td class="py-3 px-4">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-full object-cover shrink-0" data-alt="Close-up portrait of a friendly Vietnamese woman with long dark hair smiling, wearing a simple white blouse, modern clean background with soft neutral tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2O0K8eGJza1ruTzwHIkjs572PA_2tiFgqOqGNXwR1fWHA4OIBDaJ-fpBpKPztZ-DW65r5FRUv9zbGRrOp0eFTptuz1FCX0WK__vyIE_C-IVkO798CUFhZTBCVbPa8xXo1OG_cRnoxBbzUcjTtLKNoLu5oXB1EZ4ryEWnWpTl9Zyj3-5j9cDtACw9lCSR0Ayz4hyNvwX8N2Gsdmem0qMLTqMQ7XDhOLP4MbjoFONMGGK-D-MjJXBXa6M0gqHadwEX7sQN7dLytf4DG"/>
+<div>
+<div class="font-semibold text-on-surface flex items-center gap-1.5">
+<span>Nguyễn Thị Mai</span>
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="text-[11px] font-label-mono text-on-surface-variant">ID: FB-88291048</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2 font-label-mono text-sm text-on-surface">
+<span>0983 ••• 892</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-base">visibility</span>
+</button>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="text-xs text-on-surface-variant bg-surface-container px-2 py-1 rounded-md font-medium">Tiệm Mỹ Phẩm Sài Gòn</span>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    VIP Khách Thân Thiết
+                  </span>
+</td>
+<td class="py-3 px-4 text-right font-label-mono font-semibold text-on-surface">
+                  4,850,000 đ
+                </td>
+<td class="py-3 px-4 text-center font-label-mono text-on-surface">
+                  6
+                </td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-1">
+<button class="p-1.5 text-primary hover:bg-primary/10 rounded-lg transition-colors" title="Mở chat">
+<span class="material-symbols-outlined text-lg">chat</span>
+</button>
+<button class="p-1.5 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors" title="Gọi điện">
+<span class="material-symbols-outlined text-lg">call</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="py-3 px-4">
+<input class="rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-full object-cover shrink-0" data-alt="Portrait of a young Vietnamese man with a stylish haircut wearing a black t-shirt, neutral professional studio background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRI2ihNVD2OrEx-p-dBvtXCN4LA68vKgm33E2m42ZQ9JxTYuxZwtvFshqbFPapL8hjAjODXdrtZES1YH0Z1Mlis-9kwybWAsGG2cUCn_oAfkEWP4n7lvAVCF3EVteuwFiIAcoEoslqeDfB1JmtwPF7pl72V-TPbWuQntiq-yu8qhQtk1VxfVUvHfuFAj_lnErEmS1XO79kqIT-O29W0VoAGWTvC2FuNrDcjxACxcToqOuIEow0yuh_KZ9e0c5QusO5oHwiKploWIbq"/>
+<div>
+<div class="font-semibold text-on-surface">Trần Hoài Nam</div>
+<div class="text-[11px] font-label-mono text-on-surface-variant">ID: FB-77421903</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2 font-label-mono text-sm text-on-surface">
+<span>0912 ••• 445</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-base">visibility</span>
+</button>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="text-xs text-on-surface-variant bg-surface-container px-2 py-1 rounded-md font-medium">Sneaker VNXK Chính Hãng</span>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+                    Đơn mới
+                  </span>
+</td>
+<td class="py-3 px-4 text-right font-label-mono font-semibold text-on-surface">
+                  1,950,000 đ
+                </td>
+<td class="py-3 px-4 text-center font-label-mono text-on-surface">
+                  1
+                </td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-1">
+<button class="p-1.5 text-primary hover:bg-primary/10 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-lg">chat</span>
+</button>
+<button class="p-1.5 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-lg">call</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="py-3 px-4">
+<input class="rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-full object-cover shrink-0" data-alt="Portrait of a young Vietnamese woman with modern makeup and light pastel clothing, soft indoor lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfr-MDRux1l1EdYKxJDQEDtloXfDrBIDoXORf1cpNEB74IUoSDzCUpfR9eEutmUDNfuN8xPvi9pM0EfvMTfI3qrrC_pXqA38BlqJAv0_L0RH4QkNdFEi8H3PiP4QMFuvmHuVnBTdp0YoSHA-QUmvtWydmmASBpE6herR0wPywYbMK21yOQ0ZBM0wD4dEhka6UXELvEGZoFmYtqQ-nhnkJI7QJBGoPmvkgBjZFUOoSfXsojRMMqkMz5O83SYc6vCeAT35jHlSE4D44j"/>
+<div>
+<div class="font-semibold text-on-surface">Lê Hoàng Yến</div>
+<div class="text-[11px] font-label-mono text-on-surface-variant">ID: FB-99281024</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2 font-label-mono text-sm text-on-surface">
+<span>0977 ••• 112</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-base">visibility</span>
+</button>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="text-xs text-on-surface-variant bg-surface-container px-2 py-1 rounded-md font-medium">Tiệm Mỹ Phẩm Sài Gòn</span>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+                    Chờ tư vấn
+                  </span>
+</td>
+<td class="py-3 px-4 text-right font-label-mono font-semibold text-on-surface">
+                  0 đ
+                </td>
+<td class="py-3 px-4 text-center font-label-mono text-on-surface">
+                  0
+                </td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-1">
+<button class="p-1.5 text-primary hover:bg-primary/10 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-lg">chat</span>
+</button>
+<button class="p-1.5 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-lg">call</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="py-3 px-4">
+<input class="rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-full object-cover shrink-0" data-alt="Portrait of a young Vietnamese man with casual jacket, urban street style background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8s71pYkSWT-hVMrsKvJidzcYPQyJ-hHr8dLYRjBNwmTzKpikbHv2z-laaPijIEDNQO8ojvcHrt-lnFzJvWhHgwy8jPzXO7Nxq4bjQYK6VUBmHGX4UvXGthVzqGMftKZ3jS_Hbp2Cla2GXHiSmXdZnmMLvO34Zio8VUAOtCLVIgU-1tks2A1sxTmZDQEki6ErrxmIN8vInwVdD09srTCYvtq9GKGKPvk_0KZXVFdy5o8ZI19UV9Vha0_bHn88_xZImiOf059xeZlMi"/>
+<div>
+<div class="font-semibold text-on-surface">Vũ Minh Khôi</div>
+<div class="text-[11px] font-label-mono text-on-surface-variant">ID: FB-55412980</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2 font-label-mono text-sm text-on-surface">
+<span>0905 ••• 678</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-base">visibility</span>
+</button>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="text-xs text-on-surface-variant bg-surface-container px-2 py-1 rounded-md font-medium">Phụ Kiện GenZ Store</span>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-red-700 border border-red-200">
+                    Nguy cơ bom hàng
+                  </span>
+</td>
+<td class="py-3 px-4 text-right font-label-mono font-semibold text-on-surface">
+                  350,000 đ
+                </td>
+<td class="py-3 px-4 text-center font-label-mono text-on-surface">
+                  1 (hoàn)
+                </td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-1">
+<button class="p-1.5 text-primary hover:bg-primary/10 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-lg">chat</span>
+</button>
+<button class="p-1.5 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-lg">call</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="py-3 px-4">
+<input class="rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-full object-cover shrink-0" data-alt="Portrait of a Vietnamese professional woman with elegant hairstyle, soft warm studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdPxPIVgiOQe_km3Jc1spqQR4BSRgqUSMXoAhHK7WYGbVnjySv8A-eCmM8Ibxw-3tyaCWHi9N-7vvfyzmSSr7xeJBDDDS-Od6j0GloRMvoAjI9n4EzbbIKqUjPwDF1F8oGV5d5vGsMDKKsTYE837BTOd8nGHCLiZVoGnmM5dWdq_t8DMMqo8lq3BcTyOPnLYtI3953m1JPBcLsH2c3oOykuYiX9pjTxJvgiSqqo15QELpWA4zwzsc1WPPbJUDQEn2AyNXnZwZLVhtr"/>
+<div>
+<div class="font-semibold text-on-surface">Phạm Thu Trang</div>
+<div class="text-[11px] font-label-mono text-on-surface-variant">ID: FB-33219044</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2 font-label-mono text-sm text-on-surface">
+<span>0944 ••• 998</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-base">visibility</span>
+</button>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="text-xs text-on-surface-variant bg-surface-container px-2 py-1 rounded-md font-medium">Tiệm Mỹ Phẩm Sài Gòn</span>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200">
+                    Thân thiết
+                  </span>
+</td>
+<td class="py-3 px-4 text-right font-label-mono font-semibold text-on-surface">
+                  2,400,000 đ
+                </td>
+<td class="py-3 px-4 text-center font-label-mono text-on-surface">
+                  3
+                </td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-1">
+<button class="p-1.5 text-primary hover:bg-primary/10 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-lg">chat</span>
+</button>
+<button class="p-1.5 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-lg">call</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination -->
+<div class="p-4 border-t border-outline-variant/30 flex items-center justify-between text-body-sm text-on-surface-variant bg-surface-container-lowest">
+<div>Hiển thị 1 - 5 trong 14,850 khách hàng</div>
+<div class="flex items-center gap-1">
+<button class="px-3 py-1 bg-primary text-white rounded-lg font-medium text-xs">1</button>
+<button class="px-3 py-1 hover:bg-surface-container-low rounded-lg font-medium text-xs">2</button>
+<button class="px-3 py-1 hover:bg-surface-container-low rounded-lg font-medium text-xs">3</button>
+<span class="px-2">...</span>
+<button class="px-3 py-1 hover:bg-surface-container-low rounded-lg font-medium text-xs">148</button>
+</div>
+</div>
+</div>
+<!-- Right Side Inspector Panel: Customer Profile Details (35% width -> col-span-4) -->
+<div class="xl:col-span-4 bg-white rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col p-5 gap-6">
+<!-- Selected Customer Header -->
+<div class="flex items-start justify-between border-b border-outline-variant/30 pb-4">
+<div class="flex items-center gap-3">
+<img class="w-12 h-12 rounded-full object-cover ring-2 ring-primary/20" data-alt="Close-up portrait of Nguyễn Thị Mai, a smiling Vietnamese woman with a polished appearance, clean corporate background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiF4XjsILtq6n-pp01ggA3bl0yfyJm6m0CGsZ5Xr_RtJDJlJS3oguhsrY5S76X_UDqJek07TCYTZRJKM4X_zEBhxm-CswXejM9Hc_OPcROy2IIVnn9KxaaE8KtrHGm0l4r7OjCr9dUXCzodMB504CcX3jRYq0uBiMGXiOWVjMRi-NQUvlemAZDzAcvPUvZyEQsacBY6joVQDruL2CA9y7kPgac56b633KaWasTCC-rWQxvQHm1WKyq5nu96jaEDsTPdQ-3DOMrDYXY"/>
+<div>
+<div class="flex items-center gap-1.5">
+<h3 class="text-headline-md font-headline-md text-on-surface">Nguyễn Thị Mai</h3>
+<span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="text-xs text-on-surface-variant mt-0.5">Tham gia từ: 15/04/2026</div>
+</div>
+</div>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            VIP
+          </span>
+</div>
+<!-- Contact Details -->
+<div class="flex flex-col gap-3">
+<div class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Thông tin liên hệ &amp; Địa chỉ</div>
+<div class="p-3 bg-surface-container-low rounded-xl border border-outline-variant/30 flex flex-col gap-2.5 text-body-sm">
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-base">call</span>
+<span>Số điện thoại:</span>
+</span>
+<span class="font-label-mono font-semibold text-on-surface">0983 456 892</span>
+</div>
+<div class="flex items-center justify-between text-xs text-emerald-600 font-medium bg-emerald-50/50 p-1.5 rounded">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">verified</span>
+<span>Đã xác minh qua Zalo/OTP</span>
+</span>
+</div>
+<div class="flex items-start justify-between gap-2 pt-1 border-t border-outline-variant/20">
+<span class="text-on-surface-variant flex items-center gap-2 shrink-0">
+<span class="material-symbols-outlined text-base">location_on</span>
+<span>Địa chỉ:</span>
+</span>
+<span class="text-right text-on-surface">128 Nguyễn Trãi, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh</span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/20">
+<span class="text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-base">hub</span>
+<span>Fanpage:</span>
+</span>
+<span class="font-medium text-primary">Tiệm Mỹ Phẩm Sài Gòn</span>
+</div>
+</div>
+</div>
+<!-- Mini Activity Timeline -->
+<div class="flex flex-col gap-3">
+<div class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Hoạt động gần đây</div>
+<div class="relative pl-4 space-y-4 before:absolute before:left-1.5 before:top-2 before:bottom-2 before:w-[2px] before:bg-outline-variant/30 text-body-sm">
+<div class="relative flex items-start gap-3">
+<span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-white"></span>
+<div>
+<div class="text-xs text-on-surface-variant font-label-mono">10 phút trước</div>
+<div class="text-on-surface font-medium">Nhắn tin Messenger hỏi giá Serum B5.</div>
+</div>
+</div>
+<div class="relative flex items-start gap-3">
+<span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-white"></span>
+<div>
+<div class="text-xs text-on-surface-variant font-label-mono">2 ngày trước</div>
+<div class="text-on-surface font-medium">Đã nhận đơn hàng #ORD-8821 thành công (850,000 đ).</div>
+</div>
+</div>
+<div class="relative flex items-start gap-3">
+<span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-outline-variant ring-4 ring-white"></span>
+<div>
+<div class="text-xs text-on-surface-variant font-label-mono">1 tuần trước</div>
+<div class="text-on-surface">Bình luận bài đăng Facebook "Flash Sale Cuối Tuần".</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Internal Staff Notes -->
+<div class="flex flex-col gap-2">
+<div class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Ghi chú nội bộ</div>
+<div class="p-3 bg-amber-50/60 rounded-xl border border-amber-200/60 text-body-sm text-amber-900 leading-relaxed">
+            "Khách chuộng sản phẩm dưỡng ẩm da dầu, thường phản hồi nhanh sau 19h tối."
+          </div>
+</div>
+<!-- Quick Action Buttons -->
+<div class="flex flex-col gap-2.5 pt-2 mt-auto">
+<button class="w-full py-2.5 px-4 bg-primary text-white text-label-lg font-medium rounded-xl hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-lg">chat</span>
+<span>Mở Hộp Thư Chat (/inbox)</span>
+</button>
+<button class="w-full py-2.5 px-4 bg-white border border-outline-variant/60 text-on-surface text-label-lg font-medium rounded-xl hover:bg-surface-container-low transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+<span>+ Tạo Đơn Hàng Nhanh</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>
+

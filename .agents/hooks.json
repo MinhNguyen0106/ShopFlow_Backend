@@ -1,0 +1,12 @@
+{
+  "task-completion-sound": {
+    "enabled": true,
+    "Stop": [
+      {
+        "type": "command",
+        "command": "powershell -ExecutionPolicy Bypass -File c:\\Users\\Dell\\Desktop\\ShopFlow\\.agents\\hooks\\notify_task_completed.ps1",
+        "timeout": 10
+      }
+    ]
+  }
+}

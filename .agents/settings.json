@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "version": "1.0.0",
+  "agent": {
+    "defaultModel": "gemini-2.5-pro",
+    "fallbackModel": "gemini-3.8-flash",
+    "temperature": 0.2,
+    "topP": 0.95,
+    "maxOutputTokens": 8192,
+    "locale": "vi-VN",
+    "progressiveDisclosure": true
+  },
+  "autoApproveCommands": [
+    "git status",
+    "git diff",
+    "git log -n 5",
+    "npm run lint",
+    "npm run typecheck",
+    "npm test",
+    "npm run test:unit",
+    "npx tsc --noEmit",
+    "python .agents/skills/db-migration/scripts/validate.py"
+  ],
+  "safety": {
+    "preventDestructiveCommands": true,
+    "promptConfirmationOnDelete": true,
+    "blockDirectEnvModification": true,
+    "enforceHmacValidation": true,
+    "disallowedCommands": [
+      "rm -rf /",
+      "rm -rf *",
+      "Format-Volume",
+      "drop database",
+      "git push --force",
+      "git reset --hard origin/main"
+    ]
+  },
+  "logging": {
+    "level": "info",
+    "persistTranscripts": true,
+    "sanitizeSecrets": true
+  }
+}

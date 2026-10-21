@@ -1,0 +1,858 @@
+﻿<!DOCTYPE html>
+
+<html class="h-full" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShopFlow - Hộp thư Live Chat Omnichannel</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Geist & Space Mono Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline-variant": "#c3c6d7",
+            "on-surface-variant": "#434655",
+            "surface-container-low": "#f2f3ff",
+            "on-secondary-container": "#fefcff",
+            "on-primary-fixed-variant": "#003ea8",
+            "error": "#ba1a1a",
+            "tertiary-fixed": "#71ff74",
+            "on-primary-fixed": "#00174b",
+            "inverse-primary": "#b4c5ff",
+            "secondary": "#0058bc",
+            "primary-fixed": "#dbe1ff",
+            "tertiary": "#006316",
+            "on-secondary-fixed-variant": "#004493",
+            "primary": "#004ac6",
+            "secondary-fixed-dim": "#adc6ff",
+            "on-tertiary": "#ffffff",
+            "secondary-container": "#0070eb",
+            "primary-container": "#2563eb",
+            "surface-bright": "#faf8ff",
+            "on-surface": "#131b2e",
+            "tertiary-container": "#007f1f",
+            "surface-container": "#eaedff",
+            "on-tertiary-fixed": "#002203",
+            "background": "#faf8ff",
+            "on-error": "#ffffff",
+            "surface-tint": "#0053db",
+            "primary-fixed-dim": "#b4c5ff",
+            "inverse-surface": "#283044",
+            "error-container": "#ffdad6",
+            "on-tertiary-container": "#c6ffbc",
+            "inverse-on-surface": "#eef0ff",
+            "surface-dim": "#d2d9f4",
+            "surface-container-high": "#e2e7ff",
+            "surface": "#faf8ff",
+            "on-error-container": "#93000a",
+            "on-background": "#131b2e",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-fixed": "#001a41",
+            "tertiary-fixed-dim": "#49e255",
+            "outline": "#737686",
+            "on-secondary": "#ffffff",
+            "secondary-fixed": "#d8e2ff",
+            "on-primary": "#ffffff",
+            "surface-variant": "#dae2fd",
+            "surface-container-highest": "#dae2fd",
+            "on-tertiary-fixed-variant": "#005311",
+            "on-primary-container": "#eeefff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1rem",
+            "space-xl": "2rem",
+            "gutter-desktop": "1.5rem",
+            "space-xs": "0.25rem",
+            "margin": "1rem",
+            "space-sm": "0.5rem",
+            "space-md": "0.875rem",
+            "space-lg": "1.25rem",
+            "margin-desktop": "2rem"
+          },
+          "fontFamily": {
+            "label-md": ["Geist"],
+            "headline-xl-mobile": ["Geist"],
+            "body-md": ["Geist"],
+            "body-lg": ["Geist"],
+            "headline-md": ["Geist"],
+            "label-mono": ["Space Mono"],
+            "headline-lg": ["Geist"],
+            "label-lg": ["Geist"],
+            "body-sm": ["Geist"],
+            "headline-xl": ["Geist"]
+          },
+          "fontSize": {
+            "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-xl-mobile": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "body-md": ["0.875rem", { "lineHeight": "1.375rem", "letterSpacing": "-0.006em", "fontWeight": "400" }],
+            "body-lg": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.011em", "fontWeight": "400" }],
+            "headline-md": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-mono": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "headline-lg": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-lg": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "-0.006em", "fontWeight": "500" }],
+            "body-sm": ["0.75rem", { "lineHeight": "1.125rem", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-xl": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.03em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Blueprint Micro-Grid Background */
+    .bg-blueprint-grid {
+      background-color: #f8fafc;
+      background-image: radial-gradient(#cbd5e1 0.75px, transparent 0.75px);
+      background-size: 16px 16px;
+    }
+    /* Calibrated macOS Window Shadow */
+    .macos-window-shadow {
+      box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.14), 0 0 0 1px rgba(15, 23, 42, 0.08);
+    }
+    .macos-panel-shadow {
+      box-shadow: 0 4px 16px -4px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(226, 232, 240, 0.9);
+    }
+    /* Subtle Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="h-full bg-blueprint-grid text-on-surface antialiased overflow-hidden select-none">
+<!-- ========================================================================= -->
+<!-- 1. LEFT FIXED SIDENAVBAR (Shared Component: SideNavBar)                  -->
+<!-- ========================================================================= -->
+<aside class="fixed top-0 left-0 h-screen w-64 flex flex-col justify-between p-4 z-40 bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant/30 shadow-sm dark:shadow-none">
+<!-- Top Brand & Navigation Block -->
+<div class="flex flex-col gap-5">
+<!-- Brand Identity Header -->
+<div class="flex items-center gap-3 px-2 py-1">
+<div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary to-secondary-container flex items-center justify-center text-on-primary shadow-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="hub">hub</span>
+</div>
+<div class="flex flex-col">
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight">ShopFlow</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant font-medium">Pro E-commerce Suite</span>
+</div>
+</div>
+<!-- Quick CTA Button -->
+<button class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-primary-container text-on-primary font-label-lg text-label-lg shadow-sm hover:bg-primary transition-all duration-150 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+<span>Soạn bài viết mới</span>
+</button>
+<!-- Nav Items Stack -->
+<nav class="flex flex-col gap-1">
+<!-- 0: Tổng quan (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span>Tổng quan</span>
+</a>
+<!-- 1: Hộp thư Live Chat (ACTIVE) -->
+<a class="flex items-center justify-between px-3 py-2.5 rounded-lg bg-surface-container text-primary dark:text-inverse-primary font-medium text-label-lg font-label-lg shadow-xs" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]" data-icon="forum" style="font-variation-settings: 'FILL' 1;">forum</span>
+<span>Hộp thư Live Chat</span>
+</div>
+<span class="px-2 py-0.5 rounded-full text-label-md font-label-md bg-primary-container text-on-primary font-bold">18</span>
+</a>
+<!-- 2: Lịch đăng bài (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="calendar_month">calendar_month</span>
+<span>Lịch đăng bài</span>
+</a>
+<!-- 3: Kịch bản tự động hóa (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="smart_toy">smart_toy</span>
+<span>Kịch bản tự động hóa</span>
+</a>
+<!-- 4: Kết nối Fanpage (Inactive) -->
+<a class="flex items-center justify-between px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]" data-icon="sync_alt">sync_alt</span>
+<span>Kết nối Fanpage</span>
+</div>
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+</a>
+</nav>
+</div>
+<!-- Bottom Footer Meta v19 & System Settings -->
+<div class="flex flex-col gap-1 pt-3 border-t border-outline-variant/30">
+<!-- Rate Limit Status Pill -->
+<div class="flex items-center justify-between px-3 py-2 rounded-lg bg-surface-container-low/70 text-on-surface-variant text-label-md font-label-md mb-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="speed">speed</span>
+<span>Rate Limit Meta v19</span>
+</div>
+<span class="font-label-mono text-label-md text-emerald-600 font-bold">14% used</span>
+</div>
+<!-- Settings item -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span>Cài đặt hệ thống</span>
+</a>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- 2. TOP FIXED TOOLBAR (Shared Component: TopNavBar)                       -->
+<!-- ========================================================================= -->
+<header class="fixed top-0 right-0 left-64 h-14 flex items-center justify-between px-6 z-30 bg-surface-container-lowest/90 dark:bg-inverse-surface/90 backdrop-blur-md border-b border-outline-variant/30 shadow-[0_1px_3px_0_rgba(15,23,42,0.05)]">
+<!-- Left Region: Title + Search -->
+<div class="flex items-center gap-4 flex-1 max-w-xl">
+<!-- Title & macOS Traffic Lights -->
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/40 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]/40 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]/40 inline-block"></span>
+</div>
+<div class="h-4 w-px bg-outline-variant/40 mx-1"></div>
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight">ShopFlow Live Hub</span>
+</div>
+<!-- Omnisearch Bar -->
+<div class="relative flex-1 max-w-xs">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-outline" data-icon="search">search</span>
+<input class="w-full h-8 pl-9 pr-3 rounded-lg bg-surface-container-low/60 border border-outline-variant/40 text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-150" placeholder="Tìm hội thoại, SĐT, mã đơn (⌘K)..." type="text"/>
+</div>
+</div>
+<!-- Right Trailing Region -->
+<div class="flex items-center gap-3">
+<!-- Live Meta Indicator -->
+<div class="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-700 text-label-md font-label-md">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+</span>
+<span class="font-label-mono">Meta Graph API v19.0 Online</span>
+</div>
+<!-- Active Fanpage Selector Pill -->
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low border border-outline-variant/40 text-on-surface text-label-md font-label-md shadow-xs">
+<span class="material-symbols-outlined text-[16px] text-[#1877F2]" data-icon="storefront">storefront</span>
+<span class="font-medium">Fanpage: Tiệm Mỹ Phẩm Sài Gòn</span>
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</div>
+<!-- CTA Action Button -->
+<button class="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary-container text-on-primary text-label-md font-label-md font-medium shadow-xs hover:bg-primary transition-all duration-150 active:scale-95">
+<span class="material-symbols-outlined text-[16px]" data-icon="add_circle">add_circle</span>
+<span>Tạo chiến dịch</span>
+</button>
+<!-- Trailing Action Icons -->
+<div class="flex items-center gap-1 text-on-surface-variant">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-surface-container-low transition-colors duration-150 relative" title="Cảm biến Live">
+<span class="material-symbols-outlined text-[20px]" data-icon="sensors">sensors</span>
+<span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-surface-container-low transition-colors duration-150 relative" title="Thông báo">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-primary rounded-full"></span>
+</button>
+</div>
+<!-- Profile Section -->
+<div class="flex items-center gap-2 pl-2 border-l border-outline-variant/40">
+<img class="w-8 h-8 rounded-full ring-2 ring-primary/20 object-cover" data-alt="Professional portrait photograph of a young Vietnamese female retail store owner in a bright minimalist office setting. She wears a clean casual blazer with a warm and focused expression. The room is flooded with high-key natural sunlight reflecting off soft white surfaces and architectural glass panels. Clean linear design aesthetics and serene light-mode mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC4YvWATkbuonx-yd-bJ76h0ZJWTnzr_a-tsd3Lcgv1Mc5_PQcelvzyQy0DgjDvf4v6q1Y_oh6AAe0D9ZCtcrm7e9Lkz4JrQkXHliA_1fcdwAGo1fbgiXIFcff-Um5ZkTUjKQej3nxrYY6JueE5nhpvnGWSQlpg9WUUJz9uLWVFpaogL2my3-2nnb7njwqUMdPbTbkPEHbHsIALaRXrKIVJTakShkA5lrk8Z12EVQafsqytQJxUbQtx9SZE4_2GE7P5m5q46toaPmB"/>
+<div class="hidden xl:flex flex-col">
+<span class="text-label-md font-label-md font-semibold text-on-surface leading-none">Chủ cửa hàng</span>
+<span class="text-body-sm font-body-sm text-outline leading-tight">Admin Flow</span>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- 3. INBOX MAIN WORKSPACE (DENSE 4-PANE BENTO LAYOUT)                      -->
+<!-- ========================================================================= -->
+<main class="fixed top-14 left-64 right-0 bottom-0 p-3 overflow-hidden">
+<!-- Outer macOS Window Container -->
+<div class="w-full h-full bg-surface-container-lowest rounded-[24px] border border-outline-variant/30 macos-window-shadow flex overflow-hidden">
+<!-- ===================================================================== -->
+<!-- PANE 1: Channel & Filter Navigation (~260px)                          -->
+<!-- ===================================================================== -->
+<section class="w-[260px] flex-shrink-0 border-r border-outline-variant/30 bg-surface-container-lowest flex flex-col justify-between p-3 overflow-y-auto">
+<div class="flex flex-col gap-4">
+<!-- Fanpage Selector Switcher -->
+<div>
+<label class="block text-body-sm font-body-sm font-semibold text-outline uppercase tracking-wider mb-1.5 px-1">Kênh trực tuyến</label>
+<div class="relative">
+<button class="w-full flex items-center justify-between p-2 rounded-xl bg-surface-container-low border border-outline-variant/40 hover:border-primary/50 transition-all text-left group">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center flex-shrink-0 text-label-md font-bold">
+                    3P
+                  </div>
+<div class="truncate">
+<p class="text-label-md font-label-md font-semibold text-on-surface truncate">Tất cả kênh (3 Fanpage)</p>
+<p class="text-body-sm font-body-sm text-outline truncate">Tiệm Mỹ Phẩm, Hùng Sport...</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[18px] text-outline group-hover:text-primary" data-icon="unfold_more">unfold_more</span>
+</button>
+</div>
+</div>
+<!-- Quick Search Filter -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-[16px] text-outline" data-icon="search">search</span>
+<input class="w-full h-8 pl-8 pr-2.5 rounded-lg bg-surface-container-low/40 border border-outline-variant/30 text-body-sm font-body-sm placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="Tìm theo tên khách, SĐT, mã đơn..." type="text"/>
+</div>
+<!-- Inbox Core Status Filters -->
+<div>
+<label class="block text-body-sm font-body-sm font-semibold text-outline uppercase tracking-wider mb-1.5 px-1">Trạng thái hộp thư</label>
+<div class="flex flex-col gap-0.5">
+<!-- Tất cả hội thoại -->
+<button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-on-surface bg-surface-container-low font-label-lg text-label-lg font-medium">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="inbox">inbox</span>
+<span>Tất cả hội thoại</span>
+</div>
+<span class="text-label-md font-label-md px-1.5 py-0.5 rounded-md bg-surface-container font-bold text-primary">18</span>
+</button>
+<!-- Chưa đọc -->
+<button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low/70 transition-colors font-label-lg text-label-lg">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-blue-500" data-icon="mark_chat_unread">mark_chat_unread</span>
+<span>Chưa đọc</span>
+</div>
+<span class="text-label-md font-label-md px-1.5 py-0.5 rounded-md bg-blue-100 text-blue-700 font-bold">5</span>
+</button>
+<!-- Có số điện thoại (Lead) -->
+<button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low/70 transition-colors font-label-lg text-label-lg">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-emerald-600" data-icon="phone_in_talk">phone_in_talk</span>
+<span>Có số điện thoại (Lead)</span>
+</div>
+<span class="text-label-md font-label-md px-1.5 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold">8</span>
+</button>
+<!-- Sắp hết hạn 24h Meta -->
+<button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-amber-800 bg-amber-50/70 border border-amber-200/60 font-label-lg text-label-lg my-0.5">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-amber-600 animate-pulse" data-icon="alarm">alarm</span>
+<span class="font-semibold">Sắp hết hạn 24h Meta</span>
+</div>
+<span class="text-label-md font-label-md px-1.5 py-0.5 rounded-full bg-amber-500 text-white font-bold">3</span>
+</button>
+<!-- Đã chốt đơn -->
+<button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low/70 transition-colors font-label-lg text-label-lg">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-purple-600" data-icon="shopping_bag">shopping_bag</span>
+<span>Đã chốt đơn</span>
+</div>
+<span class="text-label-md font-label-md px-1.5 py-0.5 rounded-md bg-purple-50 text-purple-700 font-bold">12</span>
+</button>
+</div>
+</div>
+<!-- Tag & Channel Chips -->
+<div>
+<label class="block text-body-sm font-body-sm font-semibold text-outline uppercase tracking-wider mb-2 px-1">Nhãn &amp; Phân loại</label>
+<div class="flex flex-wrap gap-1.5">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-blue-50 border border-blue-200 text-blue-700 text-label-md font-label-md cursor-pointer hover:bg-blue-100">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>VIP
+              </span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-red-50 border border-red-200 text-red-700 text-label-md font-label-md cursor-pointer hover:bg-red-100">
+<span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>Cần tư vấn gấp
+              </span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-700 text-label-md font-label-md cursor-pointer hover:bg-emerald-100">
+<span class="material-symbols-outlined text-[12px]" data-icon="shield">shield</span>Đã ẩn SĐT
+              </span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-slate-100 text-slate-700 text-label-md font-label-md cursor-pointer hover:bg-slate-200">
+<span class="material-symbols-outlined text-[12px]" data-icon="chat">chat</span>FB Messenger
+              </span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-slate-100 text-slate-700 text-label-md font-label-md cursor-pointer hover:bg-slate-200">
+<span class="material-symbols-outlined text-[12px]" data-icon="comment">comment</span>Bình luận bài viết
+              </span>
+</div>
+</div>
+</div>
+<!-- Fanpage Quick Connectivity Overview -->
+<div class="p-2.5 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="cloud_done">cloud_done</span>
+<div class="flex flex-col">
+<span class="text-label-md font-label-md font-semibold text-on-surface">Webhooks Đồng Bộ</span>
+<span class="text-body-sm font-body-sm text-outline font-label-mono">1.2ms latency</span>
+</div>
+</div>
+<span class="text-label-md font-label-md text-emerald-600 font-bold">100%</span>
+</div>
+</section>
+<!-- ===================================================================== -->
+<!-- PANE 2: Conversation Threads List (~330px)                           -->
+<!-- ===================================================================== -->
+<section class="w-[330px] flex-shrink-0 border-r border-outline-variant/30 bg-surface-container-lowest flex flex-col">
+<!-- List Header -->
+<div class="h-12 px-3 border-b border-outline-variant/30 flex items-center justify-between bg-surface-bright/50">
+<div class="flex items-center gap-2">
+<span class="text-label-lg font-label-lg font-semibold text-on-surface">Hộp thư</span>
+<span class="text-label-md font-label-md px-2 py-0.5 rounded-full bg-surface-container text-primary font-bold">18</span>
+</div>
+<div class="flex items-center gap-1 text-outline">
+<button class="p-1 rounded hover:bg-surface-container-low transition-colors text-label-md font-label-md flex items-center gap-0.5" title="Sắp xếp">
+<span>Mới nhất</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="arrow_drop_down">arrow_drop_down</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-low transition-colors" title="Thao tác hàng loạt">
+<span class="material-symbols-outlined text-[18px]" data-icon="checklist">checklist</span>
+</button>
+</div>
+</div>
+<!-- Thread Items Stack -->
+<div class="flex-1 overflow-y-auto divide-y divide-outline-variant/20">
+<!-- THREAD 1 (ACTIVE / SELECTED) -->
+<div class="p-3 bg-surface-container/40 border-l-4 border-l-primary relative cursor-pointer transition-colors duration-100">
+<div class="flex items-start justify-between gap-2 mb-1">
+<div class="flex items-center gap-2">
+<div class="relative">
+<img class="w-9 h-9 rounded-full object-cover ring-1 ring-slate-200" data-alt="Modern studio portrait of a stylish young Vietnamese customer named Tran Thu Thao with subtle makeup and soft natural light. Clean aesthetic, soft neutral background, wearing an elegant cream top. Contemporary digital portrait photography for social commerce application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYUmlIJ2EgR6cyMlPxMaBW6qm145rztjeN7-o9RWgr1VnMwzTCVL7ZGPRZwcVtUBCYZAsG4eZZR-wTfR1JAoko4WPT7wL3L2vrbl7F68EPuiWBRwXsRfk6U75EUYjxnUlVJOJhV6Al6scskVIilTANfwjHU7X7SwzzPKAG5TU8-YyTptCTGXGQKbFj9oU1bMedSgbtw9e45jgero3OlHXRBkna99s3A1WfdPQbxMUsnoWWgMAxQLRjPntOpPncG_IH0wF0TwyYWR1u"/>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#1877F2] text-white flex items-center justify-center text-[10px]">
+<span class="material-symbols-outlined text-[11px]" data-icon="comment">comment</span>
+</span>
+</div>
+<div>
+<h4 class="text-label-lg font-label-lg font-bold text-on-surface leading-tight">Trần Thu Thảo</h4>
+<span class="text-body-sm font-body-sm text-outline">#Post108 · Bình luận</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-label-md font-label-md text-outline">2 phút trước</span>
+<!-- Meta 24h Countdown Badge -->
+<span class="mt-1 px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-bold font-label-mono flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px] text-amber-600" data-icon="timer">timer</span>
+                  còn 42m
+                </span>
+</div>
+</div>
+<!-- Message Preview -->
+<p class="text-body-sm font-body-sm text-on-surface font-medium line-clamp-1 mb-2">
+              Shop ơi tư vấn mình đôi sneaker size 38 với...
+            </p>
+<!-- Shield Badge & Channel Info -->
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[11px] font-semibold border border-emerald-200">
+<span class="material-symbols-outlined text-[12px]" data-icon="lock">lock</span>
+                Đã tự động ẩn SĐT 0988***123
+              </span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 text-[11px] font-semibold">
+                Lead nóng
+              </span>
+</div>
+</div>
+<!-- THREAD 2 -->
+<div class="p-3 hover:bg-surface-container-low/60 transition-colors cursor-pointer">
+<div class="flex items-start justify-between gap-2 mb-1">
+<div class="flex items-center gap-2">
+<div class="relative">
+<div class="w-9 h-9 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-label-md">
+                    ĐH
+                  </div>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#0084FF] text-white flex items-center justify-center text-[10px]">
+<span class="material-symbols-outlined text-[11px]" data-icon="chat">chat</span>
+</span>
+</div>
+<div>
+<h4 class="text-label-lg font-label-lg font-semibold text-on-surface leading-tight">Đặng Văn Hùng</h4>
+<span class="text-body-sm font-body-sm text-outline">Messenger</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-label-md font-label-md text-outline">15 phút trước</span>
+<span class="mt-1 px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[11px] font-label-mono">
+                  còn 1h 15m
+                </span>
+</div>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-1 mb-1.5">
+              Cho mình xem mẫu áo thun tập gym màu xám đen với shop...
+            </p>
+<div class="flex items-center gap-1.5">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 text-[11px] font-mono">
+                SĐT: 0912***678
+              </span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded bg-orange-50 text-orange-700 text-[11px]">
+                Hùng Sport
+              </span>
+</div>
+</div>
+<!-- THREAD 3 -->
+<div class="p-3 hover:bg-surface-container-low/60 transition-colors cursor-pointer">
+<div class="flex items-start justify-between gap-2 mb-1">
+<div class="flex items-center gap-2">
+<div class="relative">
+<div class="w-9 h-9 rounded-full bg-pink-100 text-pink-700 flex items-center justify-center font-bold text-label-md">
+                    QA
+                  </div>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 text-white flex items-center justify-center text-[10px]">
+<span class="material-symbols-outlined text-[11px]" data-icon="photo_camera">photo_camera</span>
+</span>
+</div>
+<div>
+<h4 class="text-label-lg font-label-lg font-semibold text-on-surface leading-tight">Đỗ Quỳnh Anh</h4>
+<span class="text-body-sm font-body-sm text-outline">Instagram Direct</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-label-md font-label-md text-outline">30 phút trước</span>
+<span class="mt-1 px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[11px] font-label-mono">
+                  còn 2h 10m
+                </span>
+</div>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-1 mb-1.5">
+              Có ốp lưng cho iPhone 15 Pro Max không bạn ơi?
+            </p>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 text-[11px]">
+              Chưa có SĐT
+            </span>
+</div>
+<!-- THREAD 4 -->
+<div class="p-3 hover:bg-surface-container-low/60 transition-colors cursor-pointer">
+<div class="flex items-start justify-between gap-2 mb-1">
+<div class="flex items-center gap-2">
+<div class="relative">
+<div class="w-9 h-9 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-label-md">
+                    ĐA
+                  </div>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#1877F2] text-white flex items-center justify-center text-[10px]">
+<span class="material-symbols-outlined text-[11px]" data-icon="comment">comment</span>
+</span>
+</div>
+<div>
+<h4 class="text-label-lg font-label-lg font-semibold text-on-surface leading-tight">Vũ Đức Anh</h4>
+<span class="text-body-sm font-body-sm text-outline">Bài viết #Post99</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-label-md font-label-md text-outline">1 giờ trước</span>
+<span class="mt-1 px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[11px] font-semibold">
+                  Đã xử lý
+                </span>
+</div>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant line-clamp-1 mb-1">
+              Gửi giúp mình thông tin bảo hành củ sạc 65W với...
+            </p>
+</div>
+</div>
+</section>
+<!-- ===================================================================== -->
+<!-- PANE 3: Conversation Stream (Center-Right Main Stream)                -->
+<!-- ===================================================================== -->
+<section class="flex-1 flex flex-col bg-surface min-w-[420px] border-r border-outline-variant/30">
+<!-- Stream Header -->
+<div class="h-14 px-4 border-b border-outline-variant/30 bg-surface-container-lowest flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20" data-alt="Close-up crisp profile avatar of a Vietnamese female shopper smiling gently. Clean light studio background, perfectly sharp edges with pastel tones suitable for live customer profile badge in modern macOS desktop web app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7x1u60jnjDkl1_oP8VTRZeGF99fFu8vcgY0HmNuk1wgmkfn1tlA0et9-VJ52A8cJxt87qAEVtN2MjVnP7i0ieqJZbbTjP7V_dlZWkg9fzVh7HFzg1Y-kpl0XAxWVqU-faVuLf8wyoiJ2pTh9pUXknfpaIZLCn_xXeWpi4RQU6iOwR8eBly3QAgH5d0Ycp7f-qsM9SreF5543YoRFyOULv0J80nRk07B-gbaFPjevXs2RCS7psrH1r8B-jws08zi1WrJZIplq72vmd"/>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="text-label-lg font-label-lg font-bold text-on-surface">Trần Thu Thảo</span>
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="px-2 py-0.2 rounded-full bg-blue-50 text-primary text-[11px] font-semibold border border-blue-200">Khách quen</span>
+</div>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-outline">
+<span class="flex items-center gap-1 hover:text-primary cursor-pointer truncate max-w-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="link">link</span>
+                  Bài viết: BST Sneaker Mùa Hè Năng Động #SK2024
+                </span>
+</div>
+</div>
+</div>
+<!-- Header Actions & Meta SLA Counter -->
+<div class="flex items-center gap-2">
+<!-- Meta 24h SLA Pill -->
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-label-md font-label-md">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+</span>
+<span class="font-label-mono">Cửa sổ Meta: Còn 42:15</span>
+</div>
+<!-- Action buttons -->
+<button class="h-8 px-2.5 rounded-lg border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-container-low text-on-surface text-label-md font-label-md flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-emerald-600" data-icon="call">call</span>
+<span>Gọi nhanh</span>
+</button>
+<button class="h-8 px-2.5 rounded-lg border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-container-low text-on-surface text-label-md font-label-md flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="person_add">person_add</span>
+<span>Gán: Thu Hà</span>
+</button>
+<button class="h-8 w-8 rounded-lg border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-container-low text-on-surface flex items-center justify-center transition-colors" title="Đánh dấu đã xong">
+<span class="material-symbols-outlined text-[18px] text-emerald-600" data-icon="check_circle">check_circle</span>
+</button>
+</div>
+</div>
+<!-- Chat Message Stream Feed -->
+<div class="flex-1 p-4 overflow-y-auto space-y-3.5 bg-surface-bright/40">
+<!-- System Event: Post Comment Trigger -->
+<div class="flex items-center justify-center">
+<span class="px-3 py-1 rounded-full bg-surface-container-low/80 border border-outline-variant/30 text-outline text-body-sm font-body-sm font-label-mono flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]" data-icon="history">history</span>
+              10:24 - Khách hàng để lại bình luận trên Bài viết #SK2024
+            </span>
+</div>
+<!-- Customer Comment Bubble -->
+<div class="flex items-start gap-2.5 max-w-[85%]">
+<img class="w-7 h-7 rounded-full object-cover flex-shrink-0 mt-0.5" data-alt="Miniature circular avatar of customer Tran Thu Thao with subtle friendly expression against warm neutral backdrop, modern linear e-commerce style portrait." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1JQNSjql3vzLF2BiOa8WFWO3QaUQ517dB5XgdX7728y6YOgFWwy_TNnIqPxfjCrxB6CB2dc0Z613AIUb_lKDLPObXNtotWD94a9-T0KqFxpMtiBZa38XbFoArTjC83PCz59YZ7isozXhN5aqDCCARXNCzxMUVCo0BAq9-DwwVX49xTX5Ukac6xO4tJKvEe_2hTuDs05TOxnH0Vh18x4o4EYHmNeu849yRaA7pP8bJlHDz_xNR93CSHGavuNWZRVIhH5GRhDamwWEf"/>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="text-label-md font-label-md font-bold text-on-surface">Trần Thu Thảo</span>
+<span class="text-body-sm font-body-sm text-outline">10:24</span>
+<span class="px-1.5 py-0.2 rounded bg-blue-100 text-blue-700 text-[10px] font-semibold">Bình luận bài viết</span>
+</div>
+<div class="p-3 rounded-2xl rounded-tl-sm bg-surface-container-lowest border border-outline-variant/30 macos-panel-shadow text-body-md font-body-md text-on-surface leading-relaxed">
+                Em muốn lấy 2 đôi Sneaker ShopFlow Classic màu trắng size 38 giao về 124 Nguyễn Huệ, Q.1, TP.HCM nha shop, sđt em là <span class="font-bold underline text-primary">0988654123</span>
+</div>
+</div>
+</div>
+<!-- ShopFlow Shield Bot Alert Banner -->
+<div class="mx-6 p-2.5 rounded-xl bg-emerald-50/90 border border-emerald-300 text-emerald-900 flex items-start gap-2.5 shadow-xs">
+<div class="w-6 h-6 rounded-lg bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[15px]" data-icon="shield">shield</span>
+</div>
+<div class="flex-1">
+<p class="text-label-md font-label-md font-bold text-emerald-800 flex items-center gap-1">
+                Tự động bảo vệ: Đã phát hiện và ẨN BÌNH LUẬN chứa SĐT
+              </p>
+<p class="text-body-sm font-body-sm text-emerald-700 leading-snug">
+                Bình luận chứa SĐT <span class="font-mono font-semibold">0988***123</span> đã được ẩn tự động khỏi Fanpage công khai sau <span class="font-bold">0.3s</span> để chống cướp đơn và bảo vệ quyền riêng tư của khách hàng.
+              </p>
+</div>
+<span class="text-[11px] font-mono text-emerald-600 bg-white/80 px-2 py-0.5 rounded border border-emerald-200">ShopFlow Shield</span>
+</div>
+<!-- Automated Bot Private Message -->
+<div class="flex items-start gap-2.5 max-w-[85%] ml-auto flex-row-reverse">
+<div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center flex-shrink-0 text-label-md font-bold">
+<span class="material-symbols-outlined text-[16px]" data-icon="smart_toy">smart_toy</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<div class="flex items-center gap-2">
+<span class="text-body-sm font-body-sm text-outline">10:24</span>
+<span class="text-label-md font-label-md font-bold text-primary">ShopFlow Auto-reply v19</span>
+<span class="px-1.5 py-0.2 rounded bg-purple-100 text-purple-700 text-[10px] font-semibold">Bot tự động</span>
+</div>
+<div class="p-3 rounded-2xl rounded-tr-sm bg-primary/10 border border-primary/20 text-body-md font-body-md text-on-surface leading-relaxed text-left">
+                Chào bạn Thu Thảo, ShopFlow đã nhận thông tin và chuyển ngay đến chuyên viên tư vấn để giữ size cho bạn nhé! 👟✨
+              </div>
+</div>
+</div>
+<!-- Agent Reply (Trần Thu Hà - Active) -->
+<div class="flex items-start gap-2.5 max-w-[85%] ml-auto flex-row-reverse">
+<div class="relative">
+<img class="w-7 h-7 rounded-full object-cover ring-1 ring-emerald-400" data-alt="Crisp miniature corporate headshot of Vietnamese female customer support specialist with headset and friendly helpful demeanor in modern e-commerce control center." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj8Abe1j36YtyGcRtxvoCUoJVullc1Caa4isnoGBLz6AeOxEQw_Ta06gsyb2zkwyflnz7B6EOLvsTkG4pNZYYjXffYDGS6LtKmeJxM9xI6EAisP42cXYP5NQ5LGdyxUqvfNkhidrpBrtMB8ZGDh13vIYQaM1-9kQeHeX2Vy658wrprEGT_8CUEVUEKBHQ2csohM5YvcOPUSZ3J7InTtwgibYCkiAAKLNNW5KlRIrUyz6qHE_xdKr1TfFUWzBKpYBlh_REpQy00h47N"/>
+<span class="w-2 h-2 rounded-full bg-emerald-500 absolute bottom-0 right-0 ring-1 ring-white"></span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<div class="flex items-center gap-2">
+<span class="text-body-sm font-body-sm text-outline">10:25</span>
+<span class="text-label-md font-label-md font-bold text-on-surface">Trần Thu Hà (Online)</span>
+<span class="px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 text-[10px] font-semibold">Tư vấn viên</span>
+</div>
+<div class="p-3.5 rounded-2xl rounded-tr-sm bg-primary-container text-on-primary font-body-md text-body-md shadow-xs leading-relaxed text-left">
+                Dạ em chào chị Thảo! Em vừa kiểm tra kho thì 2 đôi size 38 màu trắng vẫn còn ạ. Em lên đơn giao về Quận 1 cho chị luôn nhé ạ!
+              </div>
+<span class="text-[11px] text-outline font-label-mono flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-primary" data-icon="done_all">done_all</span>
+                Đã chuyển thành công qua Messenger
+              </span>
+</div>
+</div>
+</div>
+<!-- Message Composer Dock -->
+<div class="p-3 bg-surface-container-lowest border-t border-outline-variant/30 flex flex-col gap-2">
+<!-- Macro Quick Reply Chips -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1">
+<button class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface text-label-md font-label-md border border-outline-variant/30 flex-shrink-0 transition-colors">
+<span class="material-symbols-outlined text-[14px] text-primary" data-icon="bolt">bolt</span>
+              Mẫu chốt đơn nhanh
+            </button>
+<button class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface text-label-md font-label-md border border-outline-variant/30 flex-shrink-0 transition-colors">
+<span class="material-symbols-outlined text-[14px] text-emerald-600" data-icon="account_balance">account_balance</span>
+              Gửi STK ngân hàng
+            </button>
+<button class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface text-label-md font-label-md border border-outline-variant/30 flex-shrink-0 transition-colors">
+<span class="material-symbols-outlined text-[14px] text-blue-500" data-icon="location_on">location_on</span>
+              Xin địa chỉ giao
+            </button>
+<button class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface text-label-md font-label-md border border-outline-variant/30 flex-shrink-0 transition-colors">
+<span class="material-symbols-outlined text-[14px] text-purple-600" data-icon="published_with_changes">published_with_changes</span>
+              Chính sách đổi trả
+            </button>
+</div>
+<!-- Input Box & Toolbar -->
+<div class="rounded-xl border border-outline-variant/40 bg-surface focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all p-2 flex flex-col gap-1.5">
+<textarea class="w-full bg-transparent border-0 resize-none text-body-md font-body-md text-on-surface placeholder:text-outline focus:ring-0 p-1" placeholder="Nhập tin nhắn phản hồi (Nhấn Enter để gửi, Shift+Enter xuống dòng)..." rows="2"></textarea>
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/20">
+<!-- Rich Tools -->
+<div class="flex items-center gap-1 text-outline">
+<button class="w-7 h-7 rounded hover:bg-surface-container-low flex items-center justify-center transition-colors" title="Đính kèm ảnh sản phẩm">
+<span class="material-symbols-outlined text-[18px]" data-icon="image">image</span>
+</button>
+<button class="w-7 h-7 rounded hover:bg-surface-container-low flex items-center justify-center transition-colors" title="Thêm emoji">
+<span class="material-symbols-outlined text-[18px]" data-icon="sentiment_satisfied">sentiment_satisfied</span>
+</button>
+<button class="w-7 h-7 rounded hover:bg-surface-container-low flex items-center justify-center transition-colors" title="Kịch bản mẫu">
+<span class="material-symbols-outlined text-[18px]" data-icon="quickreply">quickreply</span>
+</button>
+<button class="w-7 h-7 rounded hover:bg-surface-container-low flex items-center justify-center transition-colors" title="Gán nhãn CRM">
+<span class="material-symbols-outlined text-[18px]" data-icon="label">label</span>
+</button>
+</div>
+<!-- Main Send Action Button -->
+<button class="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary-container text-on-primary text-label-md font-label-md font-semibold hover:bg-primary transition-all active:scale-95 shadow-xs">
+<span>Gửi tin nhắn</span>
+<span class="material-symbols-outlined text-[15px]" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- ===================================================================== -->
+<!-- PANE 4: Customer Profile & AI Assistant (~330px)                      -->
+<!-- ===================================================================== -->
+<section class="w-[330px] flex-shrink-0 bg-surface-container-lowest p-3 flex flex-col gap-3 overflow-y-auto border-l border-outline-variant/30">
+<!-- Customer CRM Card -->
+<div class="p-3 rounded-2xl bg-surface-container-low/50 border border-outline-variant/30 flex flex-col gap-2.5">
+<div class="flex items-center gap-3">
+<img class="w-11 h-11 rounded-xl object-cover ring-2 ring-primary/20" data-alt="Elegant square portrait of Vietnamese female customer Tran Thu Thao with subtle friendly expression and modern minimalist aesthetic for high-end SaaS CRM customer detail pane." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChKVfZzjQJ9DfKlQWeV5werbJUmUzv-3mI4k19bzffGUt3FLo0uyCqJbmgtbqRRkLbW5TdFakKlfqu3aE2eW91cEZ7mqsek_MbqYZ_Qke1K2q9dcg_fIPlhG4PNwl8P4XOtr-r7lX8j56mfgjjhC4lqjQU__Om_kAC43KxTUT3ZD1EuM7wCSpI4XDZUaFiKj60XJ7fSxabqRFyKju7P47Ueo-ZVFajSVO23xUFArFO6rq3C2IKMDDAFa8ijjH0zzt0hzAB17mUuca2"/>
+<div class="flex flex-col">
+<h3 class="text-label-lg font-label-lg font-bold text-on-surface">Trần Thu Thảo</h3>
+<div class="flex items-center gap-1">
+<span class="px-2 py-0.2 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold">Khách VIP</span>
+<span class="text-[11px] text-outline font-label-mono">Tiềm năng cao</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 pt-2 border-t border-outline-variant/20">
+<div class="p-2 rounded-lg bg-surface-container-lowest">
+<span class="text-body-sm font-body-sm text-outline block">Tổng chi tiêu</span>
+<span class="text-label-md font-label-md font-bold text-on-surface">3.450.000 đ</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container-lowest">
+<span class="text-body-sm font-body-sm text-outline block">Số đơn hàng</span>
+<span class="text-label-md font-label-md font-bold text-primary">3 đơn</span>
+</div>
+</div>
+</div>
+<!-- Contact Detail Info -->
+<div class="space-y-2 p-2.5 rounded-xl border border-outline-variant/30 bg-surface-bright/50">
+<div class="flex items-center justify-between">
+<span class="text-body-sm font-body-sm text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]" data-icon="call">call</span>
+              Số điện thoại:
+            </span>
+<div class="flex items-center gap-1">
+<span class="font-label-mono font-bold text-label-md text-on-surface">0988654123</span>
+<button class="p-1 hover:text-primary transition-colors" title="Sao chép">
+<span class="material-symbols-outlined text-[14px]" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="text-body-sm font-body-sm text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]" data-icon="home_pin">home_pin</span>
+              Địa chỉ nhận hàng:
+            </span>
+<p class="text-body-sm font-body-sm text-on-surface font-medium pl-4">
+              124 Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh
+            </p>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/20">
+<span class="text-body-sm font-body-sm text-outline">Nguồn khách:</span>
+<span class="text-body-sm font-body-sm text-primary font-medium">Tiệm Mỹ Phẩm Sài Gòn</span>
+</div>
+</div>
+<!-- GEMINI AI SMART ORDER EXTRACTION CARD -->
+<div class="p-3 rounded-2xl bg-gradient-to-br from-blue-50/80 via-white to-indigo-50/60 border border-blue-200/90 shadow-sm relative overflow-hidden">
+<!-- Sparkle accent banner -->
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[18px] text-blue-600 animate-pulse" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-label-md font-label-md font-bold text-blue-900">Trích xuất đơn (Gemini AI)</span>
+</div>
+<span class="text-[10px] font-label-mono px-1.5 py-0.5 rounded bg-blue-100 text-blue-800 font-bold">Độ chính xác 99%</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mb-2.5">
+            Đã phân tích tự động từ tin nhắn bình luận của khách hàng:
+          </p>
+<!-- Order item box -->
+<div class="p-2.5 rounded-xl bg-white border border-blue-100 mb-2.5 space-y-1.5 text-body-sm font-body-sm">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-semibold text-on-surface leading-tight">Sneaker ShopFlow Classic Trắng</p>
+<p class="text-body-sm text-outline font-label-mono">Size: 38 · Phân loại: White</p>
+</div>
+<span class="font-bold font-label-mono text-primary text-label-md">x2 đôi</span>
+</div>
+<div class="flex justify-between pt-1 border-t border-slate-100 text-body-sm">
+<span class="text-outline">Đơn giá:</span>
+<span class="font-mono text-on-surface">550.000 đ</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-outline">Phí vận chuyển:</span>
+<span class="font-semibold text-emerald-600">Miễn phí (VIP)</span>
+</div>
+<div class="flex justify-between pt-1 border-t border-slate-100 font-bold text-label-md text-on-surface">
+<span>Tổng tiền tạm tính:</span>
+<span class="text-primary font-mono text-label-lg">1.100.000 đ</span>
+</div>
+</div>
+<!-- Primary Quick Action -->
+<button class="w-full py-2.5 px-3 rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md font-bold transition-all shadow-sm flex items-center justify-center gap-1.5 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]" data-icon="shopping_cart_checkout">shopping_cart_checkout</span>
+<span>+ Tạo đơn hàng ngay (1.100.000 đ)</span>
+</button>
+</div>
+<!-- Recent Order History -->
+<div class="flex-1 p-2.5 rounded-xl bg-surface-container-low/40 border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="text-label-md font-label-md font-semibold text-on-surface">Đơn gần nhất</span>
+<span class="text-[11px] text-primary hover:underline cursor-pointer">Xem tất cả</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container-lowest border border-outline-variant/20 flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-mono text-label-md font-bold text-on-surface">#ORD-9021</span>
+<span class="px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 text-[10px] font-semibold">Đã giao</span>
+</div>
+<p class="text-body-sm font-body-sm text-outline truncate">1x Son Dưỡng Ẩm Môi Tự Nhiên</p>
+<span class="text-body-sm font-body-sm font-label-mono text-outline">Tháng trước · 280.000 đ</span>
+</div>
+</div>
+<!-- Bottom Micro Status -->
+<div class="flex items-center justify-between text-body-sm text-outline pt-2 border-t border-outline-variant/20">
+<span>Đồng bộ CRM</span>
+<span class="text-emerald-600 font-medium flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Thời gian thực
+            </span>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Contextual Quick Action Trigger (Linear keyboard shortcut hint) -->
+<div class="fixed bottom-4 right-8 z-50 pointer-events-none">
+<div class="px-3 py-1.5 rounded-full bg-inverse-surface/90 text-inverse-on-surface text-label-md font-label-md font-label-mono shadow-lg backdrop-blur-md flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+<span>ShopFlow Live v19.0 · Phím tắt: ⌘K tìm kiếm, ↵ gửi</span>
+</div>
+</div>
+</body></html>
+

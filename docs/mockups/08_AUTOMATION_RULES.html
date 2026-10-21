@@ -1,0 +1,992 @@
+﻿<!DOCTYPE html>
+
+<html class="h-full bg-[#faf8ff]" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShopFlow - Cấu hình Kịch bản Tự động &amp; Ẩn Số Điện Thoại Chống Cướp Đơn</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-fixed": "#002203",
+            "inverse-primary": "#b4c5ff",
+            "on-tertiary": "#ffffff",
+            "on-error": "#ffffff",
+            "surface-bright": "#faf8ff",
+            "on-primary-fixed-variant": "#003ea8",
+            "surface": "#faf8ff",
+            "on-secondary-fixed": "#001a41",
+            "secondary-fixed-dim": "#adc6ff",
+            "secondary-container": "#0070eb",
+            "on-secondary": "#ffffff",
+            "on-primary": "#ffffff",
+            "error": "#ba1a1a",
+            "on-surface": "#131b2e",
+            "surface-container-low": "#f2f3ff",
+            "on-secondary-fixed-variant": "#004493",
+            "surface-dim": "#d2d9f4",
+            "on-primary-fixed": "#00174b",
+            "error-container": "#ffdad6",
+            "surface-variant": "#dae2fd",
+            "tertiary": "#006316",
+            "surface-container": "#eaedff",
+            "on-surface-variant": "#434655",
+            "secondary": "#0058bc",
+            "primary": "#004ac6",
+            "surface-tint": "#0053db",
+            "outline": "#737686",
+            "on-error-container": "#93000a",
+            "on-tertiary-container": "#c6ffbc",
+            "inverse-surface": "#283044",
+            "background": "#faf8ff",
+            "tertiary-fixed-dim": "#49e255",
+            "outline-variant": "#c3c6d7",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-container": "#007f1f",
+            "surface-container-highest": "#dae2fd",
+            "surface-container-high": "#e2e7ff",
+            "inverse-on-surface": "#eef0ff",
+            "primary-fixed": "#dbe1ff",
+            "tertiary-fixed": "#71ff74",
+            "secondary-fixed": "#d8e2ff",
+            "on-tertiary-fixed-variant": "#005311",
+            "on-secondary-container": "#fefcff",
+            "primary-container": "#2563eb",
+            "on-primary-container": "#eeefff",
+            "on-background": "#131b2e",
+            "primary-fixed-dim": "#b4c5ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "1rem",
+            "space-sm": "0.5rem",
+            "gutter-desktop": "1.5rem",
+            "gutter": "1rem",
+            "space-lg": "1.25rem",
+            "space-md": "0.875rem",
+            "margin-desktop": "2rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2rem"
+          },
+          "fontFamily": {
+            "headline-xl": ["Geist", "sans-serif"],
+            "body-lg": ["Geist", "sans-serif"],
+            "label-mono": ["Space Mono", "monospace"],
+            "headline-md": ["Geist", "sans-serif"],
+            "headline-lg": ["Geist", "sans-serif"],
+            "body-md": ["Geist", "sans-serif"],
+            "label-md": ["Geist", "sans-serif"],
+            "label-lg": ["Geist", "sans-serif"],
+            "headline-xl-mobile": ["Geist", "sans-serif"],
+            "body-sm": ["Geist", "sans-serif"]
+          },
+          "fontSize": {
+            "headline-xl": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "body-lg": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.011em", "fontWeight": "400" }],
+            "label-mono": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "headline-md": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-lg": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-md": ["0.875rem", { "lineHeight": "1.375rem", "letterSpacing": "-0.006em", "fontWeight": "400" }],
+            "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "label-lg": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "-0.006em", "fontWeight": "500" }],
+            "headline-xl-mobile": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "body-sm": ["0.75rem", { "lineHeight": "1.125rem", "letterSpacing": "0em", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Blueprint dot grid canvas */
+    .blueprint-grid {
+      background-color: #faf8ff;
+      background-image: radial-gradient(#c3c6d7 0.85px, transparent 0.85px);
+      background-size: 16px 16px;
+    }
+    
+    /* macOS Window Elevation */
+    .macos-window-shadow {
+      box-shadow: 0 20px 45px -12px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(195, 198, 215, 0.45);
+    }
+    
+    .macos-card-hover {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .macos-card-hover:hover {
+      box-shadow: 0 12px 30px -8px rgba(15, 23, 42, 0.12), 0 0 0 1px #2563eb;
+      transform: translateY(-1px);
+    }
+
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c3c6d7;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #737686;
+    }
+  </style>
+</head>
+<body class="h-full blueprint-grid font-body-md text-on-surface antialiased overflow-x-hidden selection:bg-primary-container selection:text-white">
+<!-- ========================================== -->
+<!-- 1. FIXED LEFT SIDEBAR (Shared Component)  -->
+<!-- ========================================== -->
+<aside class="fixed top-0 left-0 h-screen w-64 flex flex-col justify-between p-4 z-40 bg-surface-container-lowest/95 backdrop-blur-md border-r border-outline-variant/30 shadow-sm select-none">
+<!-- Top Part -->
+<div class="space-y-4">
+<!-- macOS Window Traffic Light Controls -->
+<div class="flex items-center gap-2 px-1 pt-1">
+<span class="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/50 inline-block shadow-xs"></span>
+<span class="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]/50 inline-block shadow-xs"></span>
+<span class="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]/50 inline-block shadow-xs"></span>
+<span class="ml-2 font-label-mono text-body-sm text-outline tracking-wider">SF-OS v3.8</span>
+</div>
+<!-- Brand Header -->
+<div class="flex items-center gap-3 px-1 py-1 border-b border-outline-variant/20 pb-3.5">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-md shadow-primary/20 shrink-0">
+<span class="material-symbols-outlined text-[22px]" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div class="min-w-0 flex-1">
+<div class="flex items-center gap-1.5">
+<span class="text-headline-md font-headline-md font-bold text-primary tracking-tight">ShopFlow</span>
+<span class="px-1.5 py-0.5 rounded-full bg-primary/10 text-primary font-label-mono text-[10px] font-bold">VN</span>
+</div>
+<p class="font-label-md text-body-sm text-on-surface-variant truncate">Pro E-commerce Suite</p>
+</div>
+</div>
+<!-- Action Button (CTA) -->
+<button class="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-full bg-primary-container hover:bg-primary text-white font-label-lg text-label-lg transition-all shadow-sm active:scale-95 group">
+<span class="material-symbols-outlined text-[18px] transition-transform group-hover:rotate-90" data-icon="add">add</span>
+<span>Soạn bài viết mới</span>
+</button>
+<!-- Navigation Links -->
+<nav aria-label="Main Navigation" class="space-y-1 pt-1">
+<!-- Tab 1: Tổng quan -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined text-[20px] text-outline" data-icon="dashboard">dashboard</span>
+<span class="truncate">Tổng quan</span>
+</a>
+<!-- Tab 2: Hộp thư Live Chat -->
+<a class="flex items-center justify-between px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-[20px] text-outline" data-icon="forum">forum</span>
+<span class="truncate">Hộp thư Live Chat</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary-container text-white text-[11px] font-label-mono font-bold">18</span>
+</a>
+<!-- Tab 3: Lịch đăng bài -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined text-[20px] text-outline" data-icon="calendar_month">calendar_month</span>
+<span class="truncate">Lịch đăng bài</span>
+</a>
+<!-- Tab 4: Kịch bản tự động hóa (ACTIVE PER JSON) -->
+<a class="flex items-center justify-between px-3 py-2.5 rounded-lg bg-surface-container text-primary font-medium text-label-lg font-label-lg relative border-l-2 border-primary shadow-xs" href="#">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-[20px] text-primary" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="truncate font-semibold">Kịch bản tự động hóa</span>
+</div>
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+</a>
+<!-- Tab 5: Kết nối Fanpage -->
+<a class="flex items-center justify-between px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-[20px] text-outline" data-icon="sync_alt">sync_alt</span>
+<span class="truncate">Kết nối Fanpage</span>
+</div>
+<span class="flex items-center gap-1 font-label-mono text-[10px] text-emerald-600 font-semibold">
+<span class="w-2 h-2 rounded-full bg-[#27C93F] inline-block animate-ping"></span>
+            3 Live
+          </span>
+</a>
+</nav>
+</div>
+<!-- Bottom Footer Links -->
+<div class="pt-4 border-t border-outline-variant/30 space-y-2">
+<!-- Meta Rate Limit Widget -->
+<div class="p-2.5 rounded-xl bg-surface-container-low border border-outline-variant/30">
+<div class="flex items-center justify-between font-label-mono text-body-sm text-on-surface-variant mb-1.5">
+<span class="flex items-center gap-1.5 font-medium">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="speed">speed</span>
+            Rate Limit Meta v19
+          </span>
+<span class="text-primary font-bold">28%</span>
+</div>
+<div class="w-full h-1.5 bg-outline-variant/30 rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 28%"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] font-label-mono text-outline mt-1">
+<span>720 / 2,500 req</span>
+<span class="text-emerald-600 font-semibold">Tối ưu</span>
+</div>
+</div>
+<!-- Settings button -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined text-[20px] text-outline" data-icon="settings">settings</span>
+<span class="truncate">Cài đặt hệ thống</span>
+</a>
+</div>
+</aside>
+<!-- ========================================== -->
+<!-- 2. TOP NAVIGATION BAR (Shared Component)    -->
+<!-- ========================================== -->
+<header class="fixed top-0 right-0 left-64 h-14 flex items-center justify-between px-6 z-30 bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/30 shadow-[0_1px_3px_0_rgba(15,23,42,0.05)]">
+<!-- Left: Breadcrumb & Meta API Live Badge -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 font-label-lg text-label-md text-on-surface-variant">
+<span class="hover:text-primary transition-colors cursor-pointer">Dashboard</span>
+<span class="text-outline">/</span>
+<span class="text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="smart_toy">smart_toy</span>
+          Kịch bản tự động hóa
+        </span>
+</div>
+<div class="hidden xl:flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 font-label-mono text-[11px] font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
+<span>Meta Graph API v19 Online - Webhook Live</span>
+</div>
+</div>
+<!-- Middle: Search Input (macOS Style) -->
+<div class="w-72 lg:w-96 relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-[18px]" data-icon="search">search</span>
+<input class="w-full h-9 pl-9 pr-14 py-1 text-body-md rounded-lg bg-surface border border-outline-variant/50 focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-outline text-on-surface transition-all" placeholder="Tìm kiếm kịch bản, webhook, tag..." type="text"/>
+<div class="absolute right-2.5 top-2 flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-surface-container text-[11px] font-label-mono text-on-surface-variant border border-outline-variant/30">
+<span>⌘</span><span>K</span>
+</div>
+</div>
+<!-- Right: Page Selector, Actions & Profile -->
+<div class="flex items-center gap-3">
+<!-- Fanpage Selector Dropdown -->
+<div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface border border-outline-variant/50 hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="w-2 h-2 rounded-full bg-blue-600"></span>
+<span class="text-label-md font-label-md text-on-surface truncate max-w-[160px]">Fanpage: Tiệm Mỹ Phẩm Sài Gòn</span>
+<span class="px-1.5 py-0.2 rounded-full bg-primary/10 text-primary text-[10px] font-label-mono font-bold">3 Page</span>
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="expand_more">expand_more</span>
+</div>
+<!-- Trailing Action Button -->
+<button class="hidden lg:flex items-center gap-1.5 py-1.5 px-3.5 rounded-full bg-primary-container hover:bg-primary text-white font-label-md text-label-md font-medium transition-all shadow-xs active:scale-95">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span>
+<span>Tạo chiến dịch</span>
+</button>
+<!-- Icon Actions Group -->
+<div class="flex items-center gap-1 pl-2 border-l border-outline-variant/30">
+<!-- Sensors live -->
+<button class="p-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors relative" title="Webhook Stream Sensors">
+<span class="material-symbols-outlined text-[20px]" data-icon="sensors">sensors</span>
+<span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+</button>
+<!-- Notifications -->
+<button class="p-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors relative" title="Thông báo hệ thống">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error border border-white"></span>
+</button>
+<!-- Profile Avatar -->
+<div class="flex items-center gap-2 pl-1 cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-primary overflow-hidden">
+<span class="material-symbols-outlined text-[20px]" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================== -->
+<!-- 3. MAIN CONTENT WORKSPACE                  -->
+<!-- ========================================== -->
+<main class="ml-64 pt-14 p-6 min-h-screen">
+<div class="max-w-[1600px] mx-auto space-y-6">
+<!-- Header Title Section -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pt-2">
+<div>
+<div class="flex items-center gap-2.5">
+<h1 class="text-headline-lg font-headline-lg font-bold text-on-surface tracking-tight">Kịch bản Tự Động Hóa &amp; Chống Cướp Đơn</h1>
+<span class="px-2.5 py-0.5 rounded-full bg-emerald-100/70 border border-emerald-300 text-emerald-800 text-[11px] font-label-mono font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="shield" style="font-variation-settings: 'FILL' 1;">shield</span>
+              v2.4 Live Guard
+            </span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1 max-w-3xl">
+            Bảo vệ số điện thoại khách hàng tức thì trong 0.3s qua Webhook Meta Graph API v19 và thiết lập phản hồi đa kênh tự động thông minh.
+          </p>
+</div>
+<div class="flex items-center gap-2.5 shrink-0">
+<button class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-container-lowest border border-outline-variant/60 hover:bg-surface-container-low text-on-surface font-label-lg text-label-lg transition-all shadow-xs">
+<span class="material-symbols-outlined text-[18px] text-outline" data-icon="history">history</span>
+<span>Lịch sử thực thi (Audit Log)</span>
+</button>
+<button class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-container-lowest border border-outline-variant/60 hover:bg-surface-container-low text-on-surface font-label-lg text-label-lg transition-all shadow-xs">
+<span class="material-symbols-outlined text-[18px] text-emerald-600" data-icon="network_ping">network_ping</span>
+<span>Kiểm tra Webhook</span>
+</button>
+<button class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary-container hover:bg-primary text-white font-label-lg text-label-lg font-semibold transition-all shadow-sm active:scale-95">
+<span class="material-symbols-outlined text-[18px]" data-icon="add_circle">add_circle</span>
+<span>+ Thêm kịch bản mới</span>
+</button>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- [HERO BANNER] ANTI-THEFT SHIELD HERO CARD   -->
+<!-- ========================================== -->
+<section class="relative overflow-hidden rounded-2xl bg-surface-container-lowest border border-blue-200/80 macos-window-shadow p-6 lg:p-7">
+<!-- Decorative Glow Ambient -->
+<div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-blue-500/10 blur-3xl pointer-events-none"></div>
+<div class="absolute right-40 -bottom-20 w-64 h-64 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none"></div>
+<!-- Header Ribbon inside Card -->
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-4 mb-5">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></span>
+<span class="ml-2 font-label-mono text-body-sm text-outline font-medium">SHIELD_SECURITY_CORE :: MODULE_VN_PHONE_GUARD</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+</span>
+<span class="font-label-mono text-body-sm text-emerald-700 font-bold tracking-tight">ĐANG BẢO VỆ 24/7 (ACTIVE)</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+<!-- Shield Icon & Content -->
+<div class="lg:col-span-8 flex flex-col sm:flex-row items-start sm:items-center gap-5">
+<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-blue-700 text-white flex items-center justify-center shrink-0 shadow-lg shadow-primary/25 border-2 border-white">
+<span class="material-symbols-outlined text-[36px]" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div class="space-y-1.5">
+<div class="flex flex-wrap items-center gap-2">
+<h2 class="text-headline-md font-headline-md font-bold text-on-surface">
+                  Tự Động Ẩn Bình Luận Chứa Số Điện Thoại (Chống Cướp Khách Hàng)
+                </h2>
+<span class="px-2 py-0.5 rounded-md bg-blue-100 text-primary font-label-mono text-[11px] font-bold">Lá Chắn v2.4</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+                Hệ thống regex quét đa dạng định dạng số điện thoại Việt Nam (10-11 số, dấu chấm, gạch ngang, khoảng trắng, viết chữ) và kích hoạt lệnh ẩn comment của Meta Graph API ngay khi phát sinh webhook.
+              </p>
+<!-- Security Specs Badges -->
+<div class="flex flex-wrap items-center gap-2 pt-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container font-label-mono text-[11px] text-on-surface font-medium border border-outline-variant/40">
+<span class="material-symbols-outlined text-[14px] text-primary" data-icon="bolt">bolt</span>
+                  Độ trễ: &lt; 0.28s Instant Hide
+                </span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container font-label-mono text-[11px] text-on-surface font-medium border border-outline-variant/40">
+<span class="material-symbols-outlined text-[14px] text-emerald-600" data-icon="code">code</span>
+                  Regex VN Telecoms (03x, 05x, 07x, 08x, 09x)
+                </span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container font-label-mono text-[11px] text-on-surface font-medium border border-outline-variant/40">
+<span class="material-symbols-outlined text-[14px] text-purple-600" data-icon="key">key</span>
+                  Meta Token: Live &amp; Encrypted AES-256
+                </span>
+</div>
+</div>
+</div>
+<!-- Master Control Switch -->
+<div class="lg:col-span-4 flex flex-col items-start lg:items-end justify-center lg:border-l lg:border-outline-variant/20 lg:pl-6">
+<div class="p-3.5 rounded-xl bg-surface-container/60 border border-outline-variant/30 w-full text-right">
+<div class="flex items-center justify-between gap-4 mb-2">
+<span class="font-label-lg text-label-md text-on-surface font-semibold">Trạng Thái Hệ Thống:</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<p class="font-label-mono text-body-sm text-emerald-700 font-semibold flex items-center justify-end gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                BẬT - Đang kích hoạt toàn bộ 3 Fanpage
+              </p>
+</div>
+</div>
+</div>
+<!-- Sub Toggles Grid -->
+<div class="mt-5 pt-4 border-t border-outline-variant/20 grid grid-cols-1 md:grid-cols-3 gap-3.5">
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface hover:bg-surface-container transition-colors border border-outline-variant/30 cursor-pointer">
+<div class="flex items-center gap-2.5 min-w-0 pr-2">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="mark_chat_unread">mark_chat_unread</span>
+<span class="text-body-sm font-label-lg text-on-surface truncate">Gửi tin nhắn Messenger tự động khi ẩn SĐT</span>
+</div>
+<input checked="" class="rounded text-primary focus:ring-primary h-4 w-4 border-outline-variant" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface hover:bg-surface-container transition-colors border border-outline-variant/30 cursor-pointer">
+<div class="flex items-center gap-2.5 min-w-0 pr-2">
+<span class="material-symbols-outlined text-[18px] text-amber-600" data-icon="local_fire_department">local_fire_department</span>
+<span class="text-body-sm font-label-lg text-on-surface truncate">Gắn thẻ #Lead_Nóng &amp; đẩy trực tiếp vào CRM</span>
+</div>
+<input checked="" class="rounded text-primary focus:ring-primary h-4 w-4 border-outline-variant" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface hover:bg-surface-container transition-colors border border-outline-variant/30 cursor-pointer">
+<div class="flex items-center gap-2.5 min-w-0 pr-2">
+<span class="material-symbols-outlined text-[18px] text-sky-600" data-icon="send">send</span>
+<span class="text-body-sm font-label-lg text-on-surface truncate">Gửi cảnh báo Telegram tức thì cho CSKH</span>
+</div>
+<input checked="" class="rounded text-primary focus:ring-primary h-4 w-4 border-outline-variant" type="checkbox"/>
+</label>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 4 BENTO STAT CARDS                         -->
+<!-- ========================================== -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Card 1 -->
+<div class="p-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 shadow-xs hover:border-outline-variant transition-all">
+<div class="flex items-center justify-between text-on-surface-variant mb-2">
+<span class="font-label-lg text-label-md text-outline">Tổng kịch bản</span>
+<div class="w-7 h-7 rounded-lg bg-blue-50 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" data-icon="smart_toy">smart_toy</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-headline-lg font-headline-lg font-bold text-on-surface">12</span>
+<span class="font-label-mono text-body-sm text-outline">kịch bản</span>
+</div>
+<div class="flex items-center gap-2 mt-2 pt-2 border-t border-outline-variant/20 font-label-mono text-body-sm">
+<span class="text-emerald-700 font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 8 Đang chạy
+            </span>
+<span class="text-outline">|</span>
+<span class="text-on-surface-variant">4 Tạm dừng</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="p-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 shadow-xs hover:border-outline-variant transition-all">
+<div class="flex items-center justify-between text-on-surface-variant mb-2">
+<span class="font-label-lg text-label-md text-outline">SĐT đã ẩn bảo vệ</span>
+<div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" data-icon="phonelink_lock">phonelink_lock</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-headline-lg font-headline-lg font-bold text-emerald-800">1,842</span>
+<span class="font-label-mono text-body-sm text-emerald-600 font-semibold">+34 hôm nay</span>
+</div>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-outline-variant/20 font-label-mono text-body-sm">
+<span class="text-outline">Tỷ lệ thành công:</span>
+<span class="text-emerald-700 font-bold">100.0%</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="p-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 shadow-xs hover:border-outline-variant transition-all">
+<div class="flex items-center justify-between text-on-surface-variant mb-2">
+<span class="font-label-lg text-label-md text-outline">Auto-replies đã gửi</span>
+<div class="w-7 h-7 rounded-lg bg-purple-50 text-purple-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" data-icon="forum">forum</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-headline-lg font-headline-lg font-bold text-on-surface">14,890</span>
+<span class="font-label-mono text-body-sm text-outline">tin nhắn &amp; cmt</span>
+</div>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-outline-variant/20 font-label-mono text-body-sm">
+<span class="text-outline">Tỷ lệ phân phối:</span>
+<span class="text-primary font-bold">99.8% Meta API</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="p-4 rounded-xl bg-surface-container-lowest border border-outline-variant/40 shadow-xs hover:border-outline-variant transition-all">
+<div class="flex items-center justify-between text-on-surface-variant mb-2">
+<span class="font-label-lg text-label-md text-outline">Tốc độ phản hồi trung bình</span>
+<div class="w-7 h-7 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" data-icon="speed">speed</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-headline-lg font-headline-lg font-bold text-primary font-label-mono">0.28s</span>
+<span class="font-label-mono text-body-sm text-emerald-600 font-semibold">Cực nhanh</span>
+</div>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-outline-variant/20 font-label-mono text-body-sm">
+<span class="text-outline">Hiệu suất:</span>
+<span class="text-on-surface-variant font-medium">Nhanh hơn 12x thủ công</span>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- FILTER TOOLBAR                             -->
+<!-- ========================================== -->
+<section class="p-3.5 rounded-xl bg-surface-container-lowest border border-outline-variant/40 shadow-xs space-y-3">
+<!-- Filter Tabs -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-label-md font-label-md scrollbar-none">
+<button class="px-3.5 py-1.5 rounded-full bg-primary-container text-white font-medium shrink-0 shadow-xs">
+            Tất cả (12)
+          </button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface shrink-0 transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-emerald-600" data-icon="shield">shield</span>
+            Chống cướp đơn &amp; Bảo mật (3)
+          </button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface shrink-0 transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-purple-600" data-icon="neurology">neurology</span>
+            Tư vấn bán hàng AI (5)
+          </button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface shrink-0 transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-amber-600" data-icon="nightlight">nightlight</span>
+            Chăm sóc sau giờ làm (2)
+          </button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface shrink-0 transition-colors">
+            Đang tạm dừng (2)
+          </button>
+</div>
+<!-- Search & Dropdown Actions Bar -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1 border-t border-outline-variant/20">
+<div class="relative w-full sm:w-96">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-[18px]" data-icon="search">search</span>
+<input class="w-full h-9 pl-9 pr-3 py-1 text-body-md rounded-lg bg-surface border border-outline-variant/50 focus:border-primary focus:ring-2 focus:ring-primary/20 text-on-surface placeholder:text-outline transition-all" placeholder="Tìm kiếm tên kịch bản, từ khóa trigger..." type="text"/>
+</div>
+<div class="flex items-center gap-2.5 w-full sm:w-auto justify-end">
+<!-- Fanpage dropdown -->
+<select class="h-9 px-3 py-1 rounded-lg bg-surface border border-outline-variant/50 text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary">
+<option>Tất cả Fanpage (3)</option>
+<option>Tiệm Mỹ Phẩm Sài Gòn</option>
+<option>Sneaker VNXK</option>
+<option>Hùng Sport</option>
+</select>
+<!-- Sort dropdown -->
+<select class="h-9 px-3 py-1 rounded-lg bg-surface border border-outline-variant/50 text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary font-label-lg">
+<option>Mới cập nhật</option>
+<option>Lượt kích hoạt nhiều nhất</option>
+<option>Tên kịch bản A-Z</option>
+</select>
+<button class="h-9 px-3.5 rounded-full bg-primary-container hover:bg-primary text-white font-label-md text-label-md font-medium flex items-center gap-1 shrink-0 transition-all shadow-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span>
+<span>+ Thêm Kịch Bản Mới</span>
+</button>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- MAIN 2 COLUMNS: RULES LIST & AUDIT LOG     -->
+<!-- ========================================== -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- LEFT COLUMN (70% ~ 8 cols): RULES LIST -->
+<div class="lg:col-span-8 space-y-4">
+<!-- RULE 1: Tư vấn báo giá & Flash Sale -->
+<article class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/50 shadow-xs macos-card-hover space-y-4 relative overflow-hidden">
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-start gap-3.5">
+<div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]" data-icon="sell" style="font-variation-settings: 'FILL' 1;">sell</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-headline-md font-headline-md font-semibold text-on-surface">Tư vấn báo giá &amp; Khuyến mãi Flash Sale</h3>
+<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-label-mono font-bold">Đang chạy</span>
+</div>
+<p class="font-label-mono text-body-sm text-outline mt-0.5">RULE_ID: #FLASHSALE-PRICE-2024</p>
+</div>
+</div>
+<!-- Switch & Options -->
+<div class="flex items-center gap-3">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<button class="p-1.5 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Triggers Keyword Tags -->
+<div class="p-3 rounded-xl bg-surface-container-low/70 border border-outline-variant/30 space-y-2">
+<div class="flex items-center gap-2 text-label-md font-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="filter_alt">filter_alt</span>
+<span>Từ khóa kích hoạt (Triggers):</span>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-outline-variant/50 text-body-sm font-label-mono text-on-surface">"giá"</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-outline-variant/50 text-body-sm font-label-mono text-on-surface">"bao nhiêu"</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-outline-variant/50 text-body-sm font-label-mono text-on-surface">"inbox"</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-outline-variant/50 text-body-sm font-label-mono text-on-surface">"price"</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-outline-variant/50 text-body-sm font-label-mono text-on-surface">"báo giá"</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-outline-variant/50 text-body-sm font-label-mono text-on-surface">"shop ơi"</span>
+</div>
+</div>
+<!-- Actions Chain Flow -->
+<div class="space-y-1.5">
+<span class="text-label-md font-label-md text-outline">Chuỗi hành động tự động (Workflow Actions):</span>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-2 pt-1 font-body-sm">
+<div class="flex items-center gap-2 p-2 rounded-lg bg-surface border border-outline-variant/40">
+<span class="material-symbols-outlined text-[18px] text-blue-600 shrink-0" data-icon="thumb_up">thumb_up</span>
+<span class="truncate">Tự động Like bình luận</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-lg bg-surface border border-outline-variant/40">
+<span class="material-symbols-outlined text-[18px] text-purple-600 shrink-0" data-icon="shuffle">shuffle</span>
+<span class="truncate">Reply Spintax (3 biến thể)</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-lg bg-surface border border-outline-variant/40">
+<span class="material-symbols-outlined text-[18px] text-emerald-600 shrink-0" data-icon="send">send</span>
+<span class="truncate">Gửi Messenger + Nút Xem Menu</span>
+</div>
+</div>
+</div>
+<!-- Meta Footer info -->
+<div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-outline-variant/20 text-body-sm">
+<div class="flex items-center gap-4 text-outline font-label-mono text-[12px]">
+<span class="flex items-center gap-1 text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="storefront">storefront</span>
+                  Áp dụng: Tiệm Mỹ Phẩm Sài Gòn, Sneaker VNXK
+                </span>
+<span>•</span>
+<span class="text-primary font-bold">4,210 lượt kích hoạt</span>
+<span class="text-emerald-700 font-semibold">(99.6% thành công)</span>
+</div>
+<!-- Button actions -->
+<div class="flex items-center gap-1.5 font-label-md">
+<button class="px-2.5 py-1 rounded-md hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="edit">edit</span>
+                  Chỉnh sửa
+                </button>
+<button class="px-2.5 py-1 rounded-md hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="content_copy">content_copy</span>
+                  Sao chép
+                </button>
+<button class="px-2.5 py-1 rounded-md hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="receipt_long">receipt_long</span>
+                  Xem log
+                </button>
+</div>
+</div>
+</article>
+<!-- RULE 2: Gemini AI Smart Agent -->
+<article class="p-5 rounded-2xl bg-surface-container-lowest border border-purple-200 shadow-xs macos-card-hover space-y-4 relative overflow-hidden">
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-start gap-3.5">
+<div class="w-10 h-10 rounded-xl bg-purple-100 border border-purple-300 text-purple-700 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]" data-icon="psychology" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<div>
+<div class="flex flex-wrap items-center gap-2">
+<h3 class="text-headline-md font-headline-md font-semibold text-on-surface">Tư vấn Size &amp; Form Dáng (Gemini AI Smart Agent)</h3>
+<span class="px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 text-[11px] font-label-mono font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="auto_awesome">auto_awesome</span>
+                      Gemini 1.5 Flash E-commerce
+                    </span>
+</div>
+<p class="font-label-mono text-body-sm text-outline mt-0.5">RULE_ID: #AI-AGENT-SIZE-GEN</p>
+</div>
+</div>
+<!-- Switch & Options -->
+<div class="flex items-center gap-3">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<button class="p-1.5 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Triggers Keyword Tags -->
+<div class="p-3 rounded-xl bg-purple-50/50 border border-purple-200/50 space-y-2">
+<div class="flex items-center gap-2 text-label-md font-label-md text-purple-900">
+<span class="material-symbols-outlined text-[16px] text-purple-600" data-icon="psychology_alt">psychology_alt</span>
+<span>Từ khóa &amp; Ngữ cảnh phân tích:</span>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-purple-200 text-body-sm font-label-mono text-purple-900">"size"</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-purple-200 text-body-sm font-label-mono text-purple-900">"form"</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-purple-200 text-body-sm font-label-mono text-purple-900">"cân nặng"</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-purple-200 text-body-sm font-label-mono text-purple-900">"chiều cao"</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-purple-200 text-body-sm font-label-mono text-purple-900">"mập không"</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-purple-200 text-body-sm font-label-mono text-purple-900">"bảng size"</span>
+</div>
+</div>
+<!-- AI Context Detail -->
+<p class="text-body-md text-on-surface-variant">
+              AI phân tích ngữ cảnh câu hỏi, gợi ý size chuẩn theo bảng thông số kho hàng, phản hồi comment tự nhiên và mời vào chat riêng.
+            </p>
+<!-- Meta Footer info -->
+<div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-outline-variant/20 text-body-sm">
+<div class="flex items-center gap-4 text-outline font-label-mono text-[12px]">
+<span class="flex items-center gap-1 text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="storefront">storefront</span>
+                  Áp dụng: Sneaker VNXK, Hùng Sport
+                </span>
+<span>•</span>
+<span class="text-purple-700 font-bold">2,840 kích hoạt</span>
+<span class="text-emerald-700 font-semibold">(Độ hài lòng 98%)</span>
+</div>
+<!-- Button actions -->
+<div class="flex items-center gap-1.5 font-label-md">
+<button class="px-2.5 py-1 rounded-md hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="tune">tune</span>
+                  Cấu hình Prompt
+                </button>
+<button class="px-2.5 py-1 rounded-md hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="receipt_long">receipt_long</span>
+                  Xem log AI
+                </button>
+</div>
+</div>
+</article>
+<!-- RULE 3: Chính sách Đổi trả & COD -->
+<article class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/50 shadow-xs macos-card-hover space-y-4 relative overflow-hidden">
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-start gap-3.5">
+<div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]" data-icon="local_shipping" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-headline-md font-headline-md font-semibold text-on-surface">Chính sách Đổi trả, Bảo hành &amp; Ship COD Toàn Quốc</h3>
+<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-label-mono font-bold">Đang chạy</span>
+</div>
+<p class="font-label-mono text-body-sm text-outline mt-0.5">RULE_ID: #COD-WARRANTY-POLICY</p>
+</div>
+</div>
+<!-- Switch & Options -->
+<div class="flex items-center gap-3">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<button class="p-1.5 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-low/70 border border-outline-variant/30 space-y-2">
+<div class="flex items-center gap-2 text-label-md font-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-emerald-600" data-icon="filter_alt">filter_alt</span>
+<span>Từ khóa kích hoạt (Triggers):</span>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-outline-variant/50 text-body-sm font-label-mono text-on-surface">"đổi trả"</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-outline-variant/50 text-body-sm font-label-mono text-on-surface">"bảo hành"</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-outline-variant/50 text-body-sm font-label-mono text-on-surface">"ship cod"</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-outline-variant/50 text-body-sm font-label-mono text-on-surface">"kiểm tra hàng"</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white border border-outline-variant/50 text-body-sm font-label-mono text-on-surface">"phí ship"</span>
+</div>
+</div>
+<p class="text-body-md text-on-surface-variant">
+              Trả lời công khai chính sách cam kết: Được đồng kiểm tra hàng trước khi thanh toán, đổi size miễn phí trong 7 ngày.
+            </p>
+<div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-outline-variant/20 text-body-sm">
+<div class="flex items-center gap-4 text-outline font-label-mono text-[12px]">
+<span class="flex items-center gap-1 text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="storefront">storefront</span>
+                  Áp dụng: Toàn bộ 3 Fanpage
+                </span>
+<span>•</span>
+<span class="text-primary font-bold">1,912 lượt kích hoạt</span>
+</div>
+<div class="flex items-center gap-1.5 font-label-md">
+<button class="px-2.5 py-1 rounded-md hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="edit">edit</span>
+                  Chỉnh sửa
+                </button>
+<button class="px-2.5 py-1 rounded-md hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="receipt_long">receipt_long</span>
+                  Xem log
+                </button>
+</div>
+</div>
+</article>
+<!-- RULE 4: Phản hồi Ngoài Giờ Làm Việc -->
+<article class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/50 shadow-xs macos-card-hover space-y-4 relative overflow-hidden">
+<div class="flex items-start justify-between gap-4">
+<div class="flex items-start gap-3.5">
+<div class="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]" data-icon="bedtime" style="font-variation-settings: 'FILL' 1;">bedtime</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-headline-md font-headline-md font-semibold text-on-surface">Phản hồi Ngoài Giờ Làm Việc (Night Mode 23:00 - 07:30)</h3>
+<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-label-mono font-bold">Đang chạy</span>
+</div>
+<p class="font-label-mono text-body-sm text-outline mt-0.5">RULE_ID: #NIGHT-AUTO-DISCOUNT</p>
+</div>
+</div>
+<!-- Switch & Options -->
+<div class="flex items-center gap-3">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<button class="p-1.5 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Condition -->
+<div class="p-3 rounded-xl bg-amber-50/50 border border-amber-200/50 flex items-center gap-2.5 text-body-sm text-on-surface">
+<span class="material-symbols-outlined text-[18px] text-amber-600" data-icon="schedule">schedule</span>
+<span><strong>Khung giờ áp dụng:</strong> Mọi tin nhắn và bình luận gửi từ 23:00 đêm đến 07:30 sáng hôm sau.</span>
+</div>
+<p class="text-body-md text-on-surface-variant">
+              Tự động gửi lời xin lỗi và hẹn nhân viên CSKH trực tuyến sẽ hỗ trợ chu đáo từ 08:00 sáng kèm mã voucher giảm 10% 'NIGHTOWL'.
+            </p>
+<div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-outline-variant/20 text-body-sm">
+<div class="flex items-center gap-4 text-outline font-label-mono text-[12px]">
+<span class="flex items-center gap-1 text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="storefront">storefront</span>
+                  Áp dụng: Tiệm Mỹ Phẩm Sài Gòn
+                </span>
+<span>•</span>
+<span class="text-primary font-bold">638 lượt kích hoạt</span>
+</div>
+<div class="flex items-center gap-1.5 font-label-md">
+<button class="px-2.5 py-1 rounded-md hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="edit">edit</span>
+                  Chỉnh sửa
+                </button>
+<button class="px-2.5 py-1 rounded-md hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="receipt_long">receipt_long</span>
+                  Xem log
+                </button>
+</div>
+</div>
+</article>
+</div>
+<!-- RIGHT COLUMN (30% ~ 4 cols): LIVE AUDIT LOG DRAWER -->
+<div class="lg:col-span-4 space-y-4">
+<div class="rounded-2xl bg-surface-container-lowest border border-outline-variant/50 p-5 shadow-xs macos-window-shadow sticky top-20">
+<!-- Header with macOS dots & Live Indicator -->
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-3 mb-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></span>
+<h3 class="font-headline-md text-label-lg font-bold text-on-surface ml-1">Nhật Ký Real-time</h3>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container transition-colors" title="Làm mới log">
+<span class="material-symbols-outlined text-[16px]" data-icon="refresh">refresh</span>
+</button>
+</div>
+</div>
+<!-- Mini search in log -->
+<div class="relative mb-3.5">
+<span class="material-symbols-outlined absolute left-2.5 top-2 text-outline text-[16px]" data-icon="search">search</span>
+<input class="w-full h-8 pl-8 pr-2 py-1 text-body-sm rounded-lg bg-surface border border-outline-variant/40 focus:border-primary text-on-surface placeholder:text-outline" placeholder="Lọc theo tên, SĐT, bài viết..." type="text"/>
+</div>
+<!-- Audit Items List -->
+<div class="space-y-3 font-body-sm max-h-[580px] overflow-y-auto pr-1">
+<!-- Item 1 -->
+<div class="p-3 rounded-xl bg-surface-container-low/60 border border-outline-variant/30 space-y-1.5 hover:border-primary/50 transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-semibold text-on-surface">Trần Thu Thảo</span>
+<span class="font-label-mono text-[11px] text-emerald-700 bg-emerald-100/70 px-1.5 py-0.2 rounded font-bold">0.22s hide</span>
+</div>
+<div class="flex items-center gap-2 font-label-mono text-body-sm text-outline">
+<span class="text-primary font-bold">098****123</span>
+<span>•</span>
+<span class="truncate">BST Sneaker Hè</span>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 border-t border-outline-variant/20 font-label-mono">
+<span class="text-emerald-700 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="check_circle">check_circle</span>
+                    Đã ẩn cmt &amp; gửi Mess
+                  </span>
+<span class="text-outline">1 phút trước</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-3 rounded-xl bg-surface-container-low/60 border border-outline-variant/30 space-y-1.5 hover:border-primary/50 transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-semibold text-on-surface">Đặng Văn Hùng</span>
+<span class="font-label-mono text-[11px] text-emerald-700 bg-emerald-100/70 px-1.5 py-0.2 rounded font-bold">0.19s hide</span>
+</div>
+<div class="flex items-center gap-2 font-label-mono text-body-sm text-outline">
+<span class="text-primary font-bold">091****678</span>
+<span>•</span>
+<span class="truncate">Áo thun thể thao Pro</span>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 border-t border-outline-variant/20 font-label-mono">
+<span class="text-purple-700 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="hub">hub</span>
+                    Đã tạo Lead CRM #419
+                  </span>
+<span class="text-outline">4 phút trước</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-3 rounded-xl bg-surface-container-low/60 border border-outline-variant/30 space-y-1.5 hover:border-primary/50 transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-semibold text-on-surface">Phạm Thị Mai</span>
+<span class="font-label-mono text-[11px] text-emerald-700 bg-emerald-100/70 px-1.5 py-0.2 rounded font-bold">0.28s hide</span>
+</div>
+<div class="flex items-center gap-2 font-label-mono text-body-sm text-outline">
+<span class="text-primary font-bold">090****890</span>
+<span>•</span>
+<span class="truncate">Combo Serum Vitamin C</span>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 border-t border-outline-variant/20 font-label-mono">
+<span class="text-amber-700 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="support_agent">support_agent</span>
+                    Đã báo CSKH trực
+                  </span>
+<span class="text-outline">12 phút trước</span>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="p-3 rounded-xl bg-surface-container-low/60 border border-outline-variant/30 space-y-1.5 hover:border-primary/50 transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-semibold text-on-surface">Vũ Đức Anh</span>
+<span class="font-label-mono text-[11px] text-emerald-700 bg-emerald-100/70 px-1.5 py-0.2 rounded font-bold">0.25s hide</span>
+</div>
+<div class="flex items-center gap-2 font-label-mono text-body-sm text-outline">
+<span class="text-primary font-bold">097****456</span>
+<span>•</span>
+<span class="truncate">Củ sạc nhanh 65W</span>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 border-t border-outline-variant/20 font-label-mono">
+<span class="text-emerald-700 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="check_circle">check_circle</span>
+                    Đã ẩn comment tức thì
+                  </span>
+<span class="text-outline">19 phút trước</span>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="p-3 rounded-xl bg-surface-container-low/60 border border-outline-variant/30 space-y-1.5 hover:border-primary/50 transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-semibold text-on-surface">Hoàng Lan</span>
+<span class="font-label-mono text-[11px] text-emerald-700 bg-emerald-100/70 px-1.5 py-0.2 rounded font-bold">0.31s hide</span>
+</div>
+<div class="flex items-center gap-2 font-label-mono text-body-sm text-outline">
+<span class="text-primary font-bold">086****321</span>
+<span>•</span>
+<span class="truncate">Váy hoa nhí Vintage</span>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 border-t border-outline-variant/20 font-label-mono">
+<span class="text-emerald-700 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="check_circle">check_circle</span>
+                    Đã gửi Messenger tự động
+                  </span>
+<span class="text-outline">28 phút trước</span>
+</div>
+</div>
+</div>
+<!-- Security Info Banner inside Drawer -->
+<div class="mt-4 p-3 rounded-xl bg-surface border border-outline-variant/40 flex items-start gap-2.5 text-[11px] font-label-mono text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+<p class="leading-relaxed">
+                Meta Graph Webhook v19 được mã hóa SHA-256 HMAC Signature, ngăn ngừa hoàn toàn rò rỉ dữ liệu khách hàng.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
+

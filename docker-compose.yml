@@ -1,0 +1,120 @@
+# ==============================================================================
+# ShopFlow - Docker Compose Configuration
+# Môi trường phát triển cục bộ (Local Development)
+# Dịch vụ: PostgreSQL 15-alpine + Redis 7-alpine
+# ==============================================================================
+#
+# Cách sử dụng:
+#   1. Sao chép tệp `.env.docker.example` thành `.env.docker`:
+#      cp .env.docker.example .env.docker
+#   2. Điều chỉnh các giá trị trong `.env.docker` nếu cần.
+#   3. Khởi động tất cả dịch vụ:
+#      docker-compose --env-file .env.docker up -d
+#   4. Kiểm tra trạng thái:
+#      docker-compose ps
+#   5. Dừng và xóa container:
+#      docker-compose down
+#   6. Dừng và xóa cả volume (CẢNH BÁO: mất dữ liệu):
+#      docker-compose down -v
+# ==============================================================================
+
+version: "3.9"
+
+services:
+  # ============================================================================
+  # PostgreSQL 15 - Cơ sở dữ liệu chính
+  # ============================================================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: shopflow_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-shopflow_db}
+      POSTGRES_USER: ${POSTGRES_USER:-shopflow_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-shopflow_secret_2024}
+      # Cấu hình timezone Việt Nam
+      TZ: Asia/Ho_Chi_Minh
+      PGTZ: Asia/Ho_Chi_Minh
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      # Volume bền vững lưu trữ dữ liệu PostgreSQL
+      - pgdata:/var/lib/postgresql/data
+      # Thư mục chứa script SQL khởi tạo (chạy khi lần đầu tạo container)
+      - ./backend/src/infrastructure/database/migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-shopflow_user} -d ${POSTGRES_DB:-shopflow_db}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - shopflow_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ============================================================================
+  # Redis 7 - Hàng đợi tác vụ BullMQ & Cache & Idempotency Keys
+  # ============================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: shopflow_redis
+    restart: unless-stopped
+    # Kích hoạt persistence AOF (Append-Only File) để không mất dữ liệu queue khi restart
+    # Giới hạn bộ nhớ 256MB, chính sách noeviction để BullMQ không bị mất job
+    command: >
+      redis-server
+      --appendonly yes
+      --appendfsync everysec
+      --maxmemory 256mb
+      --maxmemory-policy noeviction
+      --requirepass ${REDIS_PASSWORD:-redis_secret_2024}
+      --loglevel notice
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      # Volume bền vững lưu trữ dữ liệu Redis (AOF file)
+      - redisdata:/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "redis-cli -a ${REDIS_PASSWORD:-redis_secret_2024} ping | grep PONG",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - shopflow_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+# ==============================================================================
+# Volumes - Lưu trữ bền vững (Persistent Storage)
+# ==============================================================================
+volumes:
+  pgdata:
+    name: shopflow_pgdata
+    driver: local
+  redisdata:
+    name: shopflow_redisdata
+    driver: local
+
+# ==============================================================================
+# Networks - Mạng nội bộ Docker
+# ==============================================================================
+networks:
+  shopflow_network:
+    name: shopflow_network
+    driver: bridge

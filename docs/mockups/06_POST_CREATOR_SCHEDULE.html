@@ -1,0 +1,768 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShopFlow - Trình Soạn Thảo &amp; Lên Lịch Đăng Bài Fanpage</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#49e255",
+            "on-tertiary-fixed": "#002203",
+            "inverse-surface": "#283044",
+            "on-secondary-fixed-variant": "#004493",
+            "on-primary": "#ffffff",
+            "on-surface": "#131b2e",
+            "secondary-fixed-dim": "#adc6ff",
+            "on-tertiary-fixed-variant": "#005311",
+            "secondary-container": "#0070eb",
+            "on-secondary-container": "#fefcff",
+            "secondary": "#0058bc",
+            "on-error": "#ffffff",
+            "primary-fixed": "#dbe1ff",
+            "outline": "#737686",
+            "surface-tint": "#0053db",
+            "tertiary": "#006316",
+            "on-background": "#131b2e",
+            "surface-container-low": "#f2f3ff",
+            "surface-variant": "#dae2fd",
+            "surface-container-lowest": "#ffffff",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-tertiary-container": "#c6ffbc",
+            "on-primary-fixed-variant": "#003ea8",
+            "tertiary-container": "#007f1f",
+            "on-secondary-fixed": "#001a41",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#dae2fd",
+            "on-primary-container": "#eeefff",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed": "#00174b",
+            "surface-container": "#eaedff",
+            "surface-dim": "#d2d9f4",
+            "error": "#ba1a1a",
+            "surface-bright": "#faf8ff",
+            "on-error-container": "#93000a",
+            "surface-container-high": "#e2e7ff",
+            "inverse-on-surface": "#eef0ff",
+            "inverse-primary": "#b4c5ff",
+            "surface": "#faf8ff",
+            "secondary-fixed": "#d8e2ff",
+            "outline-variant": "#c3c6d7",
+            "primary": "#004ac6",
+            "on-secondary": "#ffffff",
+            "background": "#faf8ff",
+            "tertiary-fixed": "#71ff74",
+            "on-surface-variant": "#434655",
+            "primary-container": "#2563eb"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "1rem",
+            "space-lg": "1.25rem",
+            "space-xs": "0.25rem",
+            "gutter": "1rem",
+            "space-md": "0.875rem",
+            "gutter-desktop": "1.5rem",
+            "space-sm": "0.5rem",
+            "margin-desktop": "2rem",
+            "space-xl": "2rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Geist"],
+            "body-lg": ["Geist"],
+            "headline-lg": ["Geist"],
+            "label-lg": ["Geist"],
+            "label-md": ["Geist"],
+            "headline-xl": ["Geist"],
+            "headline-xl-mobile": ["Geist"],
+            "body-md": ["Geist"],
+            "label-mono": ["Space Mono"],
+            "headline-md": ["Geist"]
+          },
+          "fontSize": {
+            "body-sm": ["0.75rem", { "lineHeight": "1.125rem", "letterSpacing": "0em", "fontWeight": "400" }],
+            "body-lg": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.011em", "fontWeight": "400" }],
+            "headline-lg": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-lg": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "-0.006em", "fontWeight": "500" }],
+            "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-xl": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "headline-xl-mobile": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "body-md": ["0.875rem", { "lineHeight": "1.375rem", "letterSpacing": "-0.006em", "fontWeight": "400" }],
+            "label-mono": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "headline-md": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Blueprint Micro-Grid Canvas Pattern */
+    .bg-blueprint {
+      background-color: #faf8ff;
+      background-image: radial-gradient(#c3c6d7 0.75px, transparent 0.75px);
+      background-size: 16px 16px;
+    }
+    /* Calibrated macOS Layered Shadow */
+    .macos-window-shadow {
+      box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(195, 198, 215, 0.4);
+    }
+    .macos-subtle-shadow {
+      box-shadow: 0 4px 14px 0 rgba(15, 23, 42, 0.04), 0 0 0 1px rgba(195, 198, 215, 0.35);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c3c6d7;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-blueprint font-body-md text-on-surface antialiased min-h-screen selection:bg-primary-fixed selection:text-primary">
+<!-- ========================================================================= -->
+<!-- SIDE NAVIGATION (Shared Component: SideNavBar)                            -->
+<!-- ========================================================================= -->
+<aside class="fixed top-0 left-0 h-screen w-64 flex flex-col justify-between p-4 z-40 bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant/30 shadow-sm dark:shadow-none">
+<div class="flex flex-col gap-5">
+<!-- Brand & Header -->
+<div class="flex items-center gap-3 px-2 py-1">
+<div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm">
+<span class="material-symbols-outlined text-[22px]">storefront</span>
+</div>
+<div class="flex flex-col">
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight leading-none">ShopFlow</span>
+<span class="text-label-md font-label-md text-outline font-normal mt-0.5">Pro E-commerce Suite</span>
+</div>
+</div>
+<!-- Quick Action CTA -->
+<a class="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-full bg-primary text-on-primary font-label-lg text-label-lg shadow-sm hover:bg-secondary transition-colors duration-150 active:scale-[0.99]" href="/(dashboard)/posts/new">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Soạn bài viết mới</span>
+</a>
+<!-- Primary Navigation Links -->
+<!-- Tab Labels: ["Tổng quan", "Hộp thư Live Chat", "Lịch đăng bài", "Kịch bản tự động hóa", "Kết nối Fanpage"] -->
+<!-- Active Tab: "Lịch đăng bài" (Semantic Match for Post Creator & Scheduler) -->
+<nav class="flex flex-col gap-1">
+<!-- Tab 0: Tổng quan -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#dashboard">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span>Tổng quan</span>
+</a>
+<!-- Tab 1: Hộp thư Live Chat -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#livechat">
+<span class="material-symbols-outlined text-[20px]">forum</span>
+<span>Hộp thư Live Chat</span>
+<span class="ml-auto bg-primary-fixed text-primary px-1.5 py-0.5 rounded-full text-[10px] font-semibold">12</span>
+</a>
+<!-- Tab 2: Lịch đăng bài (ACTIVE) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-container text-primary dark:text-inverse-primary font-medium text-label-lg font-label-lg" href="/(dashboard)/posts/new">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+<span>Lịch đăng bài</span>
+</a>
+<!-- Tab 3: Kịch bản tự động hóa -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#automation">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+<span>Kịch bản tự động hóa</span>
+</a>
+<!-- Tab 4: Kết nối Fanpage -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#fanpages">
+<span class="material-symbols-outlined text-[20px]">sync_alt</span>
+<span>Kết nối Fanpage</span>
+</a>
+</nav>
+</div>
+<!-- SideNav Footer Info & Tools -->
+<div class="flex flex-col gap-2 pt-4 border-t border-outline-variant/30">
+<!-- Meta Rate Limit Widget -->
+<div class="px-3 py-2.5 rounded-lg bg-surface-container-low border border-outline-variant/30 flex flex-col gap-1.5">
+<div class="flex items-center justify-between text-label-md font-label-md text-on-surface-variant">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[16px]">speed</span>
+<span class="font-medium">Rate Limit Meta v19</span>
+</div>
+<span class="text-[11px] font-label-mono text-tertiary font-bold">28% OK</span>
+</div>
+<div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full w-[28%]"></div>
+</div>
+<span class="text-[10px] text-outline font-label-mono leading-none">Graph API: 142/500 req/min</span>
+</div>
+<!-- Tab Footer: Cài đặt hệ thống -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 text-label-lg font-label-lg" href="#settings">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Cài đặt hệ thống</span>
+</a>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- TOP APP BAR (Shared Component: TopNavBar macOS toolbar)                   -->
+<!-- ========================================================================= -->
+<header class="fixed top-0 right-0 left-64 h-14 flex items-center justify-between px-6 z-30 bg-surface-container-lowest/90 dark:bg-inverse-surface/90 backdrop-blur-md border-b border-outline-variant/30 shadow-[0_1px_3px_0_rgba(15,23,42,0.05)]">
+<!-- Left: Search & Product Hub Indicator -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 pr-3 border-r border-outline-variant/40">
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary">ShopFlow Live Hub</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary text-label-md font-label-md font-semibold">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span>Meta v19.0 Live</span>
+</span>
+</div>
+<!-- Quick Search input -->
+<div class="relative w-72">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full h-8 pl-9 pr-3 rounded-lg bg-surface-container-low/70 border border-outline-variant/40 text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="Tìm kiếm bài viết, chiến dịch, ID fanpage..." type="text"/>
+</div>
+</div>
+<!-- Right: Context Actions, Fanpage Selector & Profile -->
+<div class="flex items-center gap-3">
+<!-- Fanpage Selector Pill (Secondary action from JSON) -->
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low border border-outline-variant/40 hover:bg-surface-container transition-colors cursor-pointer">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim border border-tertiary"></span>
+<span class="text-label-md font-label-md text-on-surface font-medium">Fanpage: Tiệm Mỹ Phẩm Sài Gòn</span>
+<span class="material-symbols-outlined text-[16px] text-outline">expand_more</span>
+</div>
+<!-- Trailing Primary Action (from JSON) -->
+<button class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md hover:bg-secondary transition-all active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">campaign</span>
+<span>Tạo chiến dịch</span>
+</button>
+<!-- Trailing Icon Actions: sensors, notifications, account_circle -->
+<div class="flex items-center gap-1 pl-2 border-l border-outline-variant/30 text-on-surface-variant">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-surface-container-low transition-colors" title="Meta Webhook Sensors">
+<span class="material-symbols-outlined text-[20px]">sensors</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-surface-container-low transition-colors relative" title="Thông báo">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error"></span>
+</button>
+<button class="flex items-center gap-1.5 pl-1.5 pr-2 py-1 rounded-lg hover:bg-surface-container-low transition-colors" title="Chủ cửa hàng ShopFlow">
+<div class="w-7 h-7 rounded-full bg-secondary-fixed flex items-center justify-center text-primary font-bold text-xs border border-outline-variant/40">
+            SF
+          </div>
+<span class="material-symbols-outlined text-[18px] text-outline">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- MAIN WORKSPACE CANVAS                                                     -->
+<!-- ========================================================================= -->
+<main class="ml-64 pt-14 pb-12 px-8 min-h-screen">
+<div class="max-w-[1560px] mx-auto flex flex-col gap-6 pt-5">
+<!-- Breadcrumbs & Meta Live Status Bar -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-outline-variant/30">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="text-label-mono font-label-mono text-outline text-[12px] bg-surface-container-low px-2 py-0.5 rounded border border-outline-variant/30">ROUTE: /(dashboard)/posts/new</span>
+<span class="text-outline text-xs">•</span>
+<span class="inline-flex items-center gap-1.5 text-label-md font-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-tertiary text-[16px]">check_circle</span>
+<span>Đã lưu bản nháp 1 phút trước</span>
+</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface text-label-md font-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[16px] text-outline">history</span>
+<span>Lịch sử phiên soạn</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface text-label-md font-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[16px] text-primary">verified_user</span>
+<span>Quy chuẩn Meta v19</span>
+</button>
+</div>
+</div>
+<!-- Page Heading -->
+<div class="flex flex-col gap-1">
+<h1 class="text-headline-xl font-headline-xl text-on-surface tracking-tight">
+          Trình Soạn Thảo &amp; Lên Lịch Đăng Bài Fanpage
+        </h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-4xl">
+          Tối ưu hóa tương tác bài đăng Facebook với tính năng Cross-posting đa Fanpage và AI gợi ý bán hàng.
+        </p>
+</div>
+<!-- TWO-COLUMN WORKSPACE GRID -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- =================================================================== -->
+<!-- LEFT COLUMN: Post Editor & Publishing Pipeline (7 Cols)             -->
+<!-- =================================================================== -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<!-- 1. CHỌN FANPAGE ĐĂNG TẢI (Cross-posting) -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-[24px] macos-window-shadow overflow-hidden">
+<!-- macOS Window Header Bar -->
+<div class="flex items-center justify-between px-5 py-3.5 bg-surface-container-low/40 border-b border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/40 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]/40 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]/40 inline-block"></span>
+<span class="ml-2 text-label-md font-label-md text-on-surface-variant font-medium">1. Chọn Fanpage Đăng Tải (Cross-posting)</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-label-md font-label-md font-semibold">
+<span class="material-symbols-outlined text-[14px]">share</span>
+<span>Đăng đồng thời đa Fanpage (Cross-posting)</span>
+</span>
+</div>
+<!-- Card Body -->
+<div class="p-5 flex flex-col gap-3">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+<!-- Page 1: Checked -->
+<label class="flex items-start gap-3 p-3 rounded-xl border-2 border-primary bg-primary-fixed/20 cursor-pointer transition-all hover:bg-primary-fixed/30 relative">
+<input checked="" class="mt-0.5 w-4 h-4 rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-bold text-on-surface leading-tight">Bella Store</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Mỹ Phẩm Cao Cấp</span>
+<span class="inline-flex items-center gap-1 text-[11px] font-label-mono text-tertiary mt-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Token v19 Live
+                    </span>
+</div>
+</label>
+<!-- Page 2: Checked -->
+<label class="flex items-start gap-3 p-3 rounded-xl border-2 border-primary bg-primary-fixed/20 cursor-pointer transition-all hover:bg-primary-fixed/30 relative">
+<input checked="" class="mt-0.5 w-4 h-4 rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-bold text-on-surface leading-tight">Sneaker VNXK</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Giày Chính Hãng</span>
+<span class="inline-flex items-center gap-1 text-[11px] font-label-mono text-tertiary mt-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Token v19 Live
+                    </span>
+</div>
+</label>
+<!-- Page 3: Unchecked -->
+<label class="flex items-start gap-3 p-3 rounded-xl border border-outline-variant/40 bg-surface-bright opacity-70 cursor-pointer transition-all hover:opacity-100 hover:bg-surface-container-low">
+<input class="mt-0.5 w-4 h-4 rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-medium text-on-surface leading-tight">Phụ Kiện GenZ</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Trang Sức &amp; Case</span>
+<span class="inline-flex items-center gap-1 text-[11px] font-label-mono text-outline mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span> Sẵn sàng kết nối
+                    </span>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- 2. NỘI DUNG BÀI VIẾT (CAPTION & AI ASSISTANT) -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-[24px] macos-window-shadow overflow-hidden">
+<!-- macOS Window Header Bar -->
+<div class="flex items-center justify-between px-5 py-3.5 bg-surface-container-low/40 border-b border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/40 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]/40 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]/40 inline-block"></span>
+<span class="ml-2 text-label-md font-label-md text-on-surface-variant font-medium">2. Nội Dung Bài Viết (Caption)</span>
+</div>
+<!-- Gemini AI Button Prominent Accent -->
+<button class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-primary to-secondary text-on-primary text-label-md font-label-md font-medium shadow-sm hover:opacity-95 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[16px]">auto_awesome</span>
+<span>✨ Viết lại caption bằng Gemini AI</span>
+</button>
+</div>
+<!-- Formatting Toolbar -->
+<div class="px-5 py-2.5 bg-surface-bright border-b border-outline-variant/30 flex items-center justify-between flex-wrap gap-2">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<button class="w-7 h-7 rounded hover:bg-surface-container flex items-center justify-center font-bold text-sm" title="In đậm">B</button>
+<button class="w-7 h-7 rounded hover:bg-surface-container flex items-center justify-center italic text-sm" title="In nghiêng">I</button>
+<button class="w-7 h-7 rounded hover:bg-surface-container flex items-center justify-center" title="Chèn biểu tượng Emoji">
+<span class="material-symbols-outlined text-[18px]">sentiment_satisfied</span>
+</button>
+<span class="h-4 w-px bg-outline-variant/40 mx-1"></span>
+<span class="text-label-md font-label-md text-outline">Gợi ý hashtag:</span>
+<button class="px-2 py-0.5 rounded-full bg-surface-container text-primary font-label-mono text-[11px] hover:bg-surface-container-high transition-colors">#ShopFlowVN</button>
+<button class="px-2 py-0.5 rounded-full bg-surface-container text-primary font-label-mono text-[11px] hover:bg-surface-container-high transition-colors">#FlashSale</button>
+<button class="px-2 py-0.5 rounded-full bg-surface-container text-primary font-label-mono text-[11px] hover:bg-surface-container-high transition-colors">#SneakerChinhHang</button>
+</div>
+<div class="flex items-center gap-1 text-label-mono font-label-mono text-outline text-[12px]">
+<span class="text-on-surface font-semibold">284</span> / 2,000 ký tự
+              </div>
+</div>
+<!-- Rich Textarea -->
+<div class="p-5 flex flex-col gap-3">
+<textarea class="w-full p-3.5 rounded-xl border border-outline-variant/40 bg-surface-bright text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-y leading-relaxed" placeholder="Soạn nội dung bài đăng bán hàng tại đây..." rows="7">🔥 SIÊU SALE GIỮA THÁNG - BÙNG NỔ ƯU ĐÃI LÊN ĐẾN 35% TOÀN BỘ MẶT HÀNG! 🔥
+
+✨ Bạn đã sẵn sàng nâng tầm phong cách cùng bộ sưu tập mới nhất mùa này?
+👉 Độc quyền tại ShopFlow x Bella Store:
+- Full size 36 -&gt; 43, đủ phối màu Best-Seller.
+- Đầy đủ bill authentic, bao check trọn đời 1 đổi 1.
+- Tặng ngay hộp bảo quản sneaker chuyên dụng cho 50 đơn hàng đầu tiên!
+
+💬 ĐỂ LẠI [SIZE + SỐ ĐIỆN THOẠI] hoặc nhấn [GỬI TIN NHẮN] để nhận ngay mã VOUCHER độc quyền 50K!</textarea>
+<!-- Meta Compliance & Chatbot Triggers -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 p-3 rounded-xl bg-surface-container-low/60 border border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-tertiary/10 text-tertiary text-label-md font-label-md font-semibold">
+<span class="material-symbols-outlined text-[15px]">verified</span>
+<span>Tối ưu chuẩn Meta CTA</span>
+</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">Tránh bị đánh spam phân phối</span>
+</div>
+<div class="text-[12px] font-label-md text-primary bg-primary-fixed/30 px-2.5 py-1 rounded-lg border border-primary/20">
+<span class="font-semibold">Từ khóa kích hoạt chatbot tự động:</span> [SIZE + SĐT, INBOX, TƯ VẤN]
+                </div>
+</div>
+</div>
+</div>
+<!-- 3. TẢI LÊN HÌNH ẢNH & VIDEO SẢN PHẨM -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-[24px] macos-window-shadow overflow-hidden">
+<!-- macOS Window Header Bar -->
+<div class="flex items-center justify-between px-5 py-3.5 bg-surface-container-low/40 border-b border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/40 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]/40 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]/40 inline-block"></span>
+<span class="ml-2 text-label-md font-label-md text-on-surface-variant font-medium">3. Tải Lên Hình Ảnh &amp; Video Sản Phẩm</span>
+</div>
+<span class="text-label-mono font-label-mono text-tertiary font-bold text-xs">4/4 ảnh đã tải lên (100% - Đã tối ưu nén ảnh Meta HD)</span>
+</div>
+<div class="p-5 flex flex-col gap-4">
+<!-- Upload progress & Droppable area -->
+<div class="border-2 border-dashed border-primary/40 rounded-2xl p-4 bg-primary-fixed/5 flex items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">cloud_upload</span>
+</div>
+<div class="flex flex-col">
+<span class="text-label-lg font-label-lg font-semibold text-on-surface">Kéo thả file hoặc bấm để chọn thêm ảnh/video</span>
+<span class="text-body-sm font-body-sm text-outline">Hỗ trợ JPG, PNG, MP4 theo tỉ lệ chuẩn Facebook 1:1 và 4:5</span>
+</div>
+</div>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/40 text-on-surface hover:bg-surface-container text-label-md font-label-md font-medium transition-colors">
+                  Chọn từ máy
+                </button>
+</div>
+<!-- 4-Photo Thumbnail Grid Preview -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<!-- Photo 1 (Cover) -->
+<div class="group relative rounded-xl overflow-hidden border border-outline-variant/40 aspect-square bg-surface-container-low shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A modern, high-fashion sneaker cleanly presented on an architectural pedestal in a studio with bright neutral daylight. The aesthetic is ultra-clean with soft gray shadows, pristine white materials, and subtle blue lighting accents that match modern SaaS design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATyfT-wqw1AyClayrbNT3pQGU7BA4vCcbRnG5cL61P98YlepqE8OMgtP28VhGi52OT0Nfl5xz8GBg4U4BhUIIjYa43-Rcwh8gIK3OUBs2zUQEMks2B6JgcEgB1xpYvGeZX4wYdRpMfl6Z1a3xv3KUadAYoSC8ULNY30_s1w4aQgGsQnvfK853iwprxsJHZ4VNAnXRZbsrPgF9dbhrr1av_EfyfikTUqb06sltQn30NWGHUGZz5NLtX34Vx45F-3twnFdUix-VmQzzp"/>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-primary text-on-primary text-[10px] font-label-md font-bold shadow">
+                    Ảnh bìa #1
+                  </div>
+<button class="absolute top-2 right-2 w-6 h-6 rounded-full bg-inverse-surface/70 text-on-primary flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+<!-- Photo 2 -->
+<div class="group relative rounded-xl overflow-hidden border border-outline-variant/40 aspect-square bg-surface-container-low shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A close-up macro studio photograph of an athletic sneaker shoe showing fine textured fabric and precision stitching under crisp minimalist photography lighting. The clean composition highlights high quality craftsmanship in a pure light-mode palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGFjpnH9e1Wi--JFxLv94ClKhgj8LB26Ix9kyUOGd0YfSaOqC4zzxyzdFuZ734H6lbF1sIxH4J7ezEQ6ulyRDgKTRp-BpVaRwCnFtGeJX_sPUvM5bFiSON323WWwiyYSSPj0K-lyKxpqbLf08-RInfHTwLHFGRrgs_8VeWG1Arbic40jFJwxhG2vNCC6jiXeuNSzeN7pLKRTmns5Yj4ede-oIL2q39k6v0k18QepNAPpCjJzb4Yr6F8WsYuiXnhK1doi5WpnHz8fGl"/>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-inverse-surface/80 text-on-primary text-[10px] font-label-md font-medium">
+                    #2 Chi tiết
+                  </div>
+<button class="absolute top-2 right-2 w-6 h-6 rounded-full bg-inverse-surface/70 text-on-primary flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+<!-- Photo 3 -->
+<div class="group relative rounded-xl overflow-hidden border border-outline-variant/40 aspect-square bg-surface-container-low shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A sleek lifestyle overhead photo of trendy sneakers paired with high quality skincare cosmetics on a pristine white marble background. Soft high-key morning light casting natural gentle shadows across the modern setup." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7935ruPNm-jqaSpDZW1J_MXXgue0_znjOhQXxxgg0PAbz65DyyP6YBFEcyLqyIa5UmBQCjYWx29BC8nKOSMq1wdUuU1GzZryjbk6d1UWj0N3N4rq359kmN61MpSriFZmIBSBaYKz6hmMowmI9GzXPfyiq18MO8j-7bcf-LvByxEzGzUuVe8kuXTAego4wT6FdoUsV8FuLanrVkJm2o-Wklp7cKiZkKh7xPKHvulBHcb5os9_ZwwCjHCfu63RN01FIMebtCGw7QDXg"/>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-inverse-surface/80 text-on-primary text-[10px] font-label-md font-medium">
+                    #3 Phối đồ
+                  </div>
+<button class="absolute top-2 right-2 w-6 h-6 rounded-full bg-inverse-surface/70 text-on-primary flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+<!-- Photo 4 (Gift box) -->
+<div class="group relative rounded-xl overflow-hidden border border-outline-variant/40 aspect-square bg-surface-container-low shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A premium branded gift shoe box with silk ribbon packaging placed in an elegant luxury retail setting with minimalist light aesthetics. The soft neutral colors emphasize exclusivity and high-end social commerce customer experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSz3eZ6ld1ENYZG69ExIKuS-SVjMtlUQj-som0GHEyeHIJFHRfEsrAoSkeNdlJX7KhlP3APC7FFISYNqUX5dssst0aD7Zoq_zfmLn4oAbrT5LmkiKVz90xprhMXne3X2OK7ijMzBQMurmsANDmm8gRs7EOhK7c7WY9cR5cYss0IhUUuPh8320LIZMu-ZVPg7M-NkGframHT1dTGWmVRLT0DZIG8sAcqf4yCd9AXWOoscBS-WekKs6T0nQ9MprlLveV-kGCWwLRxSR4"/>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-tertiary text-on-primary text-[10px] font-label-md font-bold shadow">
+                    #4 Quà tặng
+                  </div>
+<button class="absolute top-2 right-2 w-6 h-6 rounded-full bg-inverse-surface/70 text-on-primary flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. HẸN GIỜ XUẤT BẢN (Publishing Scheduler) -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-[24px] macos-window-shadow overflow-hidden">
+<!-- macOS Window Header Bar -->
+<div class="flex items-center justify-between px-5 py-3.5 bg-surface-container-low/40 border-b border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/40 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]/40 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]/40 inline-block"></span>
+<span class="ml-2 text-label-md font-label-md text-on-surface-variant font-medium">4. Hẹn Giờ Xuất Bản (Publishing Scheduler)</span>
+</div>
+<div class="flex items-center gap-1.5 text-xs text-outline font-label-mono">
+<span class="material-symbols-outlined text-[16px] text-tertiary">lock</span>
+<span>Khóa an toàn Meta Graph API v19</span>
+</div>
+</div>
+<div class="p-5 flex flex-col gap-4">
+<!-- Publishing Modes Segmented Radio -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2 p-1 bg-surface-container-low rounded-xl border border-outline-variant/30">
+<label class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg cursor-pointer text-label-md font-label-md transition-all hover:bg-surface-container-lowest/60 text-on-surface-variant">
+<input class="text-primary focus:ring-0" name="publish_mode" type="radio"/>
+<span>Đăng ngay</span>
+</label>
+<label class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg cursor-pointer text-label-md font-label-md bg-surface-container-lowest text-primary shadow-sm font-semibold border border-outline-variant/40">
+<input checked="" class="text-primary focus:ring-0" name="publish_mode" type="radio"/>
+<span>Lên lịch tự động</span>
+</label>
+<label class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg cursor-pointer text-label-md font-label-md transition-all hover:bg-surface-container-lowest/60 text-on-surface-variant">
+<input class="text-primary focus:ring-0" name="publish_mode" type="radio"/>
+<span>Lưu kho bài nháp</span>
+</label>
+</div>
+<!-- Date Time Pickers -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="text-label-md font-label-md text-on-surface font-medium flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">calendar_today</span>
+<span>Chọn ngày đăng bài</span>
+</label>
+<div class="relative">
+<input class="w-full h-10 px-3.5 rounded-lg border border-outline-variant/40 bg-surface-bright text-body-md font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" type="text" value="Ngày 18/10/2024"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">event</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-label-md font-label-md text-on-surface font-medium flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">schedule</span>
+<span>Chọn giờ xuất bản (Khung giờ vàng)</span>
+</label>
+<div class="relative">
+<input class="w-full h-10 px-3.5 rounded-lg border border-outline-variant/40 bg-surface-bright text-body-md font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" type="text" value="11:30 SA"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">alarm</span>
+</div>
+</div>
+</div>
+<!-- Meta Golden Hours Recommendations -->
+<div class="flex flex-col gap-2 pt-1">
+<span class="text-label-md font-label-md text-outline">Gợi ý khung giờ tương tác cao nhất của Fanpage:</span>
+<div class="flex items-center gap-2 flex-wrap">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-fixed text-primary border border-primary/30 text-label-md font-label-md font-semibold shadow-sm">
+<span>⚡ 11:30 (Ăn trưa - 86 tương tác/h)</span>
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container border border-outline-variant/40 text-on-surface-variant text-label-md font-label-md transition-colors">
+<span>🔥 20:00 (Buổi tối - 114 tương tác/h)</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container border border-outline-variant/40 text-on-surface-variant text-label-md font-label-md transition-colors">
+<span>☕ 08:30 (Đầu sáng - 62 tương tác/h)</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- 5. ACTION FOOTER BAR -->
+<div class="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded-2xl macos-subtle-shadow flex items-center justify-between flex-wrap gap-3">
+<div class="flex items-center gap-2">
+<button class="px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface border border-outline-variant/40 text-label-lg font-label-lg font-medium hover:bg-surface-container transition-all active:scale-[0.99]">
+                Lưu bản nháp
+              </button>
+<button class="px-4 py-2.5 rounded-full text-on-surface-variant text-label-lg font-label-lg hover:text-error transition-colors">
+                Hủy bỏ
+              </button>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-6 py-2.5 rounded-full bg-primary text-on-primary font-label-lg text-label-lg font-medium shadow-md hover:bg-secondary hover:-translate-y-0.5 transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">send_time_extension</span>
+<span>+ Lên Lịch Đăng Bài (2 Fanpage)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- =================================================================== -->
+<!-- RIGHT COLUMN: Facebook Live Feed Preview (5 Cols)                   -->
+<!-- =================================================================== -->
+<div class="lg:col-span-5 flex flex-col gap-6 sticky top-20">
+<!-- Preview Header Bar & Device Switcher -->
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">preview</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">Xem Trước Trực Quan</span>
+</div>
+<!-- Segmented Switcher Desktop / Mobile -->
+<div class="flex items-center bg-surface-container-low p-1 rounded-full border border-outline-variant/30 text-label-md font-label-md">
+<button class="flex items-center gap-1 px-3 py-1 rounded-full bg-surface-container-lowest text-primary shadow-sm font-semibold">
+<span class="material-symbols-outlined text-[16px]">desktop_windows</span>
+<span>Desktop Feed</span>
+</button>
+<button class="flex items-center gap-1 px-3 py-1 rounded-full text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[16px]">phone_iphone</span>
+<span>Mobile App</span>
+</button>
+</div>
+</div>
+<!-- REALISTIC FACEBOOK POST CARD CONTAINER -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-[24px] macos-window-shadow overflow-hidden">
+<!-- macOS Window Header Bar -->
+<div class="flex items-center justify-between px-5 py-3 bg-surface-container-low/50 border-b border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#FF5F56] inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#27C93F] inline-block"></span>
+<span class="ml-2 text-label-md font-label-md text-on-surface-variant">facebook.com/feed/preview</span>
+</div>
+<span class="text-[11px] font-label-mono text-tertiary bg-tertiary-fixed/20 px-2 py-0.5 rounded-full font-semibold">
+                Canvas Preview Mode
+              </span>
+</div>
+<!-- FB Post Inner Container -->
+<div class="p-4 flex flex-col gap-3">
+<!-- FB Post Header -->
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2.5">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-sm shadow">
+                      BS
+                    </div>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 bg-[#1877F2] rounded-full flex items-center justify-center text-white border-2 border-white text-[9px] font-bold">f</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-bold text-on-surface text-[14px]">Bella Store - Mỹ Phẩm Chính Hãng</span>
+<span class="material-symbols-outlined text-[#1877F2] text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="flex items-center gap-1.5 text-xs text-outline">
+<span>Lên lịch: 11:30 - Hôm nay</span>
+<span>•</span>
+<span class="material-symbols-outlined text-[13px]">public</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 text-outline">
+<button class="w-7 h-7 rounded-full hover:bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+<button class="w-7 h-7 rounded-full hover:bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+<!-- FB Post Caption Text -->
+<div class="text-[13.5px] text-on-surface leading-relaxed flex flex-col gap-2">
+<p>🔥 SIÊU SALE GIỮA THÁNG - BÙNG NỔ ƯU ĐÃI LÊN ĐẾN 35% TOÀN BỘ MẶT HÀNG! 🔥</p>
+<p>✨ Bạn đã sẵn sàng nâng tầm phong cách cùng bộ sưu tập mới nhất mùa này?</p>
+<p>👉 Độc quyền tại ShopFlow x Bella Store:<br/>
+                - Full size 36 -&gt; 43, đủ phối màu Best-Seller.<br/>
+                - Đầy đủ bill authentic, bao check trọn đời 1 đổi 1.<br/>
+                - Tặng ngay hộp bảo quản sneaker chuyên dụng cho 50 đơn hàng đầu tiên!</p>
+<p class="text-primary font-medium">💬 ĐỂ LẠI [SIZE + SỐ ĐIỆN THOẠI] hoặc nhấn [GỬI TIN NHẮN] để nhận ngay mã VOUCHER độc quyền 50K!</p>
+<p class="text-secondary text-xs">#ShopFlowVN #FlashSale #SneakerChinhHang</p>
+</div>
+<!-- FB 4-Photo Dynamic Collage Layout -->
+<div class="grid grid-cols-2 gap-1 rounded-xl overflow-hidden bg-surface-container-high border border-outline-variant/30">
+<!-- Large Top Left -->
+<div class="aspect-square relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A modern, high-fashion sneaker cleanly presented on an architectural pedestal in a studio with bright neutral daylight. The aesthetic is ultra-clean with soft gray shadows, pristine white materials, and subtle blue lighting accents that match modern SaaS design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZaXKcUQyieP6apfGDbGJOjMcMgv5MwFN39Yn9Urbwa9qvuNU6ZmkudGmF9DfF1ueCzcAmmxxYNkm9hijqylx01tNxaKVpJHdP8oIbDokj8PJU9Y8s7YuStoYYFGDT6nsKpboHktP9swvtw7UENzMttYl7c2_0SS1ag_yw3k9jurXfK8OGc7NrceTY9wbUHTv_GK8qknOVCckRDBE4VPKPGFa0SVinEVURcCkNUISZ1tVxKEWjfaRjArhvtsOrUzuGjYdZ6uZW96Kg"/>
+</div>
+<!-- Large Top Right -->
+<div class="aspect-square relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A close-up macro studio photograph of an athletic sneaker shoe showing fine textured fabric and precision stitching under crisp minimalist photography lighting. The clean composition highlights high quality craftsmanship in a pure light-mode palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPlq-lXCz3HtAbIzekBfeibFatubJ3XkGFJds__cLYErPbOkFUKevchVj_t2AnjUxb_yhTUkPIcuiQSi2Gs_jO-Z7dOSMTDJjLmRTiE35NayszsXRcmYXKqBRSL4WMdjq62_AJ5V3BVbD1T6QVLlxx7rSQP97ecb2RQ5LITRwA2tsmObbZSU2kevNmTvvUduKuzh4SoVndgR0G3UZ2ggMyUbTvAwgy5DMJ_hf5wOsgT0qlYy0b1eMB5mdY5qrny-3SjbnZkDebAFrT"/>
+</div>
+<!-- Bottom Left -->
+<div class="aspect-square relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A sleek lifestyle overhead photo of trendy sneakers paired with high quality skincare cosmetics on a pristine white marble background. Soft high-key morning light casting natural gentle shadows across the modern setup." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX_wvaHtPrV2mLJnvUzBIz4m5n7QPk25NrrjZ2jobIUDAE22n9T3leLUmN62GVm-EnoUn9YEAUuhEynJLN1_-3fG7180yX9mfd5xNn4utb0kW31kiFvXpUCRTTdleZWXJ57qdk6pTo2e-rnMikloBhfK5Idervxxtdv1bnfAo4fRF3TyGCzrbGFarEYX3ARISbqU7sIe7YXMX1xPpGbAj7Bli7TlKtQnJ-kHR2oztlmcVuvUi025vvL3Z7wR7DVSuA2y8nairu-E6V"/>
+</div>
+<!-- Bottom Right with +1 watermark look -->
+<div class="aspect-square relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A premium branded gift shoe box with silk ribbon packaging placed in an elegant luxury retail setting with minimalist light aesthetics. The soft neutral colors emphasize exclusivity and high-end social commerce customer experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP62X2IlpcpCuETRPWS9ZEGVFBVcm-NbIjCE2LkWVY1_55n8svhEvtw94ZnICVFuxbCU4bh0ki5M3E43d4SkJISLb0a8NTavzSHK2BiMsHgzkypuBDxXbklkdq76l0iJpBdiNfU__bme9JY-G9oG1wTmKYhgmOoPIRpjeKH9tfzbdZqv3IAwRxAanHL5lZ6QPF5TutCgMwv-L2ydFbqMBbR-cMCEGCC2eFVkaMTuvcOI-wVhZGUCZrirN1FWx7kYNiQYkYwREUfdEv"/>
+</div>
+</div>
+<!-- Attached Messenger CTA Card -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low border border-outline-variant/30">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-[#0084FF] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-on-surface">MESSENGER SHOPFLOW</span>
+<span class="text-[11px] text-on-surface-variant">Nhận ngay Voucher 35% &amp; Quà tặng</span>
+</div>
+</div>
+<button class="px-3.5 py-1.5 rounded-lg bg-[#0084FF] text-white text-xs font-semibold hover:bg-[#0070e0] transition-colors">
+                  Gửi tin nhắn
+                </button>
+</div>
+<!-- FB Engagement Stats Bar -->
+<div class="flex items-center justify-between text-xs text-outline pt-2 px-1 border-t border-outline-variant/20">
+<div class="flex items-center gap-1.5">
+<div class="flex -space-x-1">
+<span class="w-4 h-4 rounded-full bg-[#1877F2] text-white flex items-center justify-center text-[10px]">👍</span>
+<span class="w-4 h-4 rounded-full bg-[#FA383E] text-white flex items-center justify-center text-[10px]">❤️</span>
+</div>
+<span class="text-on-surface-variant font-medium">142 lượt thích</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span>48 bình luận</span>
+<span>12 lượt chia sẻ</span>
+</div>
+</div>
+<!-- Authentic FB Action Bar -->
+<div class="grid grid-cols-3 gap-1 pt-1 border-t border-outline-variant/20 text-on-surface-variant text-xs font-semibold">
+<button class="py-2 rounded-lg hover:bg-surface-container flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span>
+<span>Thích</span>
+</button>
+<button class="py-2 rounded-lg hover:bg-surface-container flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+<span>Bình luận</span>
+</button>
+<button class="py-2 rounded-lg hover:bg-surface-container flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[18px]">share</span>
+<span>Chia sẻ</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quality Score & Reach Forecast Card -->
+<div class="p-5 rounded-[24px] bg-surface-container-lowest border border-outline-variant/40 macos-subtle-shadow flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="text-label-lg font-label-lg font-bold text-on-surface">Dự Báo Hiệu Quả &amp; Kiểm Định</span>
+<span class="text-label-mono font-label-mono text-tertiary font-bold text-xs bg-tertiary/10 px-2.5 py-0.5 rounded-full">
+                100 / 100 ĐIỂM
+              </span>
+</div>
+<!-- Reach Metric -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low border border-outline-variant/30">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+</div>
+<div class="flex flex-col">
+<span class="text-label-md font-label-md font-medium text-on-surface">Ước tính tiếp cận tự nhiên:</span>
+<span class="text-body-sm font-body-sm text-outline">Trong 24 giờ đầu tiên</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-bold text-on-surface text-label-lg font-label-mono">14,200 - 28,500</span>
+<span class="text-[11px] text-tertiary block font-semibold">+38% so với khung giờ 09:00</span>
+</div>
+</div>
+<!-- ShopFlow Shield Protection Alert -->
+<div class="flex items-start gap-3 p-3.5 rounded-xl bg-tertiary-fixed/15 border border-tertiary/20">
+<span class="material-symbols-outlined text-tertiary text-[20px] mt-0.5">security</span>
+<div class="flex flex-col text-body-sm font-body-sm">
+<span class="font-bold text-tertiary-container">Hệ thống ShopFlow Shield tự động kích hoạt:</span>
+<span class="text-on-surface-variant mt-0.5">Mọi bình luận có chứa SĐT sẽ được ẩn tự động trong 0.3s sau khi bài đăng lên sóng để phòng tránh đối thủ cướp khách.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
+

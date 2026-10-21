@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "version": "1.0.0",
+  "description": "Model Context Protocol (MCP) server configuration for ShopFlow ecosystem (Next.js + Express.js + MySQL)",
+  "mcpServers": {
+    "mysql": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@benborla/mcp-server-mysql"
+      ],
+      "env": {
+        "MYSQL_HOST": "${MYSQL_HOST:-localhost}",
+        "MYSQL_PORT": "${MYSQL_PORT:-3306}",
+        "MYSQL_USER": "${MYSQL_USER:-shopflow_user}",
+        "MYSQL_PASSWORD": "${MYSQL_PASSWORD:-shopflow_password}",
+        "MYSQL_DATABASE": "${MYSQL_DATABASE:-shopflow_db}"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "query_read_only",
+        "describe_tables",
+        "list_schemas"
+      ]
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "search_repositories",
+        "search_code",
+        "list_issues",
+        "list_pull_requests",
+        "get_file_contents"
+      ]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:\\Users\\Dell\\Desktop\\ShopFlow"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "read_file",
+        "list_directory",
+        "get_file_info"
+      ]
+    }
+  }
+}

@@ -1,0 +1,365 @@
+﻿<!DOCTYPE html>
+
+<html class="h-full" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShopFlow - Kết Nối Fanpage Facebook</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "secondary-fixed": "#d8e2ff",
+            "background": "#faf8ff",
+            "primary-fixed": "#dbe1ff",
+            "on-tertiary-container": "#c6ffbc",
+            "on-surface-variant": "#434655",
+            "inverse-primary": "#b4c5ff",
+            "surface-container-highest": "#dae2fd",
+            "on-secondary": "#ffffff",
+            "surface-bright": "#faf8ff",
+            "tertiary-fixed": "#71ff74",
+            "primary-container": "#2563eb",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed-dim": "#adc6ff",
+            "inverse-surface": "#283044",
+            "surface-tint": "#0053db",
+            "primary-fixed-dim": "#b4c5ff",
+            "outline-variant": "#c3c6d7",
+            "tertiary-container": "#007f1f",
+            "on-tertiary-fixed": "#002203",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#00174b",
+            "on-secondary-fixed": "#001a41",
+            "on-primary-container": "#eeefff",
+            "surface-container-high": "#e2e7ff",
+            "on-secondary-container": "#fefcff",
+            "inverse-on-surface": "#eef0ff",
+            "tertiary": "#006316",
+            "primary": "#004ac6",
+            "on-error": "#ffffff",
+            "surface-dim": "#d2d9f4",
+            "surface-container": "#eaedff",
+            "outline": "#737686",
+            "on-primary-fixed-variant": "#003ea8",
+            "tertiary-fixed-dim": "#49e255",
+            "on-background": "#131b2e",
+            "error-container": "#ffdad6",
+            "surface-variant": "#dae2fd",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed-variant": "#005311",
+            "surface-container-low": "#f2f3ff",
+            "secondary": "#0058bc",
+            "on-error-container": "#93000a",
+            "on-surface": "#131b2e",
+            "surface": "#faf8ff",
+            "error": "#ba1a1a",
+            "secondary-container": "#0070eb",
+            "on-secondary-fixed-variant": "#004493"
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px"
+          },
+          spacing: {
+            gutter: "1rem",
+            "gutter-desktop": "1.5rem",
+            "space-xl": "2rem",
+            margin: "1rem",
+            "space-lg": "1.25rem",
+            "margin-desktop": "2rem",
+            "space-sm": "0.5rem",
+            "space-md": "0.875rem",
+            "space-xs": "0.25rem"
+          },
+          fontFamily: {
+            "headline-lg": ["Geist", "sans-serif"],
+            "label-md": ["Geist", "sans-serif"],
+            "label-mono": ["Space Mono", "monospace"],
+            "body-sm": ["Geist", "sans-serif"],
+            "headline-xl-mobile": ["Geist", "sans-serif"],
+            "body-lg": ["Geist", "sans-serif"],
+            "headline-md": ["Geist", "sans-serif"],
+            "body-md": ["Geist", "sans-serif"],
+            "headline-xl": ["Geist", "sans-serif"],
+            "label-lg": ["Geist", "sans-serif"]
+          },
+          fontSize: {
+            "headline-lg": ["1.5rem", { lineHeight: "2rem", letterSpacing: "-0.02em", fontWeight: "600" }],
+            "label-md": ["0.75rem", { lineHeight: "1rem", letterSpacing: "0.02em", fontWeight: "600" }],
+            "label-mono": ["0.75rem", { lineHeight: "1rem", letterSpacing: "-0.01em", fontWeight: "400" }],
+            "body-sm": ["0.75rem", { lineHeight: "1.125rem", letterSpacing: "0em", fontWeight: "400" }],
+            "headline-xl-mobile": ["1.75rem", { lineHeight: "2.25rem", letterSpacing: "-0.025em", fontWeight: "700" }],
+            "body-lg": ["1rem", { lineHeight: "1.5rem", letterSpacing: "-0.011em", fontWeight: "400" }],
+            "headline-md": ["1.25rem", { lineHeight: "1.75rem", letterSpacing: "-0.015em", fontWeight: "600" }],
+            "body-md": ["0.875rem", { lineHeight: "1.375rem", letterSpacing: "-0.006em", fontWeight: "400" }],
+            "headline-xl": ["2.25rem", { lineHeight: "2.75rem", letterSpacing: "-0.03em", fontWeight: "700" }],
+            "label-lg": ["0.875rem", { lineHeight: "1.25rem", letterSpacing: "-0.006em", fontWeight: "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .blueprint-bg {
+      background-color: #faf8ff;
+      background-image: radial-gradient(#CBD5E1 0.75px, transparent 0.75px);
+      background-size: 16px 16px;
+    }
+    .macos-window-shadow {
+      box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(15, 23, 42, 0.08);
+    }
+  </style>
+</head>
+<body class="h-full font-body-md text-on-surface blueprint-bg selection:bg-primary-container selection:text-on-primary-container antialiased overflow-hidden flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm z-20">
+<div class="flex justify-between items-center w-full px-6 py-3 max-w-7xl mx-auto">
+<div class="flex items-center space-x-3">
+<span class="text-headline-md font-headline-md font-extrabold text-primary dark:text-inverse-primary tracking-tight">ShopFlow</span>
+<span class="text-label-md px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-mono">v19.4-PRO</span>
+</div>
+<nav class="hidden md:flex items-center space-x-6">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 transition-all duration-200" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary transition-all duration-200" href="#">Fanpages</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary transition-all duration-200" href="#">Webhooks</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary transition-all duration-200" href="#">Settings</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button class="bg-primary-container text-on-primary text-label-lg px-4 py-2 rounded-full font-medium hover:bg-primary transition-all duration-200 shadow-sm flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">add</span>
+<span>Connect Fanpage</span>
+</button>
+<div class="w-9 h-9 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional studio headshot portrait of a smiling Vietnamese man in his early thirties wearing a crisp white collared shirt, clean lighting, neutral background, high fidelity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRm69vMFRlEWtIh6OYS8d2YT1B1KzsyFBO6gCDkmSuBbE6iMIo8lLM44Su2l3_i62lOcdmIWrBMPhCytCM35wPY46VbxgfCv5jjIvsdHSckySk1APluWLnXuIdY843XTa9BGrQltuGSNHaadqSwMMReWARBx5RaY-MUtKgleSZvFGQH_N2unXUExo081CUn_zT8OiSMgCUY965Q9UmFH53kMvcJSbpe1F3580NTJDMNdxWV7Hpp6WinKEZmaD31B_UT9_n4lpbV-le"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Canvas / Blurred Background Dashboard -->
+<main class="flex-1 relative p-6 max-w-7xl mx-auto w-full filter blur-[2px] pointer-events-none select-none opacity-40">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/40 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<span class="text-body-sm text-on-surface-variant font-medium">Active Fanpages</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">storefront</span>
+</div>
+<div class="text-headline-lg font-bold">12 / 18</div>
+<div class="text-label-mono text-tertiary mt-1">+2 connected today</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/40 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<span class="text-body-sm text-on-surface-variant font-medium">Livestream Orders</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">live_tv</span>
+</div>
+<div class="text-headline-lg font-bold">1,428</div>
+<div class="text-label-mono text-tertiary mt-1">99.4% auto-processed</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/40 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<span class="text-body-sm text-on-surface-variant font-medium">Webhooks Sent</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div class="text-headline-lg font-bold">48.2k</div>
+<div class="text-label-mono text-primary mt-1">Latency 42ms</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/40 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<span class="text-body-sm text-on-surface-variant font-medium">Automation Rules</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="text-headline-lg font-bold">34 Active</div>
+<div class="text-label-mono text-on-surface-variant mt-1">All systems operational</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/40 h-96 flex items-center justify-center">
+<div class="text-center">
+<span class="material-symbols-outlined text-6xl text-outline mb-2">dashboard</span>
+<p class="text-headline-md text-on-surface-variant">ShopFlow Enterprise Operations Workspace</p>
+</div>
+</div>
+</main>
+<!-- Centered Modal Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-inverse-surface/30 backdrop-blur-sm">
+<!-- macOS Modal Window -->
+<div class="bg-surface-container-lowest w-full max-w-4xl rounded-2xl border border-outline-variant/40 macos-window-shadow flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+<!-- Modal Header -->
+<div class="bg-surface-container-low px-6 py-4 border-b border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<!-- Traffic Lights -->
+<div class="flex items-center space-x-2">
+<div class="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]"></div>
+<div class="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]"></div>
+<div class="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]"></div>
+</div>
+<div class="h-4 w-[1px] bg-outline-variant/50 mx-1"></div>
+<h2 class="text-headline-md font-bold text-on-surface flex items-center space-x-2">
+<span>Kết Nối Fanpage Facebook - Meta OAuth v19</span>
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;" title="Verified Meta Business Integration">verified</span>
+</h2>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<!-- Sub-header: Account info & permissions -->
+<div class="px-6 py-3.5 bg-surface-container-low/50 border-b border-outline-variant/20 flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center space-x-3">
+<div class="w-9 h-9 rounded-full overflow-hidden border border-primary/30 flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional studio headshot portrait of a smiling Vietnamese man in his early thirties wearing a crisp white collared shirt, clean lighting, neutral background, high fidelity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0RD3s5-YKMAfe6UKFTw8_Ysgb_dYKhnTUNxA35Xc8dRMa5or22k-T-F8qkkXa1ApTd7r4umTsCGrgcfTrDC7jKbNpSpu9pEYWo4tbpDAMvdIOSzaHDCVDiv9VzQp6i6UKamAC7rUF_GGn_2Ye29e8IrA4YIN6vpfQSF7AhSwSHVMN_yWcPTLBLr6lnBajYfXlvp9xw5IabD4Q0ncrbvUp1PFL6VfLQ-c6CO1HhnGXRvEb16yK-Y_91stnV_GA44qgo3cX0fIFdYyV"/>
+</div>
+<div>
+<div class="text-body-sm text-on-surface-variant">Tài khoản Facebook:</div>
+<div class="text-label-lg font-bold text-on-surface">Nguyễn Minh Tuấn</div>
+</div>
+</div>
+<div class="flex items-center space-x-2">
+<span class="text-label-mono px-2.5 py-1 rounded-md bg-surface-container-highest text-on-surface-variant border border-outline-variant/40">pages_messaging</span>
+<span class="text-label-mono px-2.5 py-1 rounded-md bg-surface-container-highest text-on-surface-variant border border-outline-variant/40">pages_manage_posts</span>
+<span class="text-label-mono px-2.5 py-1 rounded-md bg-surface-container-highest text-on-surface-variant border border-outline-variant/40">pages_read_engagement</span>
+</div>
+</div>
+<!-- Search & Controls Bar -->
+<div class="p-6 pb-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 h-10 rounded-lg bg-surface border border-outline-variant/60 text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-body-md" placeholder="Tìm nhanh Fanpage..." type="text"/>
+</div>
+</div>
+<!-- Main Content: Fanpages List/Grid -->
+<div class="px-6 py-2 max-h-[360px] overflow-y-auto space-y-3">
+<!-- Fanpage 1 -->
+<div class="flex items-center justify-between p-4 rounded-xl border border-primary/40 bg-primary-container/5 hover:bg-primary-container/10 transition-all cursor-pointer">
+<div class="flex items-center space-x-4">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary/20 cursor-pointer" type="checkbox"/>
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden border border-outline-variant/30 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">storefront</span>
+</div>
+<div>
+<div class="font-bold text-body-lg text-on-surface flex items-center space-x-2">
+<span>Tiệm Mỹ Phẩm Sài Gòn</span>
+<span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="flex items-center space-x-3 mt-0.5">
+<span class="text-body-sm text-on-surface-variant">68,400 followers</span>
+<span class="text-outline-variant">•</span>
+<span class="text-body-sm text-on-surface-variant">Beauty</span>
+</div>
+</div>
+</div>
+<div>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-label-md bg-tertiary-fixed/30 text-tertiary font-semibold space-x-1">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span>Live webhook ready</span>
+</span>
+</div>
+</div>
+<!-- Fanpage 2 -->
+<div class="flex items-center justify-between p-4 rounded-xl border border-primary/40 bg-primary-container/5 hover:bg-primary-container/10 transition-all cursor-pointer">
+<div class="flex items-center space-x-4">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary/20 cursor-pointer" type="checkbox"/>
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden border border-outline-variant/30 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">checkroom</span>
+</div>
+<div>
+<div class="font-bold text-body-lg text-on-surface">Sneaker VNXK Chính Hãng</div>
+<div class="flex items-center space-x-3 mt-0.5">
+<span class="text-body-sm text-on-surface-variant">124,000 followers</span>
+<span class="text-outline-variant">•</span>
+<span class="text-body-sm text-on-surface-variant">Fashion</span>
+</div>
+</div>
+</div>
+<div>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-label-md bg-secondary-fixed/40 text-secondary font-semibold">
+              Selected
+            </span>
+</div>
+</div>
+<!-- Fanpage 3 -->
+<div class="flex items-center justify-between p-4 rounded-xl border border-outline-variant/30 bg-surface hover:bg-surface-container-low transition-all opacity-80">
+<div class="flex items-center space-x-4">
+<input class="w-5 h-5 rounded border-outline bg-surface-container-high cursor-not-allowed" disabled="" type="checkbox"/>
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden border border-outline-variant/30 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-outline text-2xl">devices</span>
+</div>
+<div>
+<div class="font-bold text-body-lg text-on-surface/80">Phụ Kiện GenZ Store</div>
+<div class="flex items-center space-x-3 mt-0.5">
+<span class="text-body-sm text-on-surface-variant">35,200 followers</span>
+<span class="text-outline-variant">•</span>
+<span class="text-body-sm text-on-surface-variant">Gadgets</span>
+</div>
+</div>
+</div>
+<div>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-label-md bg-surface-container-highest text-on-surface-variant font-medium">
+              Already connected
+            </span>
+</div>
+</div>
+<!-- Fanpage 4 -->
+<div class="flex items-center justify-between p-4 rounded-xl border border-outline-variant/40 bg-surface hover:bg-surface-container-low transition-all cursor-pointer">
+<div class="flex items-center space-x-4">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary/20 cursor-pointer" type="checkbox"/>
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden border border-outline-variant/30 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant text-2xl">restaurant</span>
+</div>
+<div>
+<div class="font-bold text-body-lg text-on-surface">Review Quán Ăn Hà Nội</div>
+<div class="flex items-center space-x-3 mt-0.5">
+<span class="text-body-sm text-on-surface-variant">12,000 followers</span>
+<span class="text-outline-variant">•</span>
+<span class="text-body-sm text-on-surface-variant">Food</span>
+</div>
+</div>
+</div>
+<div>
+<span class="text-body-sm text-outline font-medium">Available</span>
+</div>
+</div>
+</div>
+<!-- Settings Strip -->
+<div class="px-6 py-4 mx-6 my-3 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center space-x-6">
+<label class="flex items-center space-x-3 cursor-pointer">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-body-md font-medium text-on-surface">Auto-subscribe Webhooks</span>
+</label>
+<label class="flex items-center space-x-3 cursor-pointer">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-body-md font-medium text-on-surface">Auto-import Lead contacts</span>
+</label>
+</div>
+<div class="text-label-mono text-on-surface-variant">
+          Meta API v19.0
+        </div>
+</div>
+<!-- Modal Footer -->
+<div class="px-6 py-4 bg-surface-container-low border-t border-outline-variant/30 flex items-center justify-between">
+<div class="text-body-md font-semibold text-on-surface-variant">
+          Đã chọn <span class="text-primary font-bold">2</span> / 4 Fanpage
+        </div>
+<div class="flex items-center space-x-3">
+<button class="px-5 py-2.5 rounded-full bg-surface-container-highest text-on-surface font-medium hover:bg-outline-variant/40 transition-all border border-outline-variant/50">
+            Hủy bỏ
+          </button>
+<button class="px-6 py-2.5 rounded-full bg-primary-container text-on-primary font-medium hover:bg-primary transition-all shadow-sm flex items-center space-x-2">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span>+ Đồng Bộ &amp; Kích Hoạt Fanpage</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</body></html>
+

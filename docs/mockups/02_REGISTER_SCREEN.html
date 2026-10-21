@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>ShopFlow — Đăng ký tài khoản mới & Bắt đầu 14 ngày dùng thử</title>
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Geist & Space Mono Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <!-- Tailwind CSS v3 -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#2563eb",
+            "primary-hover": "#1d4ed8",
+            "canvas": "#F8FAFC",
+            "surface": "#FFFFFF",
+            "subtle": "#F1F5F9",
+          },
+          fontFamily: {
+            sans: ["Geist", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+            mono: ["Space Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Blueprint Micro-Grid Canvas Background (16px x 16px) */
+    .blueprint-grid {
+      background-color: #F8FAFC;
+      background-image: radial-gradient(#CBD5E1 0.85px, transparent 0.85px);
+      background-size: 16px 16px;
+    }
+
+    /* macOS High-Fidelity Window Shadow */
+    .macos-window-shadow {
+      box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(15, 23, 42, 0.08);
+    }
+  </style>
+</head>
+<body class="blueprint-grid min-h-screen flex flex-col justify-between font-sans text-slate-800 antialiased selection:bg-blue-600 selection:text-white">
+  <!-- Top Subtle Brand Navigation Status -->
+  <header class="w-full max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-sm">
+        <span class="material-symbols-outlined text-[20px]">bolt</span>
+      </div>
+      <span class="text-xl font-bold tracking-tight text-blue-600">ShopFlow</span>
+      <span class="text-[11px] font-mono bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-200 ml-1">VN OPERATOR</span>
+    </div>
+    <div class="flex items-center gap-4 text-xs text-slate-500">
+      <span class="hidden sm:inline-flex items-center gap-1.5 text-emerald-700 font-medium">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        Meta Graph API v19+ Hoạt động bình thường
+      </span>
+      <a class="inline-flex items-center gap-1 text-slate-500 hover:text-blue-600 transition-colors" href="#">
+        <span class="material-symbols-outlined text-[18px]">help</span>
+        <span class="hidden md:inline">Hỗ trợ 24/7</span>
+      </a>
+      <div class="inline-flex items-center gap-1 text-slate-500">
+        <span class="material-symbols-outlined text-[18px]">language</span>
+        <span class="font-mono text-[11px] font-semibold">VI</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Centerpiece: Centered macOS Window Card -->
+  <main class="flex-grow flex items-center justify-center px-4 py-8">
+    <div class="w-full max-w-[620px] bg-white rounded-[24px] border border-slate-200/90 macos-window-shadow overflow-hidden transition-all duration-200">
+      
+      <!-- 1. macOS Titlebar -->
+      <div class="h-11 bg-slate-50/95 backdrop-blur-md border-b border-slate-200/80 px-4 flex items-center justify-between select-none">
+        <!-- 3 Traffic Lights -->
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/60 shadow-xs cursor-pointer hover:opacity-85" title="Đóng"></div>
+          <div class="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]/60 shadow-xs cursor-pointer hover:opacity-85" title="Thu nhỏ"></div>
+          <div class="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]/60 shadow-xs cursor-pointer hover:opacity-85" title="Mở rộng"></div>
+        </div>
+        <!-- Window Title with Security Lock -->
+        <div class="flex items-center gap-1.5 text-xs text-slate-600 font-medium">
+          <span class="material-symbols-outlined text-[14px] text-slate-400">lock</span>
+          <span>ShopFlow — Đăng ký tài khoản mới</span>
+        </div>
+        <!-- 14-Day Free Trial Chip -->
+        <div class="bg-blue-50 text-blue-700 font-mono text-[11px] px-2.5 py-0.5 rounded-full border border-blue-200/70 flex items-center gap-1 font-semibold">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+          <span>14 ngày dùng thử</span>
+        </div>
+      </div>
+
+      <!-- Card Inner Content Area -->
+      <div class="p-6 sm:p-8 space-y-6">
+        
+        <!-- Branding & Headline -->
+        <div class="text-center space-y-2">
+          <div class="inline-flex items-center justify-center p-3 rounded-2xl bg-gradient-to-tr from-blue-700 to-blue-500 text-white shadow-lg shadow-blue-500/25">
+            <span class="material-symbols-outlined text-[30px]">bolt</span>
+          </div>
+          <div class="flex items-center justify-center gap-2 pt-1">
+            <h1 class="text-slate-900 text-2xl font-bold tracking-tight">Bắt đầu với ShopFlow</h1>
+            <span class="font-mono text-[10px] bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded border border-slate-200 font-semibold tracking-wider">SaaS VN</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-500 max-w-md mx-auto">
+            Trải nghiệm miễn phí 14 ngày không giới hạn tính năng • Không cần thẻ tín dụng
+          </p>
+        </div>
+
+        <!-- Quick Meta Facebook Business Sign Up (Luồng 1 PRD) -->
+        <div>
+          <button class="w-full py-2.5 px-4 rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50/70 transition-all duration-150 flex items-center justify-center gap-2.5 text-slate-700 font-medium text-sm shadow-sm active:scale-[0.99] cursor-pointer" onclick="handleFacebookSignUp()" type="button">
+            <!-- Meta / Facebook Vector Mark -->
+            <svg class="w-5 h-5 text-[#1877F2] fill-current" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
+            </svg>
+            <span>Đăng ký nhanh qua Facebook for Business</span>
+            <span class="text-[10px] font-mono bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded border border-blue-200 ml-1">Meta Partner</span>
+          </button>
+
+          <!-- Divider -->
+          <div class="relative my-5 text-center">
+            <div class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-slate-200"></div>
+            </div>
+            <span class="relative px-3 bg-white text-[11px] font-semibold text-slate-400 tracking-wider font-mono uppercase">
+              HOẶC ĐĂNG KÝ BẰNG EMAIL DOANH NGHIỆP
+            </span>
+          </div>
+        </div>
+
+        <!-- Dev Sandbox Mock Data Preset (Fast Fill từ 03_DATABASE_SCHEMA.md) -->
+        <div class="bg-amber-50/50 border border-amber-200/90 rounded-xl p-3 flex flex-col gap-1.5 transition-all">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-amber-900 flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[16px] text-amber-600">electric_bolt</span>
+              Điền nhanh thông tin chủ shop mẫu (Dev Sandbox):
+            </span>
+            <span class="text-[10px] font-mono text-amber-700 bg-amber-100/70 px-1.5 py-0.5 rounded">Mock Data</span>
+          </div>
+          <button class="w-full text-left bg-white/90 hover:bg-white text-xs text-slate-700 py-1.5 px-2.5 rounded-lg border border-amber-300/70 transition-colors shadow-xs flex items-center justify-between group cursor-pointer" id="mock-fill-btn" type="button">
+            <span class="font-medium text-slate-800">Phạm Quốc Hùng — Shop Hùng Sport (hung.sport@shopflow.vn) | Chủ shop</span>
+            <span class="text-[11px] text-blue-600 group-hover:underline font-medium">Áp dụng ↵</span>
+          </button>
+        </div>
+
+        <!-- Registration Form (Khớp 100% bảng users trong 03_DATABASE_SCHEMA.md) -->
+        <form class="space-y-4" id="registration-form" onsubmit="event.preventDefault(); handleRegisterSubmit();">
+          
+          <!-- Full Name Field (cột full_name VARCHAR(100) NOT NULL) -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between items-center text-xs">
+              <label class="font-medium text-slate-800" for="register-fullname">
+                Họ và tên của bạn <span class="text-red-500">*</span>
+              </label>
+              <span class="font-mono text-[11px] text-slate-400">schema: full_name</span>
+            </div>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                <span class="material-symbols-outlined text-[18px]">person</span>
+              </div>
+              <input class="w-full h-10 pl-9 pr-3.5 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all" id="register-fullname" placeholder="Nguyễn Minh Tuấn" required="" type="text"/>
+            </div>
+          </div>
+
+          <!-- Business Email Field (cột email VARCHAR(255) NOT NULL UNIQUE) -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between items-center text-xs">
+              <label class="font-medium text-slate-800" for="register-email">
+                Địa chỉ Email doanh nghiệp <span class="text-red-500">*</span>
+              </label>
+              <span class="font-mono text-[11px] text-slate-400">schema: email (unique)</span>
+            </div>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                <span class="material-symbols-outlined text-[18px]">alternate_email</span>
+              </div>
+              <input class="w-full h-10 pl-9 pr-3.5 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all" id="register-email" placeholder="tuan.nguyen@shopthoitrang.vn" required="" type="email"/>
+            </div>
+          </div>
+
+          <!-- Password & Confirm Password Grid (cột password_hash) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Password Field -->
+            <div class="space-y-1.5">
+              <div class="flex justify-between items-center text-xs">
+                <label class="font-medium text-slate-800" for="register-password">
+                  Mật khẩu <span class="text-red-500">*</span>
+                </label>
+              </div>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                  <span class="material-symbols-outlined text-[18px]">key</span>
+                </div>
+                <input class="w-full h-10 pl-9 pr-9 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all font-mono" id="register-password" placeholder="••••••••••••" required="" type="password"/>
+                <button class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 cursor-pointer" id="toggle-pwd-btn" title="Ẩn/Hiện mật khẩu" type="button">
+                  <span class="material-symbols-outlined text-[18px]">visibility</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="space-y-1.5">
+              <div class="flex justify-between items-center text-xs">
+                <label class="font-medium text-slate-800" for="register-confirm-password">
+                  Xác nhận lại mật khẩu <span class="text-red-500">*</span>
+                </label>
+              </div>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                  <span class="material-symbols-outlined text-[18px]">verified_user</span>
+                </div>
+                <input class="w-full h-10 pl-9 pr-3.5 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all font-mono" id="register-confirm-password" placeholder="••••••••••••" required="" type="password"/>
+              </div>
+            </div>
+          </div>
+
+          <!-- Password Strength Indicator -->
+          <div class="p-2.5 bg-slate-50 border border-slate-200/80 rounded-lg space-y-1.5">
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="text-slate-600 font-medium">Độ mạnh mật khẩu: <strong class="text-emerald-600" id="pwd-strength-text">Mạnh (Đạt chuẩn)</strong></span>
+              <span class="font-mono text-slate-400">Tối thiểu 8 ký tự</span>
+            </div>
+            <div class="grid grid-cols-4 gap-1.5 h-1.5">
+              <div class="rounded-full bg-emerald-500"></div>
+              <div class="rounded-full bg-emerald-500"></div>
+              <div class="rounded-full bg-emerald-500"></div>
+              <div class="rounded-full bg-emerald-500"></div>
+            </div>
+            <p class="text-[11px] text-slate-500 flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px] text-emerald-600">check_circle</span>
+              Bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt (@, #, $)
+            </p>
+          </div>
+
+          <!-- Role Selection (khớp CHECK role IN ('owner', 'admin', 'staff') trong 03_DATABASE_SCHEMA.md) -->
+          <div class="space-y-1.5 pt-1">
+            <div class="flex justify-between items-center text-xs">
+              <span class="font-medium text-slate-800">Vai trò của bạn trong cửa hàng</span>
+              <span class="font-mono text-[11px] text-slate-400">schema: role</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3" id="role-selector">
+              <!-- Owner Radio Pill (Mặc định) -->
+              <label class="cursor-pointer border-2 border-blue-600 bg-blue-50/50 text-blue-700 rounded-xl p-3 flex items-center gap-2.5 transition-all shadow-xs" id="role-owner-label">
+                <input checked="" class="w-4 h-4 text-blue-600 focus:ring-blue-500 border-slate-300" name="store-role" type="radio" value="owner"/>
+                <div class="text-left leading-tight">
+                  <div class="font-semibold text-xs text-blue-900">👑 Chủ cửa hàng</div>
+                  <div class="text-[10px] text-blue-600 font-mono">(Owner - Full Access)</div>
+                </div>
+              </label>
+
+              <!-- Admin Radio Pill -->
+              <label class="cursor-pointer border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 rounded-xl p-3 flex items-center gap-2.5 transition-all" id="role-admin-label">
+                <input class="w-4 h-4 text-blue-600 focus:ring-blue-500 border-slate-300" name="store-role" type="radio" value="admin"/>
+                <div class="text-left leading-tight">
+                  <div class="font-semibold text-xs text-slate-800">💼 Quản lý vận hành</div>
+                  <div class="text-[10px] text-slate-400 font-mono">(Admin / Lead Ops)</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Terms & Condition Checkbox -->
+          <div class="pt-2">
+            <label class="flex items-start gap-2.5 cursor-pointer select-none">
+              <input checked="" class="mt-0.5 w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-slate-300" id="agree-terms" type="checkbox"/>
+              <span class="text-xs text-slate-600 leading-relaxed">
+                Tôi đồng ý với <a class="text-blue-600 font-medium hover:underline" href="#">Điều khoản dịch vụ</a> và <a class="text-blue-600 font-medium hover:underline" href="#">Chính sách bảo mật</a> của ShopFlow VN.
+              </span>
+            </label>
+          </div>
+
+          <!-- Primary CTA Action Pill (Chuẩn 05_DESIGN_SYSTEM.md) -->
+          <div class="pt-2">
+            <button class="w-full rounded-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3.5 px-6 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all duration-150 flex items-center justify-center gap-2 text-base cursor-pointer" id="submit-register-btn" type="submit">
+              <span class="material-symbols-outlined text-[20px]">rocket_launch</span>
+              <span>Khởi Tạo Tài Khoản & Dùng Thử 14 Ngày</span>
+              <span class="text-xs bg-blue-500/80 px-2 py-0.5 rounded-full font-mono ml-1">[↵ Enter]</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- Card Footer Info -->
+        <div class="pt-2 text-center space-y-3 border-t border-slate-100">
+          <p class="text-xs text-slate-600">
+            Đã có tài khoản ShopFlow? 
+            <a class="text-blue-600 font-semibold hover:underline ml-1" href="01_LOGIN_SCREEN.html">Đăng nhập ngay</a>
+          </p>
+
+          <!-- Security Badges Ribbon -->
+          <div class="inline-flex flex-wrap items-center justify-center gap-3 text-[11px] text-slate-400 font-mono py-1">
+            <span class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[13px] text-blue-600">verified</span>
+              Meta Graph API v19+ Verified
+            </span>
+            <span>•</span>
+            <span class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[13px] text-slate-500">enhanced_encryption</span>
+              AES-256 GCM
+            </span>
+            <span>•</span>
+            <span class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[13px] text-emerald-600">shield</span>
+              ISO/IEC 27001
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="w-full bg-white border-t border-slate-200 py-4 px-6">
+    <div class="flex flex-col md:flex-row justify-between items-center w-full max-w-7xl mx-auto text-center md:text-left gap-4 text-xs text-slate-500">
+      <div>
+        <p>© 2024 ShopFlow VN. Bảo mật đa tầng chuẩn Meta Graph API v19+ & AES-256 GCM.</p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-6">
+        <a class="hover:text-blue-600 transition-colors duration-150" href="#">Điều khoản dịch vụ</a>
+        <a class="hover:text-blue-600 transition-colors duration-150" href="#">Chính sách bảo mật</a>
+        <a class="hover:text-blue-600 transition-colors duration-150" href="#">Trạng thái hệ thống</a>
+        <a class="hover:text-blue-600 transition-colors duration-150" href="#">Liên hệ hỗ trợ</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-2.5 text-sm transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none" id="toast">
+    <span class="material-symbols-outlined text-[20px] text-emerald-400" id="toast-icon">check_circle</span>
+    <span id="toast-message">Đã tự động điền tài khoản mẫu</span>
+  </div>
+
+  <!-- Interactive Sandbox & Micro-interactions Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Mock Fill Button Action
+      const mockBtn = document.getElementById('mock-fill-btn');
+      const fullnameInput = document.getElementById('register-fullname');
+      const emailInput = document.getElementById('register-email');
+      const passwordInput = document.getElementById('register-password');
+      const confirmPasswordInput = document.getElementById('register-confirm-password');
+
+      if (mockBtn) {
+        mockBtn.addEventListener('click', () => {
+          fullnameInput.value = 'Phạm Quốc Hùng';
+          emailInput.value = 'hung.sport@shopflow.vn';
+          passwordInput.value = 'HungSport@2024!';
+          confirmPasswordInput.value = 'HungSport@2024!';
+          
+          // Visual confirmation animation
+          mockBtn.classList.add('bg-emerald-50', 'border-emerald-300');
+          showToast('Đã điền thông tin chủ shop mẫu: Phạm Quốc Hùng (Shop Hùng Sport)', 'check_circle', 'text-emerald-400');
+          setTimeout(() => {
+            mockBtn.classList.remove('bg-emerald-50', 'border-emerald-300');
+          }, 800);
+        });
+      }
+
+      // Password Visibility Toggle
+      const togglePwdBtn = document.getElementById('toggle-pwd-btn');
+      if (togglePwdBtn && passwordInput) {
+        togglePwdBtn.addEventListener('click', () => {
+          const isPassword = passwordInput.getAttribute('type') === 'password';
+          passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+          
+          const iconSpan = togglePwdBtn.querySelector('span');
+          if (iconSpan) {
+            iconSpan.textContent = isPassword ? 'visibility_off' : 'visibility';
+          }
+        });
+      }
+
+      // Dynamic styling for Store Role radio switcher
+      const roleRadios = document.querySelectorAll('input[name="store-role"]');
+      const ownerLabel = document.getElementById('role-owner-label');
+      const adminLabel = document.getElementById('role-admin-label');
+
+      roleRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+          if (e.target.value === 'owner') {
+            ownerLabel.className = 'cursor-pointer border-2 border-blue-600 bg-blue-50/50 text-blue-700 rounded-xl p-3 flex items-center gap-2.5 transition-all shadow-xs';
+            adminLabel.className = 'cursor-pointer border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 rounded-xl p-3 flex items-center gap-2.5 transition-all';
+          } else {
+            adminLabel.className = 'cursor-pointer border-2 border-blue-600 bg-blue-50/50 text-blue-700 rounded-xl p-3 flex items-center gap-2.5 transition-all shadow-xs';
+            ownerLabel.className = 'cursor-pointer border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 rounded-xl p-3 flex items-center gap-2.5 transition-all';
+          }
+        });
+      });
+    });
+
+    // Submit Simulation
+    function handleRegisterSubmit() {
+      const btn = document.getElementById('submit-register-btn');
+      btn.disabled = true;
+      btn.innerHTML = `
+        <span class="material-symbols-outlined animate-spin text-[20px]">sync</span>
+        <span>Đang khởi tạo tài khoản & phân quyền...</span>
+      `;
+
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = `
+          <span class="material-symbols-outlined text-[20px]">check_circle</span>
+          <span>Đăng ký thành công! Đang chuyển hướng...</span>
+        `;
+        showToast('Chúc mừng bạn đã kích hoạt thành công 14 ngày dùng thử ShopFlow!', 'verified', 'text-blue-400');
+        setTimeout(() => {
+          window.location.href = '01_LOGIN_SCREEN.html';
+        }, 2000);
+      }, 1200);
+    }
+
+    // Facebook Sign Up Simulation
+    function handleFacebookSignUp() {
+      showToast('Đang kết nối cổng ủy quyền Meta Business OAuth...', 'sync', 'text-blue-400');
+    }
+
+    // Toast Notification Helper
+    function showToast(message, iconName = 'info', iconColor = 'text-blue-400') {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      const toastIcon = document.getElementById('toast-icon');
+
+      toastMsg.textContent = message;
+      toastIcon.textContent = iconName;
+      toastIcon.className = `material-symbols-outlined text-[20px] ${iconColor}`;
+
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

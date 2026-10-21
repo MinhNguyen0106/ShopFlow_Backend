@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "version": "1.0.0",
+  "name": "shopflow-agent-sandbox",
+  "description": "Resource quotas, network egress policy, and filesystem confinement for AI Agent execution",
+  "execution": {
+    "timeoutMs": 45000,
+    "maxMemoryMb": 2048,
+    "maxCpuQuota": 0.85,
+    "maxConcurrentTasks": 4,
+    "allowBackgroundDaemons": false
+  },
+  "network": {
+    "policy": "allowlist",
+    "denyPrivateIps": true,
+    "allowedDomains": [
+      "graph.facebook.com",
+      "api.facebook.com",
+      "generativelanguage.googleapis.com",
+      "api.github.com",
+      "registry.npmjs.org",
+      "cdn.jsdelivr.net",
+      "pypi.org",
+      "files.pythonhosted.org"
+    ],
+    "deniedPorts": [
+      22,
+      25,
+      445,
+      3389
+    ]
+  },
+  "filesystem": {
+    "isolation": "workspace-strict",
+    "rootPath": "C:\\Users\\Dell\\Desktop\\ShopFlow",
+    "allowedWritePaths": [
+      "src/**",
+      "tests/**",
+      "docs/**",
+      ".agent/**",
+      "scripts/**",
+      "public/**",
+      "package.json",
+      "tsconfig.json",
+      ".gitignore",
+      ".agentignore",
+      "README.md"
+    ],
+    "deniedPaths": [
+      ".env*",
+      ".git/**",
+      "secrets/**",
+      "credentials/**",
+      "*.pem",
+      "*.key",
+      "*.pfx"
+    ],
+    "maxFileSizeBytes": 10485760
+  }
+}

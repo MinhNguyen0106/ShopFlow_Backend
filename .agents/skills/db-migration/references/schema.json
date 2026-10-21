@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ShopFlowMySQLDatabaseSchema",
+  "description": "Relational schema reference for MySQL 8.x (InnoDB) database in ShopFlow platform",
+  "version": "1.1.0",
+  "tables": {
+    "users": {
+      "description": "Shop owners and administrative users",
+      "primaryKey": "id",
+      "columns": {
+        "id": { "type": "varchar(36)", "nullable": false },
+        "email": { "type": "varchar(255)", "unique": true, "nullable": false },
+        "password_hash": { "type": "varchar(255)", "nullable": false },
+        "full_name": { "type": "varchar(150)", "nullable": false },
+        "phone_number": { "type": "varchar(20)", "nullable": true },
+        "created_at": { "type": "datetime(3)", "default": "CURRENT_TIMESTAMP(3)", "nullable": false },
+        "updated_at": { "type": "datetime(3)", "default": "CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)", "nullable": false }
+      },
+      "indexes": ["users_email_idx"]
+    },
+    "fanpages": {
+      "description": "Connected Facebook Fanpages managed by shop owners",
+      "primaryKey": "id",
+      "columns": {
+        "id": { "type": "varchar(36)", "nullable": false },
+        "user_id": { "type": "varchar(36)", "references": "users.id", "nullable": false },
+        "facebook_page_id": { "type": "varchar(100)", "unique": true, "nullable": false },
+        "page_name": { "type": "varchar(255)", "nullable": false },
+        "access_token_encrypted": { "type": "text", "nullable": false },
+        "is_active": { "type": "boolean", "default": true, "nullable": false },
+        "webhook_subscribed": { "type": "boolean", "default": false, "nullable": false },
+        "created_at": { "type": "datetime(3)", "default": "CURRENT_TIMESTAMP(3)", "nullable": false },
+        "updated_at": { "type": "datetime(3)", "default": "CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)", "nullable": false }
+      },
+      "indexes": ["fanpages_user_id_idx", "fanpages_facebook_page_id_idx"]
+    },
+    "products": {
+      "description": "Merchandise items with SKUs, pricing, variants, and inventory",
+      "primaryKey": "id",
+      "columns": {
+        "id": { "type": "varchar(36)", "nullable": false },
+        "fanpage_id": { "type": "varchar(36)", "references": "fanpages.id", "nullable": false },
+        "sku": { "type": "varchar(50)", "nullable": false },
+        "name": { "type": "varchar(255)", "nullable": false },
+        "description": { "type": "text", "nullable": true },
+        "price": { "type": "decimal(12,2)", "nullable": false },
+        "stock_quantity": { "type": "integer", "default": 0, "nullable": false },
+        "colors": { "type": "json", "nullable": false },
+        "sizes": { "type": "json", "nullable": false },
+        "image_urls": { "type": "json", "nullable": false },
+        "is_active": { "type": "boolean", "default": true, "nullable": false },
+        "created_at": { "type": "datetime(3)", "default": "CURRENT_TIMESTAMP(3)", "nullable": false },
+        "updated_at": { "type": "datetime(3)", "default": "CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)", "nullable": false }
+      },
+      "indexes": ["products_fanpage_id_idx", "products_sku_fanpage_idx"]
+    },
+    "posts": {
+      "description": "Scheduled and published Facebook marketing posts",
+      "primaryKey": "id",
+      "columns": {
+        "id": { "type": "varchar(36)", "nullable": false },
+        "fanpage_id": { "type": "varchar(36)", "references": "fanpages.id", "nullable": false },
+        "facebook_post_id": { "type": "varchar(100)", "nullable": true },
+        "content": { "type": "text", "nullable": false },
+        "media_urls": { "type": "json", "nullable": false },
+        "status": { "type": "varchar(20)", "default": "DRAFT", "nullable": false },
+        "scheduled_publish_time": { "type": "datetime(3)", "nullable": true },
+        "published_at": { "type": "datetime(3)", "nullable": true },
+        "ai_generated": { "type": "boolean", "default": false, "nullable": false },
+        "created_at": { "type": "datetime(3)", "default": "CURRENT_TIMESTAMP(3)", "nullable": false },
+        "updated_at": { "type": "datetime(3)", "default": "CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)", "nullable": false }
+      },
+      "indexes": ["posts_fanpage_id_idx", "posts_status_idx", "posts_scheduled_publish_time_idx"]
+    },
+    "orders": {
+      "description": "Customer purchase orders parsed from comments or messenger chats",
+      "primaryKey": "id",
+      "columns": {
+        "id": { "type": "varchar(36)", "nullable": false },
+        "fanpage_id": { "type": "varchar(36)", "references": "fanpages.id", "nullable": false },
+        "post_id": { "type": "varchar(36)", "references": "posts.id", "nullable": true },
+        "source": { "type": "varchar(20)", "nullable": false },
+        "customer_fb_id": { "type": "varchar(100)", "nullable": false },
+        "customer_name": { "type": "varchar(150)", "nullable": true },
+        "customer_phone": { "type": "varchar(20)", "nullable": true },
+        "shipping_address": { "type": "text", "nullable": true },
+        "status": { "type": "varchar(30)", "default": "DRAFT", "nullable": false },
+        "total_amount": { "type": "decimal(12,2)", "default": "0.00", "nullable": false },
+        "notes": { "type": "text", "nullable": true },
+        "created_at": { "type": "datetime(3)", "default": "CURRENT_TIMESTAMP(3)", "nullable": false },
+        "updated_at": { "type": "datetime(3)", "default": "CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)", "nullable": false }
+      },
+      "indexes": ["orders_fanpage_id_idx", "orders_status_idx", "orders_created_at_idx"]
+    },
+    "order_items": {
+      "description": "Individual items contained within an order",
+      "primaryKey": "id",
+      "columns": {
+        "id": { "type": "varchar(36)", "nullable": false },
+        "order_id": { "type": "varchar(36)", "references": "orders.id", "nullable": false },
+        "product_id": { "type": "varchar(36)", "references": "products.id", "nullable": true },
+        "sku": { "type": "varchar(50)", "nullable": false },
+        "product_name": { "type": "varchar(255)", "nullable": false },
+        "color": { "type": "varchar(50)", "nullable": true },
+        "size": { "type": "varchar(30)", "nullable": true },
+        "quantity": { "type": "integer", "default": 1, "nullable": false },
+        "unit_price": { "type": "decimal(12,2)", "nullable": false },
+        "created_at": { "type": "datetime(3)", "default": "CURRENT_TIMESTAMP(3)", "nullable": false }
+      },
+      "indexes": ["order_items_order_id_idx", "order_items_product_id_idx"]
+    },
+    "interactions": {
+      "description": "Incoming webhook logs, customer comments, and automated replies",
+      "primaryKey": "id",
+      "columns": {
+        "id": { "type": "varchar(36)", "nullable": false },
+        "fanpage_id": { "type": "varchar(36)", "references": "fanpages.id", "nullable": false },
+        "facebook_event_id": { "type": "varchar(100)", "unique": true, "nullable": false },
+        "event_type": { "type": "varchar(50)", "nullable": false },
+        "sender_id": { "type": "varchar(100)", "nullable": false },
+        "raw_payload": { "type": "json", "nullable": false },
+        "reply_sent": { "type": "text", "nullable": true },
+        "is_processed": { "type": "boolean", "default": false, "nullable": false },
+        "created_at": { "type": "datetime(3)", "default": "CURRENT_TIMESTAMP(3)", "nullable": false }
+      },
+      "indexes": ["interactions_event_id_idx", "interactions_fanpage_id_idx", "interactions_created_at_idx"]
+    }
+  }
+}
