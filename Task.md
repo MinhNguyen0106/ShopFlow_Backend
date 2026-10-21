@@ -31,12 +31,11 @@
 
 ### 📋 TRẠNG THÁI: CHỜ THỰC HIỆN (TODO)
 
-#### [TASK-21] Nghiệp Vụ Quản Lý Danh Mục Sản Phẩm, Biến Thể & Tồn Kho (`/api/v1/products`) - [P1]
-- [ ] **21.1.** Xây dựng Repository & Service quản lý sản phẩm (`products`), biến thể (`variants` JSON) và trừ kho an toàn (`stock_quantity`).
-- [ ] **21.2.** Xây dựng REST APIs CRUD: `GET /api/v1/products`, `POST /api/v1/products`, `PUT /api/v1/products/:id`, `DELETE /api/v1/products/:id`.
-- [ ] **21.3.** Tích hợp cơ chế trừ kho tự động khi tạo đơn hàng và hoàn kho khi hủy đơn với Database Transaction (ACID).
-- [ ] **21.4.** Viết unit & integration tests kiểm thử nghiệp vụ kho và đồng thời (concurrency check).
-*(Khi bắt đầu thực thi: Chạy `/opsx-propose product-catalog-service`)*
+#### [TASK-21] Nghiệp Vụ Quản Lý Danh Mục Sản Phẩm, Biến Thể & Tồn Kho (`/api/v1/products`) - [P1] - **[HOÀN THÀNH]**
+- [x] **21.1.** Xây dựng Repository & Service quản lý sản phẩm (`products`), biến thể (`variants` JSON) và trừ kho an toàn (`stock_quantity`).
+- [x] **21.2.** Xây dựng REST APIs CRUD: `GET /api/v1/products`, `POST /api/v1/products`, `PUT /api/v1/products/:id`, `DELETE /api/v1/products/:id`, `PATCH /api/v1/products/:id/stock`.
+- [x] **21.3.** Tích hợp cơ chế trừ kho nguyên tử (`atomicDecrementStock`) chống overselling & race conditions với SQL `stock_quantity >= $1`.
+- [x] **21.4.** Viết unit & integration tests kiểm thử nghiệp vụ kho và đồng thời (concurrency check), 37/37 tests pass, 59/59 files backend pass 100%.
 
 #### [TASK-22] Màn Hình Giao Diện Quản Lý Đơn Hàng & Vận Đơn (`/orders`) - [P0]
 - [ ] **22.1.** Thiết kế Zustand store `order.store.ts` kết nối REST APIs `/api/v1/orders` và lắng nghe socket `ORDER_STATUS_CHANGED`.
@@ -81,5 +80,6 @@
 | 21/10/2026 | [TASK-18] Màn hình Cấu hình Kịch bản Tự động & Ẩn SĐT (`/automation`) | **DONE** | Zustand store `automation.store.ts`, Bento cards `RuleCard` (switch iOS, tag chips, preview templates), `RuleModal` (Tag Input, chèn biến động), `DeleteRuleDialog` an toàn, 13/13 unit tests & 12/12 integration tests pass (84/84 toàn frontend pass), build Next.js 14 thành công; hoàn thành OpenSpec `automation-rules-ui`. |
 | 21/10/2026 | [TASK-19] Bảng Điều Khiển Tổng Quan & Báo Cáo KPIs (`/(dashboard)`) | **DONE** | Lưới Bento đa tầng 4 KPI thẻ điều hành, `TrafficChart` SVG thuần trực quan hóa lưu lượng & khung giờ vàng (11:30 & 20:00), `MetaWindowWidget` đếm ngược SLA 24h, `HotLeadsWidget` với PII phone masking (`098****123`), `QuickActions` 4 phím tắt chuyển trang nhanh; 9/9 tests pass (93/93 toàn frontend pass), build Next.js 14 thành công. **HOÀN THÀNH SPRINT 3 (100%)**. |
 | 21/10/2026 | [TASK-20] Mô-đun Trích Xuất Thực Thể Đơn Hàng Bằng Google Gemini AI (`OrderParserService`) | **DONE** | Kiến trúc Hybrid 2 tầng: Regex Fast-path (< 50ms) + Gemini 2.5 Flash Fallback (< 1.5s), prompt injection guard `<customer_input>`, REST API `POST /api/v1/orders/parse`, 23/23 Golden test fixtures passed (đạt 100% độ chính xác), 55/55 files test (457/457 tests backend) pass 100%, 0 lỗi TypeScript. Hoàn thành OpenSpec `order-ai-parser`. |
+| 21/10/2026 | [TASK-21] Nghiệp Vụ Quản Lý Danh Mục Sản Phẩm, Biến Thể & Tồn Kho (`/api/v1/products`) | **DONE** | Bảng PostgreSQL `products` (`002_products_and_inventory.sql`), Zod DTOs, `ProductRepository` với trừ kho nguyên tử (`atomicDecrementStock` chống overselling/race conditions), `ProductService` kiểm tra trùng SKU trên cùng page, 6 REST APIs CRUD & `/stock`, 59/59 test files pass 100% (494/494 tests passed), 0 lỗi TypeScript; hoàn thành OpenSpec `product-catalog-service`. |
 
 

@@ -25,7 +25,7 @@ const envSchema = z.object({
 
   // Meta Facebook Integration
   FACEBOOK_APP_ID: z.string().optional(),
-  FACEBOOK_APP_SECRET: z.string().optional(),
+  FACEBOOK_APP_SECRET: z.string().optional().default(''),
   FACEBOOK_VERIFY_TOKEN: z.string().default('shopflow_webhook_verify_token_dev'),
 
   // Token Encryption (AES-256-GCM)

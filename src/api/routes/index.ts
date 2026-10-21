@@ -8,6 +8,7 @@ import { mediaRouter } from './media.routes.js';
 import { postRouter } from './post.routes.js';
 import { inboxRouter } from './inbox.routes.js';
 import { orderParserRouter } from './order-parser.routes.js';
+import { productRouter } from './product.routes.js';
 
 export const apiV1Router = Router();
 
@@ -37,3 +38,6 @@ apiV1Router.use('/inbox', inboxRouter);
 
 // Mount Order AI Parser routes (TASK-20)
 apiV1Router.use('/orders', orderParserRouter);
+
+// Mount Product Catalog routes (TASK-21)
+apiV1Router.use('/products', productRouter);
