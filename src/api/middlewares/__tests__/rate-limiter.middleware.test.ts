@@ -21,7 +21,7 @@ describe('Rate Limiter Middleware', () => {
       },
       socket: {
         remoteAddress: '192.168.1.100',
-      } as any,
+      } as unknown as Request['socket'],
     };
     mockRes = {
       setHeader: (name: string, value: string | number) => {
@@ -59,5 +59,27 @@ describe('Rate Limiter Middleware', () => {
 
     expect(headers['X-RateLimit-Remaining']).toBe(0);
     expect(headers['Retry-After']).toBeDefined();
+  });
+
+  it('phân tách các IP khác nhau độc lập với nhau', () => {
+    const limiter = createRateLimiter({ windowMs: 60000, max: 1 });
+    const nextFn = () => {};
+
+    // IP 1: request 1 thành công
+    limiter(mockReq as Request, mockRes as Response, nextFn);
+
+    // IP 1: request 2 bị chặn
+    expect(() => limiter(mockReq as Request, mockRes as Response, nextFn)).toThrow(TooManyRequestsError);
+
+    // IP 2: request 1 vẫn thành công
+    const mockReq2: Partial<Request> = {
+      headers: { 'x-forwarded-for': '10.0.0.1' },
+      socket: { remoteAddress: '10.0.0.1' } as unknown as Request['socket'],
+    };
+    let nextCalled = false;
+    limiter(mockReq2 as Request, mockRes as Response, () => {
+      nextCalled = true;
+    });
+    expect(nextCalled).toBe(true);
   });
 });

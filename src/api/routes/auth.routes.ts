@@ -9,7 +9,7 @@ import { Router } from 'express';
 import { authController } from '../controllers/auth.controller.js';
 import { validateRequest } from '../middlewares/validate-request.middleware.js';
 import { authenticateToken } from '../middlewares/auth.middleware.js';
-import { registerRateLimiter } from '../middlewares/rate-limiter.middleware.js';
+import { registerRateLimiter, authLimiter } from '../middlewares/rate-limiter.middleware.js';
 import {
   RegisterDtoSchema,
   LoginDtoSchema,
@@ -32,11 +32,12 @@ authRouter.post(
 
 /**
  * @route   POST /api/v1/auth/login
- * @desc    Đăng nhập hệ thống & nhận JWT tokens
+ * @desc    Đăng nhập hệ thống & nhận JWT tokens (được bảo vệ bởi Anti-Bruteforce Rate Limiter)
  * @access  Public
  */
 authRouter.post(
   '/login',
+  authLimiter,
   validateRequest({ body: LoginDtoSchema }),
   authController.login
 );

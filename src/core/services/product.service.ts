@@ -11,10 +11,14 @@ import {
   AdjustStockDto,
 } from '../../api/dtos/product.dto.js';
 import { ProductRepository, productRepository } from '../../infrastructure/repositories/product.repository.js';
+import { ICacheService, cacheService } from '../../infrastructure/cache/cache.service.js';
 import { AppError } from '../errors/app-error.js';
 
 export class ProductService {
-  constructor(private readonly repo: ProductRepository = productRepository) {}
+  constructor(
+    private readonly repo: ProductRepository = productRepository,
+    private readonly cache: ICacheService = cacheService
+  ) {}
 
   /**
    * Tạo sản phẩm mới kèm kiểm tra mã SKU duy nhất trên từng Fanpage
@@ -29,7 +33,9 @@ export class ProductService {
       );
     }
 
-    return this.repo.create(data);
+    const created = await this.repo.create(data);
+    await this.cache.invalidateByPattern(`cache:products:${data.pageId}:*`).catch(() => {});
+    return created;
   }
 
   /**
@@ -51,10 +57,17 @@ export class ProductService {
   }
 
   /**
-   * Lấy danh sách sản phẩm có phân trang và tìm kiếm
+   * Lấy danh sách sản phẩm có phân trang và tìm kiếm (được tối ưu hóa qua Redis Cache)
    */
   async getProducts(params: QueryProductsDto): Promise<ProductListResult> {
-    return this.repo.findMany(params);
+    const queryStringHash = Buffer.from(JSON.stringify(params)).toString('base64');
+    const cacheKey = `cache:products:${params.pageId}:list:${queryStringHash}`;
+
+    return this.cache.getOrSet(
+      cacheKey,
+      () => this.repo.findMany(params),
+      600 // TTL 10 phút
+    );
   }
 
   /**
@@ -79,6 +92,8 @@ export class ProductService {
     if (!updated) {
       throw new AppError('Không thể cập nhật sản phẩm', 500, 'UPDATE_FAILED');
     }
+
+    await this.cache.invalidateByPattern(`cache:products:${existing.page_id}:*`).catch(() => {});
     return updated;
   }
 
@@ -86,23 +101,31 @@ export class ProductService {
    * Xóa sản phẩm theo ID
    */
   async deleteProduct(id: string): Promise<boolean> {
-    await this.getProductById(id);
-    return this.repo.delete(id);
+    const existing = await this.getProductById(id);
+    const deleted = await this.repo.delete(id);
+    if (deleted) {
+      await this.cache.invalidateByPattern(`cache:products:${existing.page_id}:*`).catch(() => {});
+    }
+    return deleted;
   }
 
   /**
    * Trừ tồn kho nguyên tử khi có đơn đặt hàng
    */
   async decrementStock(id: string, quantity: number, variantSku?: string): Promise<Product> {
-    return this.repo.atomicDecrementStock(id, quantity, variantSku);
+    const updated = await this.repo.atomicDecrementStock(id, quantity, variantSku);
+    await this.cache.invalidateByPattern(`cache:products:${updated.page_id}:*`).catch(() => {});
+    return updated;
   }
 
   /**
    * Điều chỉnh tồn kho thủ công (cộng/trừ kho)
    */
   async adjustStock(id: string, data: AdjustStockDto): Promise<Product> {
-    await this.getProductById(id);
-    return this.repo.adjustStock(id, data.quantity, data.variantSku);
+    const existing = await this.getProductById(id);
+    const updated = await this.repo.adjustStock(id, data.quantity, data.variantSku);
+    await this.cache.invalidateByPattern(`cache:products:${existing.page_id}:*`).catch(() => {});
+    return updated;
   }
 }
 

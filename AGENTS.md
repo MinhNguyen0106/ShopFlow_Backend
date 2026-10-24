@@ -39,8 +39,9 @@ Tài liệu hướng dẫn tổng thể dành cho các AI Agent (Antigravity, Cu
 5. **Đồng Bộ Hợp Đồng Dữ Liệu (API Contract & DTO Sync):**
    - Đảm bảo tính nhất quán 100% giữa API response/request (Backend) và UI state/store (Frontend).
    - Bắt buộc tuân thủ chuẩn `ApiResponse<T>`, quy ước `camelCase`, và bóc tách dữ liệu phòng vệ (Defensive Data Parsing) theo [.agents/rules/api-contract-sync.md](file:///c:/Users/Dell/Desktop/ShopFlow/.agents/rules/api-contract-sync.md).
-6. **Quy Trình Chuyển Giao Sprint (Sprint Transition Protocol):**
-   - Sau khi hoàn thành 100% một Sprint (vượt qua toàn bộ tests & build), bắt buộc đóng Sprint đó, đề xuất mục tiêu và danh sách tasks Sprint tiếp theo vào [.agents/memory/history.md](file:///c:/Users/Dell/Desktop/ShopFlow/.agents/memory/history.md), và cập nhật lại [Task.md](file:///c:/Users/Dell/Desktop/ShopFlow/Task.md) (đổi Sprint Hiện Tại và thiết lập danh mục TODO cho Sprint mới).
+6. **Đồng Bộ Mã Nguồn Lên GitHub & Chuyển Giao Sprint:**
+   - Sau khi hoàn thành mỗi Task (vượt qua toàn bộ tests & review), bắt buộc commit và push mã nguồn lên GitHub (`git push origin <branch>/main`).
+   - Sau khi hoàn thành 100% một Sprint, bắt buộc đóng Sprint đó, đề xuất mục tiêu và danh sách tasks Sprint tiếp theo vào [.agents/memory/history.md](file:///c:/Users/Dell/Desktop/ShopFlow/.agents/memory/history.md), cập nhật lại [Task.md](file:///c:/Users/Dell/Desktop/ShopFlow/Task.md), và push bản cập nhật lên GitHub.
 
 ---
 

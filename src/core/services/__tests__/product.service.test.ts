@@ -21,6 +21,14 @@ describe('ProductService', () => {
     atomicDecrementStock: ReturnType<typeof vi.fn>;
     adjustStock: ReturnType<typeof vi.fn>;
   };
+  let mockCache: {
+    get: ReturnType<typeof vi.fn>;
+    set: ReturnType<typeof vi.fn>;
+    del: ReturnType<typeof vi.fn>;
+    invalidateByPattern: ReturnType<typeof vi.fn>;
+    getOrSet: ReturnType<typeof vi.fn>;
+    disconnect: ReturnType<typeof vi.fn>;
+  };
 
   const sampleProduct: Product = {
     id: 'prod-001',
@@ -50,7 +58,19 @@ describe('ProductService', () => {
       adjustStock: vi.fn(),
     };
 
-    service = new ProductService(mockRepo as unknown as ProductRepository);
+    mockCache = {
+      get: vi.fn(),
+      set: vi.fn(),
+      del: vi.fn(),
+      invalidateByPattern: vi.fn().mockResolvedValue(1),
+      getOrSet: vi.fn().mockImplementation((_k, factory) => factory()),
+      disconnect: vi.fn(),
+    };
+
+    service = new ProductService(
+      mockRepo as unknown as ProductRepository,
+      mockCache as any
+    );
   });
 
   describe('createProduct', () => {
@@ -106,6 +126,18 @@ describe('ProductService', () => {
         expect(error.code).toBe('SKU_ALREADY_EXISTS');
         expect(error.statusCode).toBe(409);
       }
+    });
+  });
+
+  describe('getProducts', () => {
+    it('gọi cache.getOrSet và trả về danh sách sản phẩm', async () => {
+      const mockResult = { items: [sampleProduct], total: 1, page: 1, limit: 10, totalPages: 1 };
+      mockRepo.findMany.mockResolvedValueOnce(mockResult);
+
+      const result = await service.getProducts({ pageId: 'page-001', page: 1, limit: 10 });
+
+      expect(mockCache.getOrSet).toHaveBeenCalledTimes(1);
+      expect(result).toEqual(mockResult);
     });
   });
 

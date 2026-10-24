@@ -86,11 +86,12 @@ ShopFlow/
 
 ---
 
-## 5. Quy Chuẩn Chuyển Giao Sprint (Sprint Completion & Transition Protocol)
+## 5. Quy Chuẩn Đồng Bộ GitHub & Chuyển Giao Sprint (GitHub Push & Sprint Transition)
 
-Khi toàn bộ các tác vụ trong một Sprint đạt 100% hoàn thành (pass toàn bộ test suite, type-check, build production), AI Agent bắt buộc phải thực hiện quy trình chuyển giao 3 bước:
-1. **Đóng Sprint (Sprint Closure):** Đánh dấu Sprint vừa hoàn thành là 100% DONE, lưu trữ các task đã hoàn tất vào bảng *Nhật Ký Cập Nhật Tiến Độ Sprint* trong `Task.md` và ghi nhận mốc trong `history.md`.
-2. **Đề Xuất Sprint Tiếp Theo (Propose Next Sprint to History):** Mô tả rõ ràng mục tiêu, phạm vi công việc, danh sách các tác vụ kế thừa (kèm mã `[TASK-xx]`) vào phần *[Kế Hoạch Tiếp Theo]* trong [.agents/memory/history.md](file:///c:/Users/Dell/Desktop/ShopFlow/.agents/memory/history.md).
-3. **Cập Nhật Lại `Task.md` (Update Task.md for Execution):** Cập nhật tiêu đề **Sprint Hiện Tại** ở đầu tệp `Task.md`, chuyển danh mục công việc của Sprint mới vào mục **TRẠNG THÁI: CHỜ THỰC HIỆN (TODO)** với checklist chi tiết sẵn sàng để khởi tạo OpenSpec change (`/opsx-propose`).
+1. **Đẩy Mã Nguồn Lên GitHub Sau Mỗi Task:** Sau khi hoàn tất kiểm thử và review cho từng Task, AI Agent bắt buộc phải commit đầy đủ và push mã nguồn lên remote GitHub (`git push origin <branch>/main`).
+2. **Quy Trình Chuyển Giao Sprint (Sprint Completion & Transition Protocol):** Khi toàn bộ các tác vụ trong một Sprint đạt 100% hoàn thành (pass toàn bộ test suite, type-check, build production), AI Agent bắt buộc phải thực hiện quy trình chuyển giao 3 bước:
+   - **Đóng Sprint (Sprint Closure):** Đánh dấu Sprint vừa hoàn thành là 100% DONE, lưu trữ các task đã hoàn tất vào bảng *Nhật Ký Cập Nhật Tiến Độ Sprint* trong `Task.md` và ghi nhận mốc trong `history.md`.
+   - **Đề Xuất Sprint Tiếp Theo (Propose Next Sprint to History):** Mô tả rõ ràng mục tiêu, phạm vi công việc, danh sách các tác vụ kế thừa (kèm mã `[TASK-xx]`) vào phần *[Kế Hoạch Tiếp Theo]* trong [.agents/memory/history.md](file:///c:/Users/Dell/Desktop/ShopFlow/.agents/memory/history.md).
+   - **Cập Nhật Lại `Task.md` & Push Lên GitHub:** Cập nhật tiêu đề **Sprint Hiện Tại** ở đầu tệp `Task.md`, chuyển danh mục công việc của Sprint mới vào mục **TRẠNG THÁI: CHỜ THỰC HIỆN (TODO)** với checklist chi tiết sẵn sàng để khởi tạo OpenSpec change (`/opsx-propose`), sau đó push bản cập nhật lên GitHub.
 
 

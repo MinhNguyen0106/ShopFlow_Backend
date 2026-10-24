@@ -17,6 +17,8 @@ import {
   UpdateCustomerDto,
 } from '../dtos/inbox.dto.js';
 import { AppError } from '../../core/errors/app-error.js';
+import { pageMemberRepository } from '../../infrastructure/repositories/page-member.repository.js';
+import { sanitizeCustomerForRole } from '../../core/utils/pii-masking.helper.js';
 
 export class InboxController {
   constructor(private readonly inboxSvc: InboxService = inboxService) {}
@@ -30,7 +32,7 @@ export class InboxController {
     next: NextFunction
   ): Promise<void> => {
     try {
-      const userId = req.user?.id;
+      const userId = req.user?.id || req.user?.sub;
       if (!userId) {
         throw new AppError('Chưa xác thực người dùng', 401, 'UNAUTHORIZED');
       }
@@ -59,7 +61,7 @@ export class InboxController {
     next: NextFunction
   ): Promise<void> => {
     try {
-      const userId = req.user?.id;
+      const userId = req.user?.id || req.user?.sub;
       if (!userId) {
         throw new AppError('Chưa xác thực người dùng', 401, 'UNAUTHORIZED');
       }
@@ -70,6 +72,18 @@ export class InboxController {
       }
 
       const result = await this.inboxSvc.getConversationDetail(conversationId, userId);
+
+      // Che dấu số điện thoại khách hàng nếu người gọi là staff
+      if (result.customer && result.customer.phone_number) {
+        const pageMember = await pageMemberRepository.findByPageAndUser(
+          result.conversation.page_fb_id,
+          userId
+        );
+        const role = pageMember?.role || req.pageMember?.role;
+        if (role === 'staff') {
+          result.customer = sanitizeCustomerForRole(result.customer, 'staff');
+        }
+      }
 
       res.status(200).json({
         success: true,

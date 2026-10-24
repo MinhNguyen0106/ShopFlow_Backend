@@ -5,9 +5,19 @@
 
 import { z } from 'zod';
 
-export const ConnectPagesDtoSchema = z.object({
-  page_ids: z.array(z.string().min(1, 'Page ID không được để trống')).min(1, 'Cần ít nhất một Page ID để kết nối'),
-});
+export const ConnectPagesDtoSchema = z
+  .object({
+    page_ids: z.array(z.string().min(1, 'Page ID không được để trống')).optional(),
+    pageIds: z.array(z.string().min(1, 'Page ID không được để trống')).optional(),
+  })
+  .refine(
+    (data) =>
+      (Array.isArray(data.page_ids) && data.page_ids.length > 0) ||
+      (Array.isArray(data.pageIds) && data.pageIds.length > 0),
+    {
+      message: 'Cần ít nhất một Page ID để kết nối',
+    }
+  );
 
 export type ConnectPagesDto = z.infer<typeof ConnectPagesDtoSchema>;
 

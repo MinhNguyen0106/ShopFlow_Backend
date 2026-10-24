@@ -51,7 +51,27 @@ export class FacebookOAuthController {
     next: NextFunction
   ): Promise<void> => {
     try {
-      const { code, state, format } = req.query as { code?: string; state?: string; format?: string };
+      const {
+        code,
+        state,
+        format,
+        error: fbError,
+        error_reason: fbErrorReason,
+        error_description: fbErrorDesc,
+      } = req.query as {
+        code?: string;
+        state?: string;
+        format?: string;
+        error?: string;
+        error_reason?: string;
+        error_description?: string;
+      };
+
+      if (fbError || fbErrorReason === 'user_denied') {
+        const cancelMsg = fbErrorDesc || 'Người dùng đã hủy đăng nhập Facebook';
+        res.redirect(`${env.CORS_ORIGIN}/pages?oauth_status=cancel&message=${encodeURIComponent(cancelMsg)}`);
+        return;
+      }
 
       if (!code || !state) {
         throw new AppError('Thiếu tham số code hoặc state từ Meta redirect', 400, 'BAD_REQUEST');
@@ -98,7 +118,10 @@ export class FacebookOAuthController {
       const pages = await this.service.getManageablePages(userId);
       res.status(200).json({
         success: true,
-        data: { pages },
+        data: {
+          pages,
+          accounts: pages,
+        },
       });
     } catch (error) {
       next(error);
@@ -120,7 +143,8 @@ export class FacebookOAuthController {
         throw new AppError('Yêu cầu xác thực tài khoản', 401, 'UNAUTHORIZED');
       }
 
-      const result = await this.service.connectPages(userId, req.body.page_ids);
+      const targetPageIds = (req.body.page_ids || req.body.pageIds) as string[];
+      const result = await this.service.connectPages(userId, targetPageIds);
 
       // Mask token khi trả về client
       const safePages = result.pages.map(({ page_access_token: _, ...rest }) => rest);

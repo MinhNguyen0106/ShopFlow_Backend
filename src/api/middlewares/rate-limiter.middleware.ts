@@ -91,9 +91,27 @@ export function createRateLimiter(options: RateLimiterOptions = {}) {
   return middleware;
 }
 
-// Rate Limiter mặc định cho đăng ký tài khoản (tối đa 10 lần trong 15 phút)
-export const registerRateLimiter = createRateLimiter({
+// Rate Limiter mặc định cho đăng ký & đăng nhập tài khoản (tối đa 10 lần trong 15 phút)
+export const authLimiter = createRateLimiter({
   windowMs: 15 * 60 * 1000,
   max: 10,
-  message: 'Quá nhiều yêu cầu đăng ký tài khoản từ địa chỉ IP này. Vui lòng thử lại sau 15 phút.',
+  message: 'Quá nhiều yêu cầu xác thực từ địa chỉ IP này. Vui lòng thử lại sau 15 phút.',
+});
+
+// Giữ lại alias registerRateLimiter để tương thích ngược 100% với các route hiện tại
+export const registerRateLimiter = authLimiter;
+
+// Global API Limiter: Giới hạn toàn bộ requests API thông thường (100 req / 1 phút / IP)
+export const globalApiLimiter = createRateLimiter({
+  windowMs: 60 * 1000,
+  max: 100,
+  message: 'Bạn đã gửi quá nhiều yêu cầu API. Vui lòng giảm tần suất và thử lại sau 1 phút.',
+  skipInTest: true,
+});
+
+// Heavy Computation Limiter: Bảo vệ các tác vụ tính toán nặng (AI Parsing, Export CSV, Bulk sync)
+export const heavyComputationLimiter = createRateLimiter({
+  windowMs: 60 * 1000,
+  max: 15,
+  message: 'Quá nhiều tác vụ nặng được thực hiện cùng lúc. Vui lòng đợi trong giây lát.',
 });

@@ -1,7 +1,7 @@
 # BẢNG KẾ HOẠCH THỰC THI DỰ ÁN SHOPFLOW (TASK.MD)
 
-> **Sprint Hiện Tại:** Sprint 4 (Order Management, AI Entity Extraction & Payment Integration)  
-> **Cập nhật lần cuối:** 21/10/2026  
+> **Sprint Hiện Tại:** Sprint 6 (CRM Leads Management, System Settings & Production Launch)  
+> **Cập nhật lần cuối:** 24/10/2026  
 > **Tài liệu tham chiếu:** [docs/00_INDEX.md](file:///c:/Users/Dell/Desktop/ShopFlow/docs/00_INDEX.md) • [docs/02_ARCHITECTURE_AND_FLOWS.md](file:///c:/Users/Dell/Desktop/ShopFlow/docs/02_ARCHITECTURE_AND_FLOWS.md) • [docs/03_DATABASE_SCHEMA.md](file:///c:/Users/Dell/Desktop/ShopFlow/docs/03_DATABASE_SCHEMA.md) • [docs/04_API_AND_WEBSOCKET.md](file:///c:/Users/Dell/Desktop/ShopFlow/docs/04_API_AND_WEBSOCKET.md) • [docs/05_DESIGN_SYSTEM.md](file:///c:/Users/Dell/Desktop/ShopFlow/docs/05_DESIGN_SYSTEM.md) • [docs/06_UI_SCREENS_AND_COMPONENTS.md](file:///c:/Users/Dell/Desktop/ShopFlow/docs/06_UI_SCREENS_AND_COMPONENTS.md)
 
 ---
@@ -13,44 +13,49 @@
 3. **Đồng Bộ Lịch Sử (Sync History):** Sau khi hoàn thành trọn vẹn mỗi task, cập nhật vào [.agents/memory/history.md](file:///c:/Users/Dell/Desktop/ShopFlow/.agents/memory/history.md) để lưu vết tiến độ dài hạn của dự án.
 4. **An Toàn Hệ Thống (Strict Safety Gate):** Tuyệt đối không thực hiện các hành động nguy hiểm (như xóa cơ sở dữ liệu, `DROP TABLE`, thay đổi cấu trúc kiến trúc gốc, `git push --force`) mà chưa ghi chú rõ ràng vào kế hoạch và nhận được sự xác nhận từ người dùng.
 5. **Chuẩn Mực Mã Nguồn (Code Quality):** Tuân thủ TypeScript Strict (`noImplicitAny`), Clean Architecture, không hardcode bí mật/token vào git, xác thực chữ ký Webhook HMAC-SHA256 với `timingSafeEqual`.
-6. **Quy Trình Nhánh & Triển Khai An Toàn (Task Lifecycle & Safe Deploy):** Mọi task bắt buộc phải thực hiện trên một nhánh riêng (`feature/<task-name>`). Chạy toàn bộ test suite; nếu lỗi phải tự động phân tích và sửa lỗi; nếu pass mới merge vào `main` và chạy quy trình triển khai an toàn theo [.agents/workflows/safe-deploy.md](file:///c:/Users/Dell/Desktop/ShopFlow/.agents/workflows/safe-deploy.md).
+6. **Quy Trình Nhánh, Triển Khai An Toàn & Đẩy Mã Lên GitHub (Task Lifecycle, Safe Deploy & GitHub Push):** Mọi task bắt buộc phải thực hiện trên một nhánh riêng (`feature/<task-name>`). Chạy toàn bộ test suite; nếu lỗi phải tự động phân tích và sửa lỗi; khi toàn bộ bài test đã pass thì merge vào nhánh `main`, tạo commit chuẩn mực và **bắt buộc push lên GitHub (`git push origin <branch>/main`)**, sau đó thực hiện quy trình triển khai an toàn theo [.agents/workflows/safe-deploy.md](file:///c:/Users/Dell/Desktop/ShopFlow/.agents/workflows/safe-deploy.md).
 7. **Phát Triển Hướng Đặc Tả với OpenSpec (Spec-Driven Development):**
    - Mọi tính năng lớn từ Sprint 3 được quản lý ở cấp độ Vĩ mô (Milestone) trên `Task.md`.
    - Khi bắt đầu thực thi một TASK, khởi tạo một change trong OpenSpec qua `/opsx-propose <feature-name>` để sinh `proposal.md`, `specs/`, `design.md`, và `tasks.md`.
    - Các công việc kỹ thuật vi mô (từng file, hàm, unit test) được theo dõi trực tiếp trong `openspec/changes/<feature-name>/tasks.md`.
-   - Sau khi hoàn thành kiểm thử và lưu trữ (`/opsx-archive <feature-name>`), chuyển task xuống bảng nhật ký ở cuối `Task.md` và ghi log vào `history.md`.
+   - Sau khi hoàn thành kiểm thử, lưu trữ (`/opsx-archive <feature-name>`), merge và **push mã nguồn lên GitHub**, chuyển task xuống bảng nhật ký ở cuối `Task.md` và ghi log vào `history.md`.
 8. **Quy Trình Đóng Sprint & Chuyển Giao Sprint Tiếp Theo (Sprint Completion & Transition Protocol):**
-   - Khi toàn bộ các tác vụ trong một Sprint đạt 100% hoàn thành (pass toàn bộ test suite, type-check, build production), AI Agent bắt buộc phải thực hiện quy trình chuyển giao 3 bước:
+   - Khi toàn bộ các tác vụ trong một Sprint đạt 100% hoàn thành (pass toàn bộ test suite, type-check, build production, đã push đầy đủ lên GitHub), AI Agent bắt buộc phải thực hiện quy trình chuyển giao 3 bước:
      1. **Đóng Sprint:** Đánh dấu Sprint vừa hoàn thành là 100% DONE, lưu trữ các task đã hoàn tất vào bảng *Nhật Ký Cập Nhật Tiến Độ Sprint* ở cuối trang.
      2. **Đề Xuất Sprint Tiếp Theo:** Mô tả rõ ràng mục tiêu, phạm vi công việc, danh sách các tác vụ kế thừa (kèm mã `[TASK-xx]`) vào phần *[Kế Hoạch Tiếp Theo]* trong [.agents/memory/history.md](file:///c:/Users/Dell/Desktop/ShopFlow/.agents/memory/history.md).
      3. **Cập Nhật Lại Task.md:** Cập nhật tiêu đề **Sprint Hiện Tại** ở đầu trang, chuyển danh mục công việc của Sprint mới vào mục **TRẠNG THÁI: CHỜ THỰC HIỆN (TODO)** với checklist chi tiết sẵn sàng để khởi tạo OpenSpec change (`/opsx-propose`).
 
 ---
 
-## 🚀 DANH MỤC CÔNG VIỆC SPRINT 5: ADVANCED ANALYTICS, MULTI-PAGE RBAC & PRODUCTION HARDENING
+## 🚀 DANH MỤC CÔNG VIỆC SPRINT 6: CRM LEADS MANAGEMENT, SYSTEM SETTINGS & PRODUCTION LAUNCH
 
 ### 📋 TRẠNG THÁI: CHỜ THỰC HIỆN (TODO)
 
-#### [TASK-24] Màn Hình Báo Cáo Phân Tích Doanh Thu & Hiệu Quả Bán Hàng (`/analytics`) - [P0]
-- [ ] **24.1.** Xây dựng API thống kê doanh thu theo thời gian, tỷ lệ chốt đơn từ bình luận/tin nhắn và top sản phẩm bán chạy nhất.
-- [ ] **24.2.** Thiết kế Zustand store `analytics.store.ts` kết nối REST API báo cáo số liệu và tính toán chỉ số tăng trưởng.
-- [ ] **24.3.** Xây dựng giao diện Dashboard Analytics chuẩn macOS Clean Utility với biểu đồ SVG tương tác (doanh thu, đơn hàng, heatmap khung giờ vàng).
-- [ ] **24.4.** Viết unit & integration tests cho toàn bộ phân hệ báo cáo phân tích kinh doanh.
-*(Khi bắt đầu thực thi: Chạy `/opsx-propose analytics-dashboard`)*
+#### [TASK-27] Màn Hình Quản Lý Khách Hàng & Leads Tập Trung (`/(dashboard)/customers`) - [P2]
+- [ ] **27.1.** Xây dựng API CRM khách hàng (`/api/v1/customers`): lọc theo tag (Có SĐT, Khách VIP, Đã mua hàng), tìm kiếm đa năng, lịch sử đơn hàng và tổng chi tiêu (LTV).
+- [ ] **27.2.** Thiết kế Zustand store `customer.store.ts` kết nối REST API quản lý danh bạ khách hàng kèm chức năng gán/xóa tags nhanh.
+- [ ] **27.3.** Xây dựng giao diện Khách hàng & Leads chuẩn macOS Clean Utility Bento Grid (`CustomerMetrics`, `CustomerTable`, `CustomerDetailDrawer` với lịch sử mua hàng và ghi chú nội bộ).
+- [ ] **27.4.** Viết unit & integration tests cho toàn bộ phân hệ quản lý quan hệ khách hàng CRM.
+*(Khi bắt đầu thực thi: Chạy `/opsx-propose customer-crm`)*
 
-#### [TASK-25] Mở Rộng Quản Lý Đa Fanpage & Phân Quyền Nhân Viên (RBAC) - [P1]
-- [ ] **25.1.** Thiết kế bảng cơ sở dữ liệu `page_members` phân quyền vai trò (`owner`, `manager`, `staff`).
-- [ ] **25.2.** Middleware kiểm tra quyền hạn `authorizeRole` và chính sách bảo mật che số điện thoại khách hàng PII cho vai trò `staff`.
-- [ ] **25.3.** Giao diện mời nhân viên và quản lý danh sách thành viên trong Fanpage Settings.
-- [ ] **25.4.** Viết unit & integration tests cho luồng phân quyền và bảo vệ dữ liệu PII.
-*(Khi bắt đầu thực thi: Chạy `/opsx-propose multi-page-rbac`)*
+#### [TASK-28] Màn Hình Cài Đặt Hệ Thống, Hồ Sơ & Giám Sát Meta API Limits (`/(dashboard)/settings`) - [P2]
+- [ ] **28.1.** Xây dựng API cập nhật hồ sơ cá nhân, đổi mật khẩu và API giám sát hạn mức Meta Graph API (`/api/v1/settings/meta-limits`).
+- [ ] **28.2.** Xây dựng giao diện Cài đặt đa tab macOS Clean Utility (`ProfileSettingsTab`, `SecurityPasswordTab`, `ApiLimitsMonitorTab` đếm ngược hạn ngạch 4,800 cuộc gọi/24h và trạng thái Webhook Health).
+- [ ] **28.3.** Viết unit & integration tests cho phân hệ cấu hình hệ thống.
+*(Khi bắt đầu thực thi: Chạy `/opsx-propose settings-profile`)*
 
-#### [TASK-26] Tối Ưu Hóa Hiệu Năng & Hardening Môi Trường Production - [P1]
-- [ ] **26.1.** Tối ưu hóa Redis Caching cho danh mục sản phẩm và trạng thái Fanpage với TTL và invalidation logic.
-- [ ] **26.2.** Tích hợp middleware nén Gzip/Brotli, rate limiting chống brute-force và DDoS.
-- [ ] **26.3.** Hoàn thiện cấu hình Docker Compose môi trường production (Frontend, Backend, PostgreSQL, Redis, Nginx Reverse Proxy).
-- [ ] **26.4.** Kiểm thử tải (Load Testing) và xác thực toàn diện tiêu chuẩn bảo mật OWASP.
-*(Khi bắt đầu thực thi: Chạy `/opsx-propose production-hardening`)*
+#### [TASK-29] CI/CD Pipeline & Triển Khai Production Tự Động (GitHub Actions) - [P1]
+- [ ] **29.1.** Thiết lập GitHub Actions Workflows `.github/workflows/ci.yml`: tự động chạy lint, type-check, unit tests và build trên mọi PR vào `main`.
+- [ ] **29.2.** Thiết lập GitHub Actions Workflow `.github/workflows/deploy.yml`: tự động build Docker images, push lên Container Registry và deploy cập nhật an toàn.
+- [ ] **29.3.** Hoàn tất tài liệu hướng dẫn vận hành Production Runbook và Disaster Recovery Plan.
+*(Khi bắt đầu thực thi: Chạy `/opsx-propose cicd-production-deploy`)*
+
+---
+
+### 📦 SPRINT ĐÃ HOÀN THÀNH: SPRINT 5 (100% DONE)
+- [x] **[TASK-24]** Màn Hình Báo Cáo Phân Tích Doanh Thu & Hiệu Quả Bán Hàng (`/analytics`) - 100% DONE
+- [x] **[TASK-25]** Mở Rộng Quản Lý Đa Fanpage & Phân Quyền Nhân Viên (RBAC) - 100% DONE
+- [x] **[TASK-26]** Tối Ưu Hóa Hiệu Năng & Hardening Môi Trường Production - 100% DONE
 
 ---
 
@@ -92,6 +97,10 @@
 | 21/10/2026 | [TASK-21] Nghiệp Vụ Quản Lý Danh Mục Sản Phẩm, Biến Thể & Tồn Kho (`/api/v1/products`) | **DONE** | Bảng PostgreSQL `products` (`002_products_and_inventory.sql`), Zod DTOs, `ProductRepository` với trừ kho nguyên tử (`atomicDecrementStock` chống overselling/race conditions), `ProductService` kiểm tra trùng SKU trên cùng page, 6 REST APIs CRUD & `/stock`, 59/59 test files pass 100% (494/494 tests passed), 0 lỗi TypeScript; hoàn thành OpenSpec `product-catalog-service`. |
 | 21/10/2026 | [TASK-22] Màn Hình Giao Diện Quản Lý Đơn Hàng & Vận Đơn (`/orders`) | **DONE** | Zustand store `order.store.ts` (multi-status filter, debounced search, optimistic status update, WebSocket listener), Bento UI components (`OrderStatusBadge`, `OrderMetrics`, `OrderTable` macOS Clean Utility, `OrderDetailDrawer` với PII phone masking & copy address, `OrderPrintModal` phiếu in nhiệt A5/A6 `@media print`), Sidebar `/orders` navigation badge; 23/23 tests pass 100%, 0 lỗi TypeScript. Hoàn thành OpenSpec `orders-management-ui`. |
 | 21/10/2026 | [TASK-23] Tích Hợp Cổng Thanh Toán VietQR Động & Đơn Vị Vận Chuyển | **DONE** | Migration DDL 4 bảng (`orders`, `order_items`, `payments`, `shipments`), `VietQrHelper` chuẩn Napas 247 CRC16 & QuickLink, `PaymentWebhookService` Idempotency Redis 24h & tự động đối soát chuyển `confirmed`, Adapter pattern đối tác vận chuyển (`MockCarrierAdapter`, `GhnCarrierAdapter`, `GhtkCarrierAdapter`), 4 REST APIs `/payments/vietqr`, `/payments/webhook`, `/shipments/create`, `/shipments/:trackingCode/track`; 54/54 tests pass 100%, 0 lỗi TypeScript. Hoàn thành OpenSpec `payment-shipping-integration`. **HOÀN THÀNH SPRINT 4 (100%)**. |
+| 24/10/2026 | [TASK-24] Màn Hình Báo Cáo Phân Tích Doanh Thu & Hiệu Quả Bán Hàng (`/analytics`) | **DONE** | 5 REST APIs `/api/v1/analytics/*`, `AnalyticsRepository` SQL tối ưu, `AnalyticsService` tính PoP growth & zero-division safeguard, Zustand store `analytics.store.ts` có export CSV UTF-8 BOM, cụm Bento UI (Header, Metrics, RevenueTrendChart SVG, ChannelBreakdown, TopProducts, GoldenHourHeatmap), unit & integration tests pass 100%. Hoàn thành OpenSpec `analytics-dashboard`. |
+| 24/10/2026 | [TASK-25] Mở Rộng Quản Lý Đa Fanpage & Phân Quyền Nhân Viên (RBAC) | **DONE** | Bảng PostgreSQL `page_members` (`004_page_members_and_rbac.sql`) kèm backfill tự động, middleware `requirePageRole`, REST APIs `/api/v1/pages/:pageId/members/*`, chính sách bảo vệ PII che SĐT khách hàng cho vai trò `staff` (`sanitizeOrderForRole`), cụm UI macOS Bento (`PageMembersModal`, `InviteMemberModal`, `MemberRoleBadge`), Zustand store `page-member.store.ts`, pass toàn bộ unit & integration tests. Hoàn thành OpenSpec `multi-page-rbac`. |
+| 24/10/2026 | [TASK-26] Tối Ưu Hóa Hiệu Năng & Hardening Môi Trường Production | **DONE** | Tầng Redis Caching `CacheService` với invalidation tự động, nén HTTP Gzip/Brotli qua `compressionMiddleware`, bộ Rate Limiting phân tầng (`globalApiLimiter`, `authLimiter`, `heavyComputationLimiter`), gia cố `helmet`, multi-stage Dockerfiles (`backend/Dockerfile`, `frontend/Dockerfile` standalone mode), cụm `docker-compose.prod.yml` 5 containers + Nginx Gateway, test tải `scripts/load-test.ts` và OWASP Top 10 security test suite `owasp-security.test.ts`. Hoàn thành OpenSpec `production-hardening`. **HOÀN THÀNH SPRINT 5 (100%)**. |
+
 
 
 

@@ -56,6 +56,7 @@ export class MetaGraphApiClient {
       'pages_messaging',
       'pages_read_engagement',
       'pages_show_list',
+      'pages_manage_metadata',
     ].join(',');
 
     const params = new URLSearchParams({
@@ -165,7 +166,7 @@ export class MetaGraphApiClient {
   async subscribePageApps(pageId: string, pageAccessToken: string): Promise<boolean> {
     const url = `${this.baseUrl}/${encodeURIComponent(pageId)}/subscribed_apps`;
     try {
-      const res = await fetch(url, {
+      let res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -173,6 +174,18 @@ export class MetaGraphApiClient {
           access_token: pageAccessToken,
         }),
       });
+
+      if (!res.ok) {
+        // Thử lại chỉ với messages và messaging_postbacks nếu feed thiếu quyền
+        res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            subscribed_fields: ['messages', 'messaging_postbacks'],
+            access_token: pageAccessToken,
+          }),
+        });
+      }
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));

@@ -18,6 +18,7 @@ import { AppError } from '../errors/app-error.js';
 export interface OAuthStatePayload {
   userId: string;
   nonce: string;
+  redirectUri?: string;
 }
 
 export interface ManageablePageItem {
@@ -38,9 +39,9 @@ export class FacebookOAuthService {
    * Tạo URL kết nối Facebook OAuth kèm chữ ký CSRF State.
    */
   generateConnectUrl(userId: string, redirectUri?: string): { authUrl: string; state: string } {
-    const callbackUrl = redirectUri || `${env.CORS_ORIGIN}/api/v1/fb-oauth/callback`;
+    const callbackUrl = redirectUri || `http://localhost:${env.PORT}/api/v1/fb-oauth/callback`;
     const stateToken = jwt.sign(
-      { userId, nonce: Math.random().toString(36).substring(2) },
+      { userId, redirectUri: callbackUrl, nonce: Math.random().toString(36).substring(2) },
       env.JWT_ACCESS_SECRET,
       { expiresIn: '15m' }
     );
@@ -73,7 +74,19 @@ export class FacebookOAuthService {
     redirectUri?: string
   ): Promise<{ success: boolean; fbUserId: string; fbName: string | null }> {
     const userId = this.verifyState(state);
-    const callbackUrl = redirectUri || `${env.CORS_ORIGIN}/api/v1/fb-oauth/callback`;
+
+    let stateRedirectUri: string | undefined;
+    try {
+      const decoded = jwt.decode(state) as OAuthStatePayload | null;
+      stateRedirectUri = decoded?.redirectUri;
+    } catch {
+      // Ignored
+    }
+
+    const callbackUrl =
+      redirectUri ||
+      stateRedirectUri ||
+      `http://localhost:${env.PORT}/api/v1/fb-oauth/callback`;
 
     // 1. Đổi Code lấy Short-Lived và nâng lên Long-Lived Token
     const tokens = await this.graphClient.exchangeCodeForTokens(code, callbackUrl);

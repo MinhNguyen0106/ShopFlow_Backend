@@ -11,6 +11,7 @@ import { orderParserRouter } from './order-parser.routes.js';
 import { productRouter } from './product.routes.js';
 import { paymentRouter } from './payment.routes.js';
 import { shippingRouter } from './shipping.routes.js';
+import { analyticsRouter } from './analytics.routes.js';
 
 export const apiV1Router = Router();
 
@@ -49,3 +50,6 @@ apiV1Router.use('/payments', paymentRouter);
 
 // Mount Shipping Carrier routes (TASK-23)
 apiV1Router.use('/shipments', shippingRouter);
+
+// Mount Business Analytics routes (TASK-24)
+apiV1Router.use('/analytics', analyticsRouter);

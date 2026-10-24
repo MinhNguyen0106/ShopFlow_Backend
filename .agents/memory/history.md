@@ -2,6 +2,79 @@
 
 Nhật ký theo dõi các mốc phát triển, thay đổi kiến trúc và trạng thái của dự án ShopFlow.
 
+## [2026-10-24] - Hoàn Thành TASK-26: Tối Ưu Hóa Hiệu Năng & Hardening Môi Trường Production (`production-hardening`) - ĐÓNG SPRINT 5 (100% DONE)
+- **Tác giả:** System Architect & Full-Stack Engineer (Antigravity Ecosystem)
+- **Nội dung hoàn thành:**
+  - Hoàn thành toàn diện 15/15 tasks trong OpenSpec change [production-hardening](file:///c:/Users/Dell/Desktop/ShopFlow/openspec/changes/production-hardening/tasks.md) tương ứng **[TASK-26]** trên [Task.md](file:///c:/Users/Dell/Desktop/ShopFlow/Task.md). **CHÍNH THỨC HOÀN TẤT 100% SPRINT 5!**
+  - **Tầng Redis Caching Layer & Invalidation Service (`backend/src/infrastructure/cache/`):**
+    - `CacheService` (`cache.service.ts`): Bao bọc `ioredis` với các hàm `get`, `set` (TTL), `del`, `invalidateByPattern` (quét `SCAN` 100 keys/lần tránh nghẽn luồng event-loop), `getOrSet` (Cache-Aside pattern).
+    - Tích hợp vào `ProductService`: Caching danh mục sản phẩm theo Fanpage (`cache:products:${pageId}:*`, TTL 10 phút) và tự động xóa sạch cache khi tạo mới, cập nhật sản phẩm, hoặc điều chỉnh tồn kho (`adjustStock`).
+    - Tích hợp vào `PageService`: Caching chi tiết thông tin và thống kê Fanpage (`cache:fanpage:${pageId}:info`, TTL 30 phút), tự động xóa cache khi thay đổi trạng thái hoặc ngắt kết nối.
+    - 7 unit test cases trong `cache.service.test.ts` pass 100%.
+  - **Tầng HTTP Compression & Tiered Rate Limiting (`backend/src/api/middlewares/`):**
+    - `compressionMiddleware` (`compression.middleware.ts`): Tự động nén Gzip/Deflate cho response có dung lượng ≥ 1024 bytes qua `node:zlib`, tự động bỏ qua Server-Sent Events (SSE) `text/event-stream` và `x-no-compression`.
+    - Bộ Rate Limiting phân tầng: `globalApiLimiter` (100 req/min/IP), `authLimiter` (10 req/15 min chống brute-force đăng ký/đăng nhập), `heavyComputationLimiter` (15 req/min).
+    - Helmet Hardening: HSTS 180 ngày, X-Content-Type-Options: nosniff, X-Frame-Options: SAMEORIGIN, ẩn hoàn toàn X-Powered-By, CSP chặt chẽ.
+    - Test suites `rate-limiter.middleware.test.ts` và `compression.middleware.test.ts` pass 100%.
+  - **Đóng Gói Docker Compose Production & Nginx Reverse Proxy Gateway:**
+    - `backend/Dockerfile`: Multi-stage build (Node 20-alpine, dumb-init, non-root user `node`, image siêu nhẹ < 150MB).
+    - `frontend/Dockerfile` & `next.config.js`: Bật `output: 'standalone'`, multi-stage runner < 180MB.
+    - `nginx/nginx.conf` & `nginx/conf.d/shopflow.conf`: API Gateway port 80/443, định tuyến `/api/` & `/health` -> Backend, `/socket.io/` -> WebSocket Upgrade, `/_next/static/` -> client caching 1 năm (`immutable`), `/` -> Next.js Frontend, ẩn phiên bản Nginx, nén Gzip tầng gateway.
+    - `docker-compose.prod.yml`: Điều phối 5 containers (`nginx`, `frontend`, `backend`, `postgres`, `redis`) với healthcheck đồng bộ, mạng nội bộ cô lập, và giới hạn tài nguyên CPU/RAM.
+    - `.env.production.example`: Hướng dẫn cấu hình đầy đủ cho môi trường live.
+  - **Load Testing & OWASP Top 10 Security Audit:**
+    - Kịch bản đo lường hiệu năng tải `scripts/load-test.ts` (throughput RPS, p50/p95/p99 latency).
+    - Test suite bảo mật `backend/tests/security/owasp-security.test.ts` kiểm thử tự động 5 nhóm lỗ hổng OWASP: SQL Injection, XSS, Security Headers, CORS Origin, Rate Limiting 429.
+
+## [2026-10-24] - Hoàn Thành TASK-25: Mở Rộng Quản Lý Đa Fanpage & Phân Quyền Nhân Viên RBAC (`multi-page-rbac`)
+- **Tác giả:** System Architect & Full-Stack Engineer (Antigravity Ecosystem)
+- **Nội dung hoàn thành:**
+  - Hoàn thành toàn diện 19/19 tasks trong OpenSpec change [multi-page-rbac](file:///c:/Users/Dell/Desktop/ShopFlow/openspec/changes/multi-page-rbac/tasks.md) tương ứng **[TASK-25]** trên [Task.md](file:///c:/Users/Dell/Desktop/ShopFlow/Task.md).
+  - **Database Migration DDL & Backfill (`004_page_members_and_rbac.sql`):**
+    - Tạo bảng `page_members` với các trường `id`, `page_id`, `user_id`, `role` (`owner`, `manager`, `staff`), `status` (`active`, `pending`, `revoked`), `created_at`, `updated_at`.
+    - Thiết lập ràng buộc duy nhất `unique_page_user_idx` trên `(page_id, user_id)` và indexes `idx_page_members_page_id`, `idx_page_members_user_id`.
+    - Script backfill tự động chuyển toàn bộ chủ sở hữu hiện hữu trong `connected_pages` sang `page_members` với vai trò `owner` và trạng thái `active`.
+  - **Tầng Backend Repositories, DTOs & Services:**
+    - `PageMemberRepository` (`backend/src/infrastructure/repositories/page-member.repository.ts`): Cung cấp các thao tác CRUD và bảo vệ an toàn `countOwnersByPage`.
+    - `PageMemberService` (`backend/src/core/services/page-member.service.ts`): Kiểm tra quyền mời theo email, ngăn chặn xóa `owner` duy nhất cuối cùng trên Fanpage.
+    - `PageMemberController` & Routes (`backend/src/api/routes/page.routes.ts`): Cung cấp 4 endpoints chuẩn RESTful (`GET /members`, `POST /members/invite`, `PATCH /members/:memberId/role`, `DELETE /members/:memberId`).
+  - **Tầng Authorization Middleware & Bảo Mật PII Masking:**
+    - `requirePageRole` (`backend/src/api/middlewares/auth.middleware.ts`): Xác thực vai trò người dùng động theo ngữ cảnh Fanpage, gắn kèm fallback tương thích ngược cho dữ liệu cũ.
+    - `pii-masking.helper.ts` (`backend/src/core/utils/pii-masking.helper.ts`): Che dấu số điện thoại khách hàng nhạy cảm (`098****567`) cho vai trò `staff` đối với đơn hàng (`order.controller.ts`) và danh bạ khách hàng CRM (`inbox.controller.ts`).
+  - **Tầng Frontend Types, Store & macOS Clean Utility UI:**
+    - `frontend/src/types/page-member.ts`: Định nghĩa types và hàm bóc tách phòng vệ `normalizePageMember`.
+    - `usePageMemberStore` (`frontend/src/lib/page-member.store.ts`): Quản lý state thành viên, role hiện tại, và các action tương tác API.
+    - Bộ 3 components giao diện: `MemberRoleBadge` (pastel themes), `InviteMemberModal` (radio cards), `PageMembersModal` (quản trị thành viên).
+    - Tích hợp quản trị thành viên vào giao diện danh sách Fanpage (`frontend/src/app/(dashboard)/pages/page.tsx`).
+  - **Kiểm Thử Tự Động (Quality Gates):**
+    - `page-member.repository.test.ts`: 8 test cases.
+    - `pii-masking.test.ts`: 4 test cases.
+    - `page-member.routes.test.ts`: 7 integration test cases.
+    - `page-members.test.tsx`: 8 unit & integration test cases.
+
+## [2026-10-24] - Hoàn Thành TASK-24: Màn Hình Báo Cáo Phân Tích Doanh Thu & Hiệu Quả Bán Hàng (`analytics-dashboard`)
+- **Tác giả:** System Architect & Full-Stack Engineer (Antigravity Ecosystem)
+- **Nội dung hoàn thành:**
+  - Hoàn thành toàn diện 16/16 tasks trong OpenSpec change [analytics-dashboard](file:///c:/Users/Dell/Desktop/ShopFlow/openspec/changes/analytics-dashboard/tasks.md) tương ứng **[TASK-24]** trên [Task.md](file:///c:/Users/Dell/Desktop/ShopFlow/Task.md).
+  - **Tầng Backend Analytics APIs (`/api/v1/analytics/*`):**
+    - `AnalyticsRepository` (`backend/src/infrastructure/repositories/analytics.repository.ts`): Tối ưu truy vấn SQL PostgreSQL với `DATE_TRUNC`, `EXTRACT(DOW)`, `EXTRACT(HOUR)`, `SUM`, `COUNT`, `AVG` theo múi giờ `Asia/Ho_Chi_Minh`.
+    - `AnalyticsService` (`backend/src/core/services/analytics.service.ts`): Tính toán chỉ số KPIs kinh doanh, so sánh chu kỳ trước (Period-over-Period growth rate), xử lý phòng vệ chia cho 0 (`previous === 0 ? (current > 0 ? 100 : 0) : ...`).
+    - `AnalyticsController` & Routes (`backend/src/api/routes/analytics.routes.ts`): Cung cấp 5 REST endpoints được bảo vệ bởi JWT `authenticateToken` và `validateRequest` Zod schema (`/summary`, `/revenue-series`, `/channel-breakdown`, `/top-products`, `/sales-heatmap`).
+    - 2 test suites unit & integration tests tại `analytics.service.test.ts` và `analytics.routes.test.ts`.
+  - **Tầng Frontend Types & Zustand Store (`frontend/src/lib/analytics.store.ts`):**
+    - `frontend/src/types/analytics.ts`: Khai báo types và các hàm phòng vệ `normalizeSummary`, `normalizeRevenueSeries`, `normalizeChannelBreakdown`, `normalizeTopProducts`, `normalizeHeatmap` theo `.agents/rules/api-contract-sync.md`.
+    - `useAnalyticsStore`: Quản lý bộ lọc mốc thời gian (`7d`, `30d`, `90d`, `custom`), Fanpage được chọn, fetch đồng thời 5 endpoints qua `Promise.allSettled`, và tiện ích xuất báo cáo CSV UTF-8 BOM tiếng Việt tương thích Excel.
+    - Unit tests cho store tại `frontend/src/lib/__tests__/analytics.store.test.ts`.
+  - **Tầng Giao Diện macOS Clean Utility Bento Grid (`/analytics`):**
+    - `AnalyticsHeader`: Dropdown chọn Fanpage, Segmented Control chọn thời gian, nút làm mới và nút xuất CSV.
+    - `AnalyticsMetrics`: 4 thẻ Bento KPIs (Doanh thu thuần, Tổng đơn hàng, Tỷ lệ chốt đơn CR, Giá trị đơn trung bình AOV) kèm icon và badge tăng trưởng xanh/đỏ.
+    - `RevenueTrendChart`: Biểu đồ SVG thuần tương tác cao, nội suy đường cong Bézier mượt mà, gradient fill, tooltip chi tiết khi di chuột và toggle Doanh thu / Số đơn.
+    - `ChannelBreakdownChart`: Thanh tiến độ ngang phân rã nguồn đơn (Bình luận vs Tin nhắn vs Tạo tay) kèm tỷ lệ chốt đơn thành công và tỷ lệ hủy.
+    - `TopProductsTable`: Bảng xếp hạng Top 10 sản phẩm bán chạy nhất kèm huy hiệu thứ hạng, ảnh thumbnail, SKU, số lượng bán, doanh thu và thanh tiến độ đóng góp.
+    - `GoldenHourHeatmap`: Ma trận nhiệt 24h x 7 ngày đánh dấu nổi bật 2 đỉnh giờ vàng (11:30-13:00 và 20:00-21:30) kèm tooltip số đơn và giá trị.
+    - Cập nhật Sidebar điều hướng bổ sung mục `Báo cáo phân tích` (`/analytics`, icon `BarChart3`).
+    - Lắp ráp hoàn chỉnh `frontend/src/app/(dashboard)/analytics/page.tsx` và integration test suite `frontend/src/app/(dashboard)/analytics/__tests__/analytics.test.tsx`.
+
 ## [2026-10-21] - Hoàn Thành TASK-23: Tích Hợp Cổng Thanh Toán VietQR Động & Đơn Vị Vận Chuyển (`payment-shipping-integration`) - ĐÓNG SPRINT 4 (100% DONE)
 - **Tác giả:** System Architect & Full-Stack Engineer (Antigravity Ecosystem)
 - **Nội dung hoàn thành:**
